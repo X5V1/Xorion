@@ -3,7 +3,7 @@
 <div align="center">
   <br />
     <p>
-      <a href="https://horion.download"><img src="https://raw.githubusercontent.com/X5V1/Xorion/master/resources/xorion-banner.png" width="600" alt="Horion" /></a>
+      <a href="https://horion.download"><img src="https://raw.githubusercontent.com/X5V1/Xorion/master/resources/xorion-banner.png" width="400" alt="Horion" /></a>
     </p>
   <br />
   <p>
