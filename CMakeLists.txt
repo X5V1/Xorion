@@ -274,6 +274,8 @@ add_library(Horion SHARED
         Horion/Module/Modules/Reach.h
         Horion/Module/Modules/Scaffold.cpp
         Horion/Module/Modules/Scaffold.h
+        Horion/Module/Modules/SeeCrystals.cpp
+        Horion/Module/Modules/SeeCrystals.h
         Horion/Module/Modules/Spammer.cpp
         Horion/Module/Modules/Spammer.h
         Horion/Module/Modules/Speed.cpp
@@ -308,6 +310,15 @@ add_library(Horion SHARED
         Horion/Module/Modules/Zoom.h
         Horion/Module/ModuleManager.cpp
         Horion/Module/ModuleManager.h
+
+        Horion/Render/RenderGlobals.cpp
+        Horion/Render/RenderGlobals.h
+        Horion/Render/RenderInit.cpp
+        Horion/Render/RenderUtils.cpp
+        Horion/Render/RenderUtils.h
+
+        Horion/Shaders/UnlitTintVS.hlsl
+        Horion/Shaders/UnlitTintPS.hlsl
 
         Horion/Scripting/Functions/CommandManagerFunctions.cpp
         Horion/Scripting/Functions/CommandManagerFunctions.h
@@ -398,6 +409,8 @@ add_library(Horion SHARED
         SDK/HitResult.h
         SDK/HorionNameTag.cpp
         SDK/HorionNameTag.h
+        SDK/InitSDK.cpp
+        SDK/InitSDK.h
         SDK/Inventory.cpp
         SDK/Inventory.h
         SDK/InventoryTransaction.cpp
@@ -417,6 +430,8 @@ add_library(Horion SHARED
         SDK/MinecraftUIRenderContext.h
         SDK/MojangsonToken.h
         SDK/MoveInputHandler.h
+        SDK/Offsets.cpp
+        SDK/Offsets.h
         SDK/Packet.cpp
         SDK/Packet.h
         SDK/Player.cpp
@@ -428,6 +443,8 @@ add_library(Horion SHARED
         SDK/RayTracer.h
         SDK/Ref.h
         SDK/ScreenContext.h
+        SDK/SignatureReport.h
+        SDK/Signatures.h
         SDK/Tag.cpp
         SDK/Tag.h
         SDK/Tessellator.cpp
@@ -439,6 +456,7 @@ add_library(Horion SHARED
         SDK/Vec2.h
         SDK/Vec3.h
         SDK/Vec3i.h
+        SDK/VersionTag.h
         SDK/Weather.h
 
         Utils/ChakraHelper.h

@@ -1,40 +1,26 @@
+// SDK/GameMode.h
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
-#include "../Utils/HMath.h"
-#include "ClientInstance.h"
-#include "Entity.h"
+struct GameMode;
+struct Entity;
 
-class GameMode {
-private:
-	virtual __int64 destructorGameMode();
-	// Duplicate destructor
-public:
-	virtual __int64 startDestroyBlock(Vec3i const &pos, unsigned char blockSide, bool &isDestroyedOut);
-	virtual __int64 destroyBlock(Vec3i *, unsigned char);
-	virtual __int64 continueDestroyBlock(Vec3i const &, unsigned char blockSide, Vec3 const&, bool &isDestroyedOut);
-	virtual __int64 stopDestroyBlock(Vec3i const &);
-	virtual __int64 startBuildBlock(Vec3i const &, unsigned char);
-	virtual __int64 buildBlock(Vec3i *, unsigned char, bool);
-	virtual __int64 continueBuildBlock(Vec3i const &, unsigned char);
-	virtual __int64 stopBuildBlock(void);
-	virtual __int64 tick(void);
-	virtual __int64 getPickRange(__int64 const &, bool);
-	virtual __int64 useItem(ItemStack &);
-	virtual __int64 useItemOn(__int64 &, Vec3i const &, unsigned char, Vec3 const &, __int64 const *);
-	virtual __int64 interact(Entity &, Vec3 const &);
-	virtual __int64 attack(Entity *);
-	virtual __int64 releaseUsingItem(void);
-	virtual void setTrialMode(bool);
-	virtual bool isInTrialMode(void);
+// Function pointer types (fill in real signatures as you confirm them)
+using GameMode_AttackFn = void(*)(GameMode*, Entity*);
+using GameMode_SomeOtherFn = int64_t(*)(GameMode*, int);
 
-private:
-	virtual __int64 registerUpsellScreenCallback(__int64);
+// Exposed typed pointers
+namespace SDK {
+    extern GameMode_AttackFn GameMode_attack;
+    extern GameMode_SomeOtherFn GameMode_someOther;
 
-public:
-	Player *player;
+    // Availability helpers
+    inline bool GameMode_attack_available() { return GameMode_attack != nullptr; }
+    inline bool GameMode_someOther_available() { return GameMode_someOther != nullptr; }
+}
 
-	void survivalDestroyBlockHack(Vec3i const &block, int face, Vec3 const &playerLastPos, bool &isDestroyedOut, bool isFirst);
-	void baseUseItem(ItemStack &stack);
-};
+// Init functions (call after signatures are resolved)
+void Init_GameMode_Attack();
+void Init_GameMode_Other();
+void Init_AllGameModeMappings(); // convenience to call both

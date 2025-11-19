@@ -103,6 +103,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<ReachDisplay>());
         moduleList.emplace_back(std::make_shared<Reducer>());
         moduleList.emplace_back(std::make_shared<Scaffold>());
+        moduleList.emplace_back(std::make_shared<SeeCrystals>());   // custom
         moduleList.emplace_back(std::make_shared<Spammer>());
         moduleList.emplace_back(std::make_shared<Speed>());
         moduleList.emplace_back(std::make_shared<Spider>());

@@ -1,24 +1,28 @@
-// DllMain.cpp
-#include <Windows.h>
-#include "Utils/Logger.h"
+#include <windows.h>
 #include "InitSDK.h"
-#include "GameDataChecks.h"
+#include "Logger.h"
 
-DWORD WINAPI InitThread(LPVOID) {
-    if (!InitSDK()) {
-        logF("[DllMain] InitSDK failed for 1.21.121. Modules will be guarded.");
-    } else {
-        logF("[DllMain] InitSDK OK for 1.21.121.");
-    }
-    VerifyGameData();
-    return 0;
-}
+// Entry point for your DLL.
+// PROCESS_ATTACH: start bootstrap thread to resolve signatures and init SDK.
+// PROCESS_DETACH: run shutdown to clear globals and SDK pointers.
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID) {
-    if (ul_reason_for_call == DLL_PROCESS_ATTACH) {
-        DisableThreadLibraryCalls(hModule);
-        HANDLE hThread = CreateThread(nullptr, 0, InitThread, nullptr, 0, nullptr);
-        if (hThread) CloseHandle(hThread);
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
+    switch (fdwReason) {
+    case DLL_PROCESS_ATTACH:
+        DisableThreadLibraryCalls(hinstDLL);
+        logF("[DllMain] PROCESS_ATTACH: starting bootstrap thread");
+        StartInitThread();
+        break;
+
+    case DLL_PROCESS_DETACH:
+        logF("[DllMain] PROCESS_DETACH: shutting down SDK");
+        InitSDK_Shutdown();
+        break;
+
+    case DLL_THREAD_ATTACH:
+    case DLL_THREAD_DETACH:
+        // no per-thread work
+        break;
     }
     return TRUE;
 }
