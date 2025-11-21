@@ -22,7 +22,7 @@ void MaceHit::onAttack(C_Entity* attackedEntity) {
     // Apply mace-style damage: +5 (10 blocks * 0.5)
     float extraDamage = 5.0f;
 
-    C_GameMode* gm = g_Data.getCGameMode();
+    GameMode* gm = g_Data.getGameMode();
     if (gm != nullptr) {
         gm->attack(attackedEntity);          // normal attack
         attackedEntity->damage(extraDamage); // extra mace damage

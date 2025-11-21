@@ -1,6 +1,6 @@
 #pragma once
 #include "Vec3.h"
-#include "CEntity.h"
+#include "Entity.h"
 #include <string>
 
 class LevelRenderer {
@@ -18,7 +18,7 @@ public:
     void renderWeather(const Vec3& pos, bool isRaining, bool isSnowing);
 
     // Render entity hit particles (like critical hits, mace impact, etc.)
-    void renderEntityHit(C_Entity* entity, const char* particleName);
+    void renderEntityHit(Entity* entity, const char* particleName);
 
     // Utility: clear all particles
     void clearParticles();

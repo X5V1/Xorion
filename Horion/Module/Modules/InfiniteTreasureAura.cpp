@@ -94,7 +94,7 @@ void InfiniteTreasureAura::onTick(C_GameMode* gm)
 				vec3_t pos = *targetList0[i]->getPos();
 				teleportPacket = new C_MovePlayerPacket(g_Data.getLocalPlayer(), vec3_t(pos.x - teleportX, pos.y, pos.z - teleportZ));
 				g_Data.getClientInstance()->loopbackPacketSender->sendToServer(teleportPacket);
-				g_Data.getCGameMode()->attack(targetList0[i]);
+				g_Data.getGameMode()->attack(targetList0[i]);
 				delete teleportPacket;
 				teleportPacket = new C_MovePlayerPacket(g_Data.getLocalPlayer(), *g_Data.getLocalPlayer()->getPos());
 				g_Data.getClientInstance()->loopbackPacketSender->sendToServer(teleportPacket);
@@ -106,7 +106,7 @@ void InfiniteTreasureAura::onTick(C_GameMode* gm)
 			vec3_t pos = *targetList0[0]->getPos();
 			teleportPacket = new C_MovePlayerPacket(g_Data.getLocalPlayer(), vec3_t(pos.x - teleportX, pos.y, pos.z - teleportZ));
 			g_Data.getClientInstance()->loopbackPacketSender->sendToServer(teleportPacket);
-			g_Data.getCGameMode()->attack(targetList0[0]);
+			g_Data.getGameMode()->attack(targetList0[0]);
 			delete teleportPacket;
 			teleportPacket = new C_MovePlayerPacket(g_Data.getLocalPlayer(), *g_Data.getLocalPlayer()->getPos());
 			g_Data.getClientInstance()->loopbackPacketSender->sendToServer(teleportPacket);

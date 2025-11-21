@@ -2,12 +2,12 @@
 #include "LocalPlayer.h"
 #include <stdexcept>
 #include "Utils/Logger.h"
-#include "SDK/CGameMode.h"
+#include "SDK/GameMode.h"
 #include "SDK/ClientInstance.h"
 #include "GameData.h"
 
 void (*LocalPlayer::ClientInstance_sendChat_fn)(ClientInstance*, const char*) = nullptr;
-void (*LocalPlayer::GameMode_attack_fn)(C_GameMode*, C_Entity*) = nullptr;
+void (*LocalPlayer::GameMode_attack_fn)(GameMode*, Entity*) = nullptr;
 void (*LocalPlayer::LocalPlayer_jump_fn)(void*) = nullptr;
 bool (*LocalPlayer::LocalPlayer_isSneaking_fn)(void*) = nullptr;
 void (*LocalPlayer::LocalPlayer_setSneaking_fn)(void*, bool) = nullptr;
@@ -26,7 +26,7 @@ void LocalPlayer::ensureIntegration() const {
     }
 }
 
-C_GameMode* LocalPlayer::getGameMode() const { return g_Data.getCGameMode(); }
+GameMode* LocalPlayer::getGameMode() const { return g_Data.getCGameMode(); }
 ClientInstance* LocalPlayer::getClientInstance() const { return g_Data.getClientInstance(); }
 
 void LocalPlayer::sendChatMessage(const std::string& msg) {
@@ -34,7 +34,7 @@ void LocalPlayer::sendChatMessage(const std::string& msg) {
     ClientInstance_sendChat_fn(getClientInstance(), msg.c_str());
 }
 
-void LocalPlayer::attackEntity(C_Entity* entity) {
+void LocalPlayer::attackEntity(Entity* entity) {
     ensureIntegration();
     GameMode_attack_fn(getGameMode(), entity);
 }

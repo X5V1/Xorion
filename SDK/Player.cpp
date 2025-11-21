@@ -11,7 +11,7 @@ float       (*Player::Player_getHealth_fn)(void*) = nullptr;
 void        (*Player::Player_setHealth_fn)(void*, float) = nullptr;
 
 Player::Player(void* mcPlayerPtr)
-    : C_Entity(mcPlayerPtr), mcPlayerPtr(mcPlayerPtr) {}
+    : Entity(mcPlayerPtr), mcPlayerPtr(mcPlayerPtr) {}
 
 Player::~Player() {}
 

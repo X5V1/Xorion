@@ -12,15 +12,27 @@
 #include <cstdint>
 #include <cmath>
 
-#include "../SDK/ChestBlockActor.h"
-#include "../SDK/ClientInstance.h"
-#include "../SDK/GameMode.h"
-#include "../SDK/HIDController.h"
-#include "../SDK/MoveInputHandler.h"
-#include "../SDK/RakNetConnector.h"
-#include "../Utils/TextFormat.h"
-#include "SlimMem.h"
+// Forward declarations to reduce include coupling.
+// Include the real headers in GameData.cpp where definitions are required.
+struct AABB;
+struct ChestBlockActor;
+struct ClientInstance;
+struct GameMode;          // unified as struct
+struct HIDController;
+struct MoveInputHandler;
+struct RakNetConnector;
+struct GuiData;
+struct TextHolder;
+struct Entity;
+struct EntityList;
 
+// If you need methods from SlimMem/SlimModule directly, include their headers in GameData.cpp.
+namespace SlimUtils {
+    class SlimMem;
+    class SlimModule;
+}
+
+// InfoBoxData: UI notification with a fade lifecycle.
 struct InfoBoxData {
     bool isOpen = true;
     float fadeTarget = 1.0f;
@@ -33,7 +45,6 @@ struct InfoBoxData {
         : title(std::move(title)), message(std::move(message)) {}
 
     void fade() {
-        // Adjust the fade factor as needed
         fadeVal += (fadeTarget - fadeVal) * 0.04f;
         if (fadeTarget == 0.0f && std::abs(fadeVal) < 0.001f) {
             fadeVal = 0.0f;
@@ -42,19 +53,18 @@ struct InfoBoxData {
     }
 };
 
-struct SkinData;
-
+// Custom hasher for AABB use in unordered_set
 struct AABBHasher {
     size_t operator()(const AABB& i) const;
 };
 
+// GameData: runtime state, access to client, players, entities, inputs, overlays.
 class GameData {
 private:
     ClientInstance* clientInstance = nullptr;
-    LocalPlayer* localPlayer = nullptr;
-    GameMode* gameMode = nullptr;
-    EntityList* entityList = nullptr;
-    void* hDllInst = nullptr;
+    EntityList*     entityList     = nullptr;
+    GameMode*       gameMode       = nullptr;
+    void*           hDllInst       = nullptr;
 
     std::unordered_set<AABB, AABBHasher> chestList;
     std::vector<std::string> textPrintList;
@@ -69,34 +79,46 @@ private:
     std::shared_ptr<std::tuple<std::shared_ptr<unsigned char[]>, size_t>> customTexture;
     bool customTextureActive = false;
 
-private:
     bool injectorConnectionActive = false;
     const SlimUtils::SlimModule* gameModule = nullptr;
+
+    // Runtime flags
     bool shouldTerminateB = false;
     bool shouldHideB = false;
     bool isAllowingWIPFeatures = false;
+
     std::int64_t lastUpdate = 0;
+
     static void retrieveClientInstance();
+
     TextHolder* fakeName = nullptr;
 
 public:
+    // Input
     HIDController* hidController = nullptr;
+
+    // UI
     std::vector<std::shared_ptr<InfoBoxData>> infoBoxQueue;
 
+    // Memory helpers (shared across the project)
     static SlimUtils::SlimMem* slimMem;
     static bool keys[0x256];
 
+    // Key state queries
     static bool canUseMoveKeys();
     static bool isKeyDown(int key);
     static bool isKeyPressed(int key);
     static bool isRightClickDown();
     static bool isLeftClickDown();
     static bool isWheelDown();
+
+    // Lifecycle flags
     static bool shouldTerminate();
     static bool shouldHide();
     static void hide();
     static void terminate();
 
+    // Initialization and update hooks
     static void updateGameData(GameMode* gameMode);
     static void initGameData(const SlimUtils::SlimModule* gameModule, SlimUtils::SlimMem* slimMem, void* hDllInst);
     static void addChestToList(ChestBlockActor* ChestBlock2);
@@ -105,6 +127,7 @@ public:
     static void displayMessages(GuiData* guiData);
     static void log(const char* fmt, ...);
 
+    // Metrics
     float fov = 0.0f;
     int fps = 0;
     int frameCount = 0;
@@ -112,6 +135,8 @@ public:
     int cpsRight = 0;
     int leftclickCount = 0;
     int rightclickCount = 0;
+
+    // Public API
 
     void clearChestList() {
         std::lock_guard<std::mutex> listGuard(chestListMutex);
@@ -127,7 +152,7 @@ public:
             }
             return state;
         }
-        return std::shared_ptr<InfoBoxData>();
+        return {};
     }
 
     inline std::vector<std::shared_ptr<InfoBoxData>>& getInfoBoxList() {
@@ -160,7 +185,8 @@ public:
         return std::make_tuple(customGeoActive, customGeometry);
     }
 
-    inline void setCustomTextureOverride(bool setActive, std::shared_ptr<std::tuple<std::shared_ptr<unsigned char[]>, size_t>> customTexturePtr) {
+    inline void setCustomTextureOverride(bool setActive,
+        std::shared_ptr<std::tuple<std::shared_ptr<unsigned char[]>, size_t>> customTexturePtr) {
         customTextureActive = setActive;
         if (setActive)
             customTexture.swap(customTexturePtr);
@@ -178,21 +204,21 @@ public:
         return clientInstance ? clientInstance->getGuiData() : nullptr;
     }
 
-    inline LocalPlayer* getLocalPlayer() {
+    inline class LocalPlayer* getLocalPlayer() {
         // Refresh local player from client each call
         if (clientInstance)
-            localPlayer = clientInstance->getCILocalPlayer();
-        else
-            localPlayer = nullptr;
-
-        if (localPlayer == nullptr)
-            gameMode = nullptr;
-        return localPlayer;
+            // ClientInstance must define getCILocalPlayer(); forward declared LocalPlayer here
+            return clientInstance->getCILocalPlayer();
+        return nullptr;
     }
 
-    LocalPlayer** getPtrLocalPlayer() { return &localPlayer; }
+    // If callers truly need a pointer-to-pointer
+    inline class LocalPlayer** getPtrLocalPlayer() {
+        static class LocalPlayer* lp = getLocalPlayer();
+        return &lp;
+    }
 
-    bool isInGame() { return localPlayer != nullptr; }
+    bool isInGame() { return getLocalPlayer() != nullptr; }
 
     const SlimUtils::SlimModule* getModule() { return gameModule; }
     const SlimUtils::SlimMem* getSlimMem() { return slimMem; }
@@ -203,7 +229,6 @@ public:
     HIDController** getHIDController() { return &hidController; }
 
     RakNetConnector* getRakNetConnector() {
-        // Defensive guards to avoid null deref in early init
         if (!clientInstance || !clientInstance->loopbackPacketSender ||
             !clientInstance->loopbackPacketSender->networkSystem ||
             !clientInstance->loopbackPacketSender->networkSystem->remoteConnectorComposite)
@@ -227,6 +252,20 @@ public:
     int getFPS() { return fps; }
     int getLeftCPS() { return cpsLeft; }
     int getRightCPS() { return cpsRight; }
+
+    // Internal setters used during init/update
+    inline void setClientInstance(ClientInstance* ci) { clientInstance = ci; }
+    inline void setEntityList(EntityList* el) { entityList = el; }
+    inline void setGameMode(GameMode* gm) { gameMode = gm; }
+    inline void setDllInst(void* dll) { hDllInst = dll; }
+    inline void setModule(const SlimUtils::SlimModule* mod) { gameModule = mod; }
+    inline void setSlimMem(SlimUtils::SlimMem* sm) { slimMem = sm; }
+
+    inline void setTerminate(bool v) { shouldTerminateB = v; }
+    inline void setHide(bool v) { shouldHideB = v; }
+    inline bool getTerminate() const { return shouldTerminateB; }
+    inline bool getHide() const { return shouldHideB; }
 };
 
+// Singleton instance (classic Horion style)
 extern GameData Game;

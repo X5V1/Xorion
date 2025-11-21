@@ -3,19 +3,27 @@
 #include <Windows.h>
 #include <set>
 #include <cstdarg>
+#include <chrono>
 
 #include "../Utils/Logger.h"
 #include "../Utils/Utils.h"
 #include "Hooks.h"
 
+// Singleton instance
 GameData Game;
+
+// Static members
 bool GameData::keys[0x256];
 SlimUtils::SlimMem* GameData::slimMem = nullptr;
 
+// Hash for AABB relies on AABB::lower being a Vec3i-like integer position.
+// Ensure AABB’s lower has x/y/z integers (or adapt hashing accordingly).
 size_t AABBHasher::operator()(const AABB& i) const {
     return Utils::posToHash(i.lower);
 }
 
+// Resolve ClientInstance via signature + readPointer chain.
+// Keep this in .cpp to allow forward declarations in the header.
 void GameData::retrieveClientInstance() {
     static uintptr_t clientInstanceOffset = 0x0;
     if (clientInstanceOffset == 0x0) {
@@ -23,7 +31,7 @@ void GameData::retrieveClientInstance() {
             "48 89 0D ? ? ? ? 48 89 0D ? ? ? ? 48 85 C0 74 ? 48 8B C8 E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 85 C9 74 ? 48 83 C4 28 E9 ? ? ? ? 48 83 C4 28 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 83 EC 28 48 8D 0D ? ? ? ? FF 15 ? ? ? ? 48 8B 0D ? ? ? ? 48 85 C9 74 ? 48 83 C4 28 E9 ? ? ? ? 48 83 C4 28 C3 CC CC CC CC CC 48 83 EC 28 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? 48 83 C4 28 E9 ? ? ? ? 48 8D 0D",
             3
         );
-        logF("Client offset: %p", reinterpret_cast<void*>(clientInstanceOffset));
+        Logger::logF("Client offset: %p", reinterpret_cast<void*>(clientInstanceOffset));
     }
 
     // Read pointer chain defensively
@@ -33,15 +41,14 @@ void GameData::retrieveClientInstance() {
 
 #ifdef _DEV
     if (clientInstance == nullptr)
-        throw std::exception("Client Instance is 0");
+        Logger::logF("ClientInstance is null after retrieveClientInstance");
 #endif
 }
 
 bool GameData::canUseMoveKeys() {
+    // Forward-safe: do not deref unless the type is complete; we’re in .cpp with full definitions.
     MinecraftGame* mc = clientInstance ? clientInstance->minecraftGame : nullptr;
-    if (mc == nullptr)
-        return false;
-    return mc->canUseKeybinds();
+    return mc ? mc->canUseKeybinds() : false;
 }
 
 bool GameData::isKeyDown(int key) {
@@ -50,7 +57,6 @@ bool GameData::isKeyDown(int key) {
 
 bool GameData::isKeyPressed(int key) {
     if (isKeyDown(key)) {
-        // Note: Sleep(1) blocks the calling thread; this mirrors Horion behavior
         while (isKeyDown(key))
             Sleep(1);
         return true;
@@ -59,21 +65,15 @@ bool GameData::isKeyPressed(int key) {
 }
 
 bool GameData::isRightClickDown() {
-    if (hidController == nullptr)
-        return false;
-    return hidController->rightClickDown;
+    return hidController ? hidController->rightClickDown : false;
 }
 
 bool GameData::isLeftClickDown() {
-    if (hidController == nullptr)
-        return false;
-    return hidController->leftClickDown;
+    return hidController ? hidController->leftClickDown : false;
 }
 
 bool GameData::isWheelDown() {
-    if (hidController == nullptr)
-        return false;
-    return hidController->wheelDown;
+    return hidController ? hidController->wheelDown : false;
 }
 
 bool GameData::shouldTerminate() {
@@ -121,38 +121,38 @@ void GameData::updateGameData(GameMode* gm) {
 
 void GameData::displayMessages(GuiData* guiData) {
     // Logger messages (DEV mode)
-    auto vecLock = Logger::GetTextToPrintLock();
-    auto* stringPrintVector = Logger::GetTextToPrint();
+    {
+        auto vecLock = Logger::GetTextToPrintLock();
+        auto* stringPrintVector = Logger::GetTextToPrint();
 #ifdef _DEV
-    int numPrinted = 0;
-    std::vector<TextForPrint>::iterator it;
-    for (it = stringPrintVector->begin(); it != stringPrintVector->end(); ++it) {
-        numPrinted++;
-        if (numPrinted > 20)
-            break;
+        int numPrinted = 0;
+        std::vector<TextForPrint>::iterator it;
+        for (it = stringPrintVector->begin(); it != stringPrintVector->end(); ++it) {
+            numPrinted++;
+            if (numPrinted > 20)
+                break;
 
-        guiData->displayClientMessageNoSendF("%s%s%s%s", GOLD, it->time, RESET, it->text);
-    }
-    stringPrintVector->erase(stringPrintVector->begin(), it);
+            guiData->displayClientMessageNoSendF("%s%s%s%s", GOLD, it->time, RESET, it->text);
+        }
+        stringPrintVector->erase(stringPrintVector->begin(), it);
 #else
-    stringPrintVector->clear();
+        stringPrintVector->clear();
 #endif
+    }
 
     // Local textPrintList
     {
         auto lock = std::lock_guard<std::mutex>(textPrintLock);
-
-        auto& vec = textPrintList;
         int numPrinted = 0;
-        std::vector<std::string>::iterator it;
-        for (it = vec.begin(); it != vec.end(); ++it) {
+        auto it = textPrintList.begin();
+        for (; it != textPrintList.end(); ++it) {
             numPrinted++;
             if (numPrinted > 20)
                 break;
 
             guiData->displayClientMessageNoSendF(it->c_str());
         }
-        vec.erase(vec.begin(), it);
+        textPrintList.erase(textPrintList.begin(), it);
     }
 }
 
@@ -166,13 +166,15 @@ void GameData::setHIDController(HIDController* Hid) {
 
 void GameData::forEachEntity(std::function<void(Entity*, bool)> callback) {
     if (localPlayer && localPlayer->level) {
+        // Players from hook-managed list
         for (const auto& ent : g_Hooks.entityList)
             if (ent.ent != nullptr && ent.ent->isPlayer())
-                callback(ent.ent, false); // Only players from this list
+                callback(ent.ent, false);
 
+        // Everything else from level’s misc list
         for (const auto& ent : getLocalPlayer()->level->getMiscEntityList())
             if (ent != nullptr && ent->getEntityTypeId() >= 1 && ent->getEntityTypeId() <= 999999999 && !ent->isPlayer())
-                callback(ent, false); // Everything else
+                callback(ent, false);
     }
 }
 
@@ -180,7 +182,7 @@ void GameData::forEachPlayer(std::function<void(Entity*, bool)> callback) {
     if (localPlayer && localPlayer->level) {
         for (const auto& ent : g_Hooks.entityList)
             if (ent.ent != nullptr && ent.ent->isPlayer())
-                callback(ent.ent, false); // All players
+                callback(ent.ent, false);
     }
 }
 
@@ -188,7 +190,7 @@ void GameData::forEachMob(std::function<void(Entity*, bool)> callback) {
     if (localPlayer && localPlayer->level) {
         for (const auto& ent : getLocalPlayer()->level->getMiscEntityList())
             if (ent != nullptr && ent->getEntityTypeId() >= 1 && ent->getEntityTypeId() <= 999999999 && !ent->isPlayer())
-                callback(ent, false); // All entities that are not players
+                callback(ent, false);
     }
 }
 
@@ -212,12 +214,12 @@ void GameData::initGameData(const SlimUtils::SlimModule* mod, SlimUtils::SlimMem
     retrieveClientInstance();
 
 #ifdef _DEV
-    logF("Base: %p", reinterpret_cast<void*>(gameModule ? gameModule->ptrBase : 0));
+    Logger::logF("Base: %p", reinterpret_cast<void*>(gameModule ? gameModule->ptrBase : 0));
     if (clientInstance != nullptr) {
-        logF("ClientInstance: %p", reinterpret_cast<void*>(clientInstance));
-        logF("LocalPlayer: %p", reinterpret_cast<void*>(getLocalPlayer()));
-        logF("MinecraftGame: %p", reinterpret_cast<void*>(clientInstance->minecraftGame));
-        logF("LevelRenderer: %p", reinterpret_cast<void*>(clientInstance->levelRenderer));
+        Logger::logF("ClientInstance: %p", reinterpret_cast<void*>(clientInstance));
+        Logger::logF("LocalPlayer: %p", reinterpret_cast<void*>(getLocalPlayer()));
+        Logger::logF("MinecraftGame: %p", reinterpret_cast<void*>(clientInstance->minecraftGame));
+        Logger::logF("LevelRenderer: %p", reinterpret_cast<void*>(clientInstance->levelRenderer));
     }
 #endif
 }

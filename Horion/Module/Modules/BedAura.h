@@ -1,6 +1,9 @@
 #pragma once
 #include "Module.h"
 #include <vector>
+#include "SDK/Vec3i.h"
+#include "SDK/GameMode.h"
+#include "SDK/MinecraftUIRenderContext.h"
 
 class BedAura : public IModule {
 public:
@@ -25,11 +28,11 @@ public:
     BedAura();
     ~BedAura();
 
-    virtual const char* getModuleName() override;
+    const char* getModuleName() override;
 
     // Hooks
     void onEnable() override;
     void onDisable() override;
-    void onTick(C_GameMode* gm) override;
-    void onLevelRender(C_MinecraftUIRenderContext* ctx) override;
+    void onTick(GameMode* gm) override;
+    void onPreRender(MinecraftUIRenderContext* ctx) override;
 };

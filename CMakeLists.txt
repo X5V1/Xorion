@@ -208,8 +208,8 @@ add_library(Horion SHARED
         Horion/Module/Modules/HudEditor.h
         Horion/Module/Modules/HudModule.cpp
         Horion/Module/Modules/HudModule.h
-        Horion/Module/Modules/InfiniteReach.cpp
-        Horion/Module/Modules/InfiniteReach.h
+        Horion/Module/Modules/InfiniteAura.cpp
+        Horion/Module/Modules/InfiniteAura.h
         Horion/Module/Modules/InfiniteTreasureAura.cpp
         Horion/Module/Modules/InfiniteTreasureAura.h
         Horion/Module/Modules/InstaBreak.cpp
@@ -317,9 +317,6 @@ add_library(Horion SHARED
         Horion/Render/RenderUtils.cpp
         Horion/Render/RenderUtils.h
 
-        Horion/Shaders/UnlitTintVS.hlsl
-        Horion/Shaders/UnlitTintPS.hlsl
-
         Horion/Scripting/Functions/CommandManagerFunctions.cpp
         Horion/Scripting/Functions/CommandManagerFunctions.h
         Horion/Scripting/Functions/DrawFunctions.cpp
@@ -332,6 +329,8 @@ add_library(Horion SHARED
         Horion/Scripting/Functions/GlobalFunctions.h
         Horion/Scripting/Functions/HorionFunctions.cpp
         Horion/Scripting/Functions/HorionFunctions.h
+        Horion/Scripting/Functions/InventoryFunctions.cpp
+        Horion/Scripting/Functions/InventoryFunctions.h
         Horion/Scripting/Functions/LevelFunctions.cpp
         Horion/Scripting/Functions/LevelFunctions.h
         Horion/Scripting/Functions/LocalPlayerFunctions.cpp
@@ -443,8 +442,6 @@ add_library(Horion SHARED
         SDK/RayTracer.h
         SDK/Ref.h
         SDK/ScreenContext.h
-        SDK/SignatureReport.h
-        SDK/Signatures.h
         SDK/Tag.cpp
         SDK/Tag.h
         SDK/Tessellator.cpp
@@ -515,3 +512,31 @@ add_library(Horion SHARED
         Horion/Module/Modules/AutoAnchor.cpp
         Horion/Module/Modules/AutoAnchor.h
 )
+
+# --- Shader compile rules ---
+set(SHADER_DIR ${CMAKE_SOURCE_DIR}/Horion/Shaders)
+
+# Function to compile a shader
+function(compile_shader SHADER_FILE PROFILE)
+    get_filename_component(SHADER_NAME ${SHADER_FILE} NAME_WE)
+    set(OUTPUT ${CMAKE_BINARY_DIR}/${SHADER_NAME}.cso)
+
+    add_custom_command(
+        OUTPUT ${OUTPUT}
+        COMMAND fxc /T ${PROFILE} /E main /Fo ${OUTPUT} ${SHADER_FILE}
+        DEPENDS ${SHADER_FILE}
+        COMMENT "Compiling ${SHADER_FILE} -> ${OUTPUT}"
+    )
+
+    set(COMPILED_SHADERS ${COMPILED_SHADERS} ${OUTPUT} PARENT_SCOPE)
+endfunction()
+
+# Compile each shader with the right profile
+compile_shader(${SHADER_DIR}/UnlitTintPS.hlsl ps_5_0)
+compile_shader(${SHADER_DIR}/UnlitTintVS.hlsl vs_5_0)
+
+# Group them into a target
+add_custom_target(Shaders ALL DEPENDS ${COMPILED_SHADERS})
+
+# Make Horion depend on shaders
+add_dependencies(Horion Shaders)

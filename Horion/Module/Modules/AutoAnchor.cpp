@@ -1,5 +1,8 @@
 #include "AutoAnchor.h"
-#include <unordered_map>
+#include "Utils/Utils.h"
+#include "DrawUtils.h"
+#include "SDK/GameMode.h"
+#include "SDK/MinecraftUIRenderContext.h"
 
 AutoAnchor::AutoAnchor()
     : IModule(VK_NUMPAD1, Category::COMBAT, "Auto-place and blow up Respawn Anchors.") {
@@ -17,16 +20,8 @@ const char* AutoAnchor::getModuleName() {
     return "AutoAnchor";
 }
 
-// Member variable now, not static global
-std::vector<vec3_ti> anchorList;
-
-bool isAnchorBlock(int id) {
-    return id == 758; // Respawn Anchor
-}
-
-bool isGlowstone(int id) {
-    return id == 89; // Glowstone block
-}
+static bool isAnchorBlock(int id) { return id == 758; }   // Respawn Anchor
+static bool isGlowstone(int id)   { return id == 89; }    // Glowstone block
 
 void AutoAnchor::onEnable() {
     anchorList.clear();
@@ -60,7 +55,7 @@ void AutoAnchor::onTick(GameMode* gm) {
                 if (isAnchorBlock(id)) {
                     anchorList.push_back(pos);
 
-                    // --- Step 2: Autocharge logic ---
+                    // Autocharge logic
                     int charge = 0;
                     if (block->blockLegacy) {
                         auto state = block->blockLegacy->getBlockState("respawn_anchor_charge");
@@ -71,7 +66,6 @@ void AutoAnchor::onTick(GameMode* gm) {
 
                     if (autocharge && charge < 4) {
                         int needed = 4 - charge;
-
                         auto supplies = player->getSupplies();
                         if (!supplies) continue;
                         auto inv = supplies->inventory;
@@ -87,8 +81,6 @@ void AutoAnchor::onTick(GameMode* gm) {
                                 int itemId = stack->getItem()->itemId;
                                 if (isGlowstone(itemId)) {
                                     supplies->selectedHotbarSlot = slot;
-
-                                    // Charge the anchor up to full
                                     for (int i = 0; i < needed; i++) {
                                         Vec3i blockPos(pos.x, pos.y, pos.z);
                                         gm->useItemOn(stack, blockPos, (uint8_t)1, vec3_t(0.5f, 0.5f, 0.5f));
@@ -103,16 +95,15 @@ void AutoAnchor::onTick(GameMode* gm) {
         }
     }
 
-    // --- Step 3: Placement logic ---
+    // Placement logic
     if (delay == 2 && autoplace && anchorList.empty()) {
         if (player->level->hitResult.type == HitResultType::Tile) {
             Vec3i blockPos = player->level->hitResult.blockPos;
-            bool useBlockSide = true;
-            gm->buildBlock(&blockPos, (uint8_t)player->level->hitResult.facing, useBlockSide);
+            gm->buildBlock(&blockPos, (uint8_t)player->level->hitResult.facing, true);
         }
     }
 
-    // --- Step 4: Restore previous slot ---
+    // Restore previous slot
     if (delay == 4 && FinishSelect) {
         auto supplies = player->getSupplies();
         if (supplies && prevSlot != -1) {
@@ -121,7 +112,7 @@ void AutoAnchor::onTick(GameMode* gm) {
         FinishSelect = false;
     }
 
-    // --- Reset cycle ---
+    // Reset cycle
     if (delay >= 5) {
         delay = 0;
     }

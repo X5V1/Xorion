@@ -5,9 +5,9 @@
 #include "ItemStack.h"
 
 // Base player wrapper; calls into game via resolved signatures.
-class C_Entity; // forward declaration to avoid heavy includes
+class Entity; // forward declaration to avoid heavy includes
 
-class Player : public C_Entity {
+class Player : public Entity {
 public:
     explicit Player(void* mcPlayerPtr = nullptr);
     virtual ~Player();

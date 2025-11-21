@@ -479,5 +479,22 @@
     <Library Include="minhook\MinHook.x64.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ItemGroup>
+  <!-- Pixel Shader -->
+  <FxCompile Include="Horion\Shaders\UnlitTintPS.hlsl">
+    <ShaderType>Pixel</ShaderType>
+    <ShaderModel>5.0</ShaderModel>
+    <EntryPointName>main</EntryPointName>
+    <ObjectFileOutput>$(OutDir)UnlitTintPS.cso</ObjectFileOutput>
+  </FxCompile>
+
+  <!-- Vertex Shader -->
+  <FxCompile Include="Horion\Shaders\UnlitTintVS.hlsl">
+    <ShaderType>Vertex</ShaderType>
+    <ShaderModel>5.0</ShaderModel>
+    <EntryPointName>main</EntryPointName>
+    <ObjectFileOutput>$(OutDir)UnlitTintVS.cso</ObjectFileOutput>
+  </FxCompile>
+</ItemGroup>
   <ImportGroup Label="ExtensionTargets" />
 </Project>

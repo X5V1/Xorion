@@ -6,7 +6,7 @@
 void VerifyGameData() {
     auto lp = g_Data.getLocalPlayer();
     auto ci = g_Data.getClientInstance();
-    auto gm = g_Data.getCGameMode();
+    auto gm = g_Data.getGameMode();
 
     logF("[GameData] Pointers for 1.21.121 -> LocalPlayer=%p ClientInstance=%p GameMode=%p", lp, ci, gm);
     if (!lp || !ci || !gm) {

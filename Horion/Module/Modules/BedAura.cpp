@@ -1,28 +1,25 @@
-// Horion/Module/Modules/BedAura.cpp
 #include "BedAura.h"
 
 #include "../../Memory/GameData.h"
-#include "../../SDK/CGameMode.h"
-#include "../../SDK/CClientInstance.h"
-#include "../../SDK/CEntity.h"
-#include "../../SDK/CInventory.h"
-#include "../../SDK/CItem.h"
-#include "../../SDK/CBlockLegacy.h"
-#include "../../SDK/CMinecraftUIRenderContext.h"
+#include "../../SDK/GameMode.h"
+#include "../../SDK/ClientInstance.h"
+#include "../../SDK/Entity.h"
+#include "../../SDK/Inventory.h"
+#include "../../SDK/Item.h"
+#include "../../SDK/BlockLegacy.h"
+#include "../../SDK/MinecraftUIRenderContext.h"
 #include "../../Utils/DrawUtils.h"
 #include "../../Utils/Logger.h"
 
-static inline bool isBedBlockLegacy(CBlockLegacy* legacy) {
+static inline bool isBedBlockLegacy(BlockLegacy* legacy) {
     if (!legacy) return false;
-    // Safer than numeric IDs: Bed colors vary by ID but share the same legacy block name.
-    // Expected names contain "bed" (e.g., "minecraft:white_bed", "minecraft:red_bed").
+    // Bed blocks share "bed" in their legacy name across colors
     auto name = legacy->getName().getText();
     return name.find("bed") != std::string::npos;
 }
 
-static inline bool isBedItem(CItem* item) {
+static inline bool isBedItem(Item* item) {
     if (!item) return false;
-    // Item names for beds also contain "bed" across colors.
     auto name = item->name.getText();
     return name.find("bed") != std::string::npos;
 }
@@ -44,6 +41,7 @@ BedAura::BedAura()
     delay = 0;
     prevSlot = -1;
     restoreSlotPending = false;
+    slotRestoreCountdown = 0;
 }
 
 BedAura::~BedAura() {}
@@ -56,6 +54,7 @@ void BedAura::onEnable() {
     delay = 0;
     prevSlot = -1;
     restoreSlotPending = false;
+    slotRestoreCountdown = 0;
     bedPositions.clear();
 }
 
@@ -65,25 +64,25 @@ void BedAura::onDisable() {
         auto lp = Game.getLocalPlayer();
         if (lp) {
             auto supplies = lp->getSupplies();
-            if (supplies && prevSlot >= 0) supplies->selectedHotbarSlot = prevSlot;
+            if (supplies && prevSlot >= 0) {
+                supplies->selectedHotbarSlot = prevSlot;
+            }
         }
     }
     prevSlot = -1;
     restoreSlotPending = false;
+    slotRestoreCountdown = 0;
     bedPositions.clear();
 }
 
-void BedAura::onTick(C_GameMode* gm) {
+void BedAura::onTick(GameMode* gm) {
     auto lp = Game.getLocalPlayer();
     if (!lp || !gm) return;
     if (!lp->region || !lp->level) return;
 
-    // Dimension guard: Only detonate/place in Nether/End.
-    // TODO: Replace dimension check with your SDK's canonical dimension IDs.
-    // Common mapping: 0=Overworld, 1=Nether, 2=End.
-    int dimId = lp->level->dimension; // TODO: confirm actual field
+    // Dimension guard: only act in Nether/End
+    int dimId = lp->level->dimension; // confirm actual field in your SDK
     if (dimensionGuard && dimId == 0) {
-        // Overworld: using beds attempts to sleep; skip to stay combat-safe.
         bedPositions.clear();
         return;
     }
@@ -94,7 +93,7 @@ void BedAura::onTick(C_GameMode* gm) {
     const vec3_t playerPos = *lp->getPos();
     vec3_ti basePos((int)floor(playerPos.x), (int)floor(playerPos.y), (int)floor(playerPos.z));
 
-    // 1) Scan for nearby existing beds and queue them for detonation
+    // 1) Scan for nearby beds and detonate them
     if (autoDetonateNearby) {
         for (int x = -range; x <= range; x++) {
             for (int y = -2; y <= 2; y++) {
@@ -113,38 +112,30 @@ void BedAura::onTick(C_GameMode* gm) {
             }
         }
 
-        // Detonate the beds we found by "using" them
         for (auto& bpos : bedPositions) {
-            // Facing and hit vec are heuristic; server logic will still treat it as an interact
-            // in Nether/End, causing explosion.
             Vec3i blockPos(bpos.x, bpos.y, bpos.z);
-            uint8_t facing = 1; // TODO: optionally use actual face from ray trace
+            uint8_t facing = 1;
             vec3_t hit(0.5f, 0.5f, 0.5f);
 
-            // Use currently selected item (doesn't need to be a bed to detonate an existing one)
             auto supplies = lp->getSupplies();
-            C_ItemStack* selected = nullptr;
+            ItemStack* selected = nullptr;
             if (supplies && supplies->inventory) {
                 selected = supplies->inventory->getItemStack(supplies->selectedHotbarSlot);
             }
 
-            // gm->useItemOn can be used without a bed in hand to interact with an existing bed block.
-            // TODO: Confirm your GameMode API signature and call.
-            gm->useItemOn(selected, blockPos, facing, hit); // TODO: adjust signature if needed
+            gm->useItemOn(selected, blockPos, facing, hit);
         }
     }
 
-    // 2) Autoplace: find a bed in hotbar, place it in front, then detonate it
+    // 2) Autoplace a bed and detonate it
     if (autoplace && delay % cycleDelay == 0) {
         auto supplies = lp->getSupplies();
         if (!supplies || !supplies->inventory) return;
 
-        // Save current slot
         prevSlot = supplies->selectedHotbarSlot;
         restoreSlotPending = true;
 
         int bedSlot = -1;
-        // Scan hotbar for any bed item (color-agnostic)
         for (int slot = 0; slot < 9; slot++) {
             auto stack = supplies->inventory->getItemStack(slot);
             if (!stack || !stack->item) continue;
@@ -157,32 +148,26 @@ void BedAura::onTick(C_GameMode* gm) {
         if (bedSlot != -1) {
             supplies->selectedHotbarSlot = bedSlot;
 
-            // Compute a place position: one block ahead, floor-aligned
-            vec3_t forward = lp->viewAngles.toDirection(); // TODO: confirm you have a helper for view direction
+            vec3_t forward = lp->viewAngles.toDirection(); // ensure you have this helper
             vec3_t placePosF = playerPos.add(forward).floor();
             Vec3i placePos((int)placePosF.x, (int)placePosF.y, (int)placePosF.z);
 
-            // Use block face from current hit result when available
             uint8_t face = 1;
-            if (lp->level->hitResult.type == 0 /* HitResultType::Tile */) {
+            if (lp->level->hitResult.type == 0) {
                 face = (uint8_t)lp->level->hitResult.facing;
             }
 
-            bool useBlockSide = true;
-            // Place the bed block
-            gm->buildBlock(&placePos, face, useBlockSide); // TODO: ensure this matches your buildBlock signature
+            gm->buildBlock(&placePos, face, true);
 
-            // Detonate right after placement (Nether/End -> explode)
             vec3_t hit(0.5f, 0.5f, 0.5f);
             auto stack = supplies->inventory->getItemStack(bedSlot);
-            gm->useItemOn(stack, placePos, face, hit); // TODO: confirm API signature
+            gm->useItemOn(stack, placePos, face, hit);
         }
 
-        // Restore slot a bit later to avoid flicker during place/use
-        slotRestoreCountdown = 2; // ticks until restore
+        slotRestoreCountdown = 2;
     }
 
-    // 3) Restore previous slot after actions
+    // 3) Restore previous slot
     if (restoreSlotPending) {
         if (slotRestoreCountdown > 0) {
             slotRestoreCountdown--;
@@ -197,9 +182,8 @@ void BedAura::onTick(C_GameMode* gm) {
     }
 }
 
-void BedAura::onLevelRender(C_MinecraftUIRenderContext* ctx) {
-    if (!renderBeds) return;
-    if (bedPositions.empty()) return;
+void BedAura::onPreRender(MinecraftUIRenderContext* ctx) {
+    if (!renderBeds || bedPositions.empty()) return;
 
     DrawUtils::setColor(0.9f, 0.3f, 0.3f, renderAlpha);
     for (auto& p : bedPositions) {

@@ -3,7 +3,7 @@
 #include <string>
 #include "Player.h"
 
-class C_GameMode;
+class GameMode;
 class ClientInstance;
 
 class LocalPlayer : public Player {
@@ -12,20 +12,20 @@ public:
     ~LocalPlayer();
 
     void sendChatMessage(const std::string& msg);
-    void attackEntity(C_Entity* entity);
+    void attackEntity(Entity* entity);
     void jump();
 
     bool isSneaking() const;
     void setSneaking(bool sneaking);
 
-    C_GameMode*     getGameMode() const;
+    GameMode*     getGameMode() const;
     ClientInstance* getClientInstance() const;
 
 private:
     bool sneaking;
 
     static void (*ClientInstance_sendChat_fn)(ClientInstance* ci, const char* msg);
-    static void (*GameMode_attack_fn)(C_GameMode* gm, C_Entity* entity);
+    static void (*GameMode_attack_fn)(GameMode* gm, Entity* entity);
     static void (*LocalPlayer_jump_fn)(void* mcLocalPlayer);
     static bool (*LocalPlayer_isSneaking_fn)(void* mcLocalPlayer);
     static void (*LocalPlayer_setSneaking_fn)(void* mcLocalPlayer, bool sneaking);

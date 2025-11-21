@@ -77,7 +77,7 @@ void InfiniteAura::onTick(C_GameMode* gm) {
 			}
 
 			localPlayer->swingArm();
-			g_Data.getCGameMode()->attack(target);
+			g_Data.getGameMode()->attack(target);
 
 			//Back
 			localPlayerPos = *localPlayer->getPos();
