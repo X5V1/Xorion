@@ -1,34 +1,29 @@
-// LocalPlayer.h
 #pragma once
-#include <string>
+
 #include "Player.h"
+#include "Vec2.h"
 
-class GameMode;
-class ClientInstance;
-
+// LocalPlayer extends Player with client-side operations used by modules (swing, turn, game mode access)
 class LocalPlayer : public Player {
 public:
-    explicit LocalPlayer(void* mcLocalPlayerPtr = nullptr);
-    ~LocalPlayer();
+    explicit LocalPlayer(void* mcPlayerPtr = nullptr);
+    virtual ~LocalPlayer();
 
-    void sendChatMessage(const std::string& msg);
-    void attackEntity(Entity* entity);
-    void jump();
+    // Client-side actions
+    void swingArm();
+    void localPlayerTurn(Vec2* viewAngles);
+    void applyTurnDelta(Vec2* viewAngleDelta);
 
-    bool isSneaking() const;
-    void setSneaking(bool sneaking);
+    // Accessors
+    GameMode* getGameMode() const;
+    void unlockAchievements();
 
-    GameMode*     getGameMode() const;
-    ClientInstance* getClientInstance() const;
+protected:
+    // Resolved function pointers for LocalPlayer specific calls
+    static void (*s_swingArm_fn)(void*);
+    static void (*s_localPlayerTurn_fn)(void*, Vec2*);
+    static void (*s_applyTurnDelta_fn)(void*, Vec2*);
+    static GameMode* (*s_getGameMode_fn)(void*);
 
-private:
-    bool sneaking;
-
-    static void (*ClientInstance_sendChat_fn)(ClientInstance* ci, const char* msg);
-    static void (*GameMode_attack_fn)(GameMode* gm, Entity* entity);
-    static void (*LocalPlayer_jump_fn)(void* mcLocalPlayer);
-    static bool (*LocalPlayer_isSneaking_fn)(void* mcLocalPlayer);
-    static void (*LocalPlayer_setSneaking_fn)(void* mcLocalPlayer, bool sneaking);
-
-    void ensureIntegration() const;
+    void ensureLocalIntegration() const;
 };

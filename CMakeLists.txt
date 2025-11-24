@@ -316,6 +316,8 @@ add_library(Horion SHARED
         Horion/Render/RenderInit.cpp
         Horion/Render/RenderUtils.cpp
         Horion/Render/RenderUtils.h
+        Horion/Render/Signatures.cpp
+        Horion/Render/Signatures.h
 
         Horion/Scripting/Functions/CommandManagerFunctions.cpp
         Horion/Scripting/Functions/CommandManagerFunctions.h
@@ -436,6 +438,7 @@ add_library(Horion SHARED
         SDK/Player.cpp
         SDK/Player.h
         SDK/PlayerMovementProxy.h
+        SDK/PlayerSignatures.h
         SDK/PlayerSupplies.h
         SDK/RakNetConnector.h
         SDK/RayTracer.cpp

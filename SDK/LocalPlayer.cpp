@@ -1,67 +1,95 @@
-// LocalPlayer.cpp
 #include "LocalPlayer.h"
-#include <stdexcept>
-#include "Utils/Logger.h"
-#include "SDK/GameMode.h"
-#include "SDK/ClientInstance.h"
-#include "GameData.h"
+#include "../Utils/Utils.h"
+#include "../SDK/FindSignatures.h"
+#include <vector>
 
-void (*LocalPlayer::ClientInstance_sendChat_fn)(ClientInstance*, const char*) = nullptr;
-void (*LocalPlayer::GameMode_attack_fn)(GameMode*, Entity*) = nullptr;
-void (*LocalPlayer::LocalPlayer_jump_fn)(void*) = nullptr;
-bool (*LocalPlayer::LocalPlayer_isSneaking_fn)(void*) = nullptr;
-void (*LocalPlayer::LocalPlayer_setSneaking_fn)(void*, bool) = nullptr;
+static void* findAnySignatureLocal(const std::vector<const char*>& patterns) {
+    for (auto p : patterns) {
+        void* r = FindSignature(p);
+        if (r) return r;
+    }
+    return nullptr;
+}
 
-LocalPlayer::LocalPlayer(void* mcLocalPlayerPtr)
-    : Player(mcLocalPlayerPtr), sneaking(false) {}
+// Static defs
+void (*LocalPlayer::s_swingArm_fn)(void*) = nullptr;
+void (*LocalPlayer::s_localPlayerTurn_fn)(void*, Vec2*) = nullptr;
+void (*LocalPlayer::s_applyTurnDelta_fn)(void*, Vec2*) = nullptr;
+GameMode* (*LocalPlayer::s_getGameMode_fn)(void*) = nullptr;
 
-LocalPlayer::~LocalPlayer() {}
+LocalPlayer::LocalPlayer(void* mcPlayerPtr) : Player(mcPlayerPtr) {
+    ensureLocalIntegration();
+}
 
-void LocalPlayer::ensureIntegration() const {
-    if (!mcPlayerPtr ||
-        !GameMode_attack_fn ||
-        !ClientInstance_sendChat_fn) {
-        logF("[LocalPlayer] Missing integration. Ensure InitSDK() succeeded for 1.21.121.");
-        throw std::runtime_error("LocalPlayer SDK not initialized");
+LocalPlayer::~LocalPlayer() = default;
+
+void LocalPlayer::ensureLocalIntegration() const {
+    if (!s_swingArm_fn) {
+        std::vector<const char*> pats = {
+            "40 53 48 83 EC ? 48 8B D9 48 8B 0D ? ? ? ? 48 8B 01 FF 50 ?",
+            "48 89 5C 24 ? 48 89 7C 24 ? 57 48 83 EC ? 8B F9 E8 ? ? ? ?"
+        };
+        s_swingArm_fn = reinterpret_cast<void(*)(void*)>(findAnySignatureLocal(pats));
+    }
+    if (!s_localPlayerTurn_fn) {
+        std::vector<const char*> pats = {
+            "48 8B 58 68 48 83 EC ? 48 8B F1 48 8B 4A ? E8 ? ? ? ?",
+            "48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 48 8B D1 E8 ? ? ? ?"
+        };
+        s_localPlayerTurn_fn = reinterpret_cast<void(*)(void*, Vec2*)>(findAnySignatureLocal(pats));
+    }
+    if (!s_applyTurnDelta_fn) {
+        std::vector<const char*> pats = {
+            "48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B F9 48 8B 01 48 8B 68 ?"
+        };
+        s_applyTurnDelta_fn = reinterpret_cast<void(*)(void*, Vec2*)>(findAnySignatureLocal(pats));
+    }
+    if (!s_getGameMode_fn) {
+        std::vector<const char*> pats = {
+            "48 8B 81 ? ? ? ? 48 8B 48 ? 48 8B 01 FF 50 ?",
+            "48 8B 05 ? ? ? ? 48 8B 50 ? 48 8B 88 ? ? ? ? 48 85 C9"
+        };
+        s_getGameMode_fn = reinterpret_cast<GameMode*(*)(void*)>(findAnySignatureLocal(pats));
     }
 }
 
-GameMode* LocalPlayer::getGameMode() const { return g_Data.getCGameMode(); }
-ClientInstance* LocalPlayer::getClientInstance() const { return g_Data.getClientInstance(); }
-
-void LocalPlayer::sendChatMessage(const std::string& msg) {
-    ensureIntegration();
-    ClientInstance_sendChat_fn(getClientInstance(), msg.c_str());
+void LocalPlayer::swingArm() {
+    if (!mcPlayerPtr) return;
+    ensureLocalIntegration();
+    if (s_swingArm_fn) { s_swingArm_fn(mcPlayerPtr); return; }
+    // fallback vfunc (candidate)
+    Utils::CallVFunc<56, void>(mcPlayerPtr);
 }
 
-void LocalPlayer::attackEntity(Entity* entity) {
-    ensureIntegration();
-    GameMode_attack_fn(getGameMode(), entity);
+void LocalPlayer::localPlayerTurn(Vec2* viewAngles) {
+    if (!mcPlayerPtr || !viewAngles) return;
+    ensureLocalIntegration();
+    if (s_localPlayerTurn_fn) { s_localPlayerTurn_fn(mcPlayerPtr, viewAngles); return; }
+    using TurnFn = void(__thiscall*)(void*, Vec2*);
+    static TurnFn fallback = reinterpret_cast<TurnFn>(FindSignature("LOCALPLAYER_turn_fallback_sig"));
+    if (fallback) fallback(mcPlayerPtr, viewAngles);
 }
 
-void LocalPlayer::jump() {
-    ensureIntegration();
-    if (!LocalPlayer_jump_fn) {
-        logF("[LocalPlayer] jump signature missing for 1.21.121");
-        return;
-    }
-    LocalPlayer_jump_fn(mcPlayerPtr);
+void LocalPlayer::applyTurnDelta(Vec2* viewAngleDelta) {
+    if (!mcPlayerPtr || !viewAngleDelta) return;
+    ensureLocalIntegration();
+    if (s_applyTurnDelta_fn) { s_applyTurnDelta_fn(mcPlayerPtr, viewAngleDelta); return; }
+    using ApplyFn = void(__thiscall*)(void*, Vec2*);
+    static ApplyFn fallback = reinterpret_cast<ApplyFn>(FindSignature("LOCALPLAYER_applyTurn_fallback_sig"));
+    if (fallback) fallback(mcPlayerPtr, viewAngleDelta);
 }
 
-bool LocalPlayer::isSneaking() const {
-    ensureIntegration();
-    if (!LocalPlayer_isSneaking_fn) {
-        logF("[LocalPlayer] isSneaking signature missing for 1.21.121");
-        return false;
-    }
-    return LocalPlayer_isSneaking_fn(mcPlayerPtr);
+GameMode* LocalPlayer::getGameMode() const {
+    ensureLocalIntegration();
+    if (!mcPlayerPtr) return nullptr;
+    if (s_getGameMode_fn) return s_getGameMode_fn(mcPlayerPtr);
+    // fallback: read from offset
+    return *reinterpret_cast<GameMode**>(reinterpret_cast<uintptr_t>(mcPlayerPtr) + 0xEF8);
 }
 
-void LocalPlayer::setSneaking(bool s) {
-    ensureIntegration();
-    if (!LocalPlayer_setSneaking_fn) {
-        logF("[LocalPlayer] setSneaking signature missing for 1.21.121");
-        return;
-    }
-    LocalPlayer_setSneaking_fn(mcPlayerPtr, s);
+void LocalPlayer::unlockAchievements() {
+    if (!mcPlayerPtr) return;
+    ensureLocalIntegration();
+    // try vfunc fallback candidate
+    Utils::CallVFunc<220, void>(mcPlayerPtr);
 }
