@@ -28,7 +28,8 @@ enum class Category : uint8_t {
     MOVEMENT,
     PLAYER,
     WORLD,
-    MISC
+    MISC,
+    CLIENT
 };
 
 // Base module interface used by all modules.

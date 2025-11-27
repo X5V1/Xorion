@@ -2,16 +2,15 @@
 #include "Module.h"
 #include <string>
 
-class MultiPurpose : public IModule {
+class Unbanner : public IModule {
 public:
-    // Example settings
-    bool toggleOption = true;
-    int intOption = 5;
-    float floatOption = 0.5f;
-    std::string stringOption = "Default";
+    // Settings
+    bool autoReconnect = true;
+    int retryDelay = 60;
 
     // State
     int tickCounter = 0;
+    bool showButton = true;
 
     Unbanner();
     ~Unbanner();
@@ -21,7 +20,12 @@ public:
     // Hooks
     void onEnable() override;
     void onDisable() override;
-    void onTick(C_GameMode* gm) override;
-    void onLevelRender(C_MinecraftUIRenderContext* ctx) override;
-    void onRenderGUI(C_MinecraftUIRenderContext* ctx) override;
+    void onTick(GameMode* gm) override;
+    void onPostRender(MinecraftUIRenderContext* ctx) override;
+
+private:
+    // Render the "Try Unban Me" button
+    void renderUnbanButton(MinecraftUIRenderContext* ctx);
+    // Attempt to reconnect/unban
+    void tryUnban();
 };
