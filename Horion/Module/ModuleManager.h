@@ -106,6 +106,28 @@
 #include "Modules/Fly.h"
 #include "Modules/ESP.h"
 
+// Custom modules
+#include "Modules/BedAura.h"
+#include "Modules/AutoAnchor.h"
+#include "Modules/Dicker.h"
+#include "Modules/FeetPlace.h"
+#include "Modules/LigmaNuts.h"
+#include "Modules/MaceHit.h"
+#include "Modules/SeeCrystals.h"
+#include "Modules/Unbanner.h"
+#include "Modules/InfiniteTreasureAura.h"
+#include "Modules/HudEditor.h"
+#include "Modules/DVDLogo.h"
+#include "Modules/NoClip.h"
+#include "Modules/TargetHUD.h"
+#include "Modules/InventoryViewer.h"
+#include "Modules/Breadcrumbs.h"
+#include "Modules/Watermark.h"
+#include "Modules/Fucker.h"
+#include "Modules/ChestESP.h"
+#include "Modules/AnchorNotifier.h"
+#include "Modules/AutoCrystal.h"
+
 #ifdef _DEV
 #include "Modules/PacketLogger.h"
 #include "Modules/TestModule.h"

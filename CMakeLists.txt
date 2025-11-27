@@ -514,6 +514,8 @@ add_library(Horion SHARED
         Horion/Module/Modules/BedAura.h
         Horion/Module/Modules/AutoAnchor.cpp
         Horion/Module/Modules/AutoAnchor.h
+        Horion/Module/Modules/Unbanner.cpp
+        Horion/Module/Modules/Unbanner.h
 )
 
 # --- Shader compile rules ---
