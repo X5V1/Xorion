@@ -95,8 +95,9 @@ bool AntiCheatBlocker::detectBanCommand(const std::string& command) {
     
     // Check if command starts with any of the ban patterns
     for (const auto& banPattern : banCommandPatterns) {
-        // Use rfind with position 0 to check for prefix match only
-        if (lowerCmd.rfind(banPattern, 0) == 0) {
+        // Check if the command starts with this pattern using substr comparison
+        if (lowerCmd.length() >= banPattern.length() && 
+            lowerCmd.substr(0, banPattern.length()) == banPattern) {
             return true;
         }
     }
@@ -114,21 +115,19 @@ void AntiCheatBlocker::triggerSafeDisconnect() {
         guiData->displayClientMessageF("§c[AntiCheatBlocker] §fAnti-cheat detected! Disconnecting for safety...");
     }
     
-    // Attempt to disconnect the player safely
-    // Using RakNet disconnect if available
-    auto rakNet = Game.getRakNetConnector();
-    if (rakNet != nullptr) {
-        // The actual disconnect logic would depend on the SDK implementation
-        // For now we log and set the flag
-        logF("[AntiCheatBlocker] Triggering safe disconnect due to anti-cheat detection");
-    }
+    logF("[AntiCheatBlocker] Triggering safe disconnect due to anti-cheat detection");
     
     hasKickedPlayer = true;
     detectionTriggered = true;
     
-    // Also display a warning
+    // Note: Full automatic disconnect is not implemented due to SDK limitations.
+    // The user is notified to manually disconnect to avoid potential bans.
+    // The RakNetConnector API would need disconnect() method support for automatic disconnection.
+    
+    // Display warning to the user to leave manually
     if (guiData != nullptr) {
-        guiData->displayClientMessageF("§c[AntiCheatBlocker] §fProtection activated - please leave the server manually.");
+        guiData->displayClientMessageF("§c[AntiCheatBlocker] §fProtection activated - please leave the server manually!");
+        guiData->displayClientMessageF("§c[AntiCheatBlocker] §fAutomatic disconnect not supported - disconnect NOW!");
     }
 }
 
@@ -175,16 +174,17 @@ void AntiCheatBlocker::onTick(GameMode* gm) {
 void AntiCheatBlocker::onSendPacket(Packet* packet) {
     if (packet == nullptr) return;
     
-    // Check outgoing chat messages for anti-cheat related content
-    // This can detect if a server is trying to execute anti-cheat related commands through the client
+    // Monitor outgoing chat messages from the client
+    // This detects if the client sends messages containing anti-cheat references
+    // which could indicate automated client-side scripting or detection attempts
     if (packet->isInstanceOf<TextPacket>()) {
         // Use static_cast since isInstanceOf already verified the type
         TextPacket* textPacket = static_cast<TextPacket*>(packet);
         std::string message = textPacket->message.getText();
         
-        // Check if outgoing message mentions anti-cheat (could indicate client-side scripting detection)
+        // Check if outgoing message mentions anti-cheat keywords
         if (detectAntiCheatInMessage(message)) {
-            // Trigger protection if anti-cheat is detected
+            // Trigger protection if anti-cheat related content is detected
             triggerSafeDisconnect();
         }
     }
