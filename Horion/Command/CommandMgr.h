@@ -14,6 +14,7 @@
 #include "Commands/HelpCommand.h"
 #include "Commands/HideCommand.h"
 #include "Commands/ICommand.h"
+#include "Commands/ImpersonateCommand.h"
 #include "Commands/ModulesCommand.h"
 #include "Commands/PanicCommand.h"
 #include "Commands/PlayerTeleportCommand.h"

@@ -518,6 +518,10 @@ add_library(Horion SHARED
         Horion/Module/Modules/Unbanner.h
         Horion/Module/Modules/AntiCheatBlocker.cpp
         Horion/Module/Modules/AntiCheatBlocker.h
+        Horion/Module/Modules/Impersonator.cpp
+        Horion/Module/Modules/Impersonator.h
+        Horion/Command/Commands/ImpersonateCommand.cpp
+        Horion/Command/Commands/ImpersonateCommand.h
 )
 
 # --- Shader compile rules (Windows-only) ---

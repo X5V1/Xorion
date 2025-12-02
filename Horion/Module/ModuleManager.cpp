@@ -79,6 +79,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<InventoryCleaner>());
         moduleList.emplace_back(std::make_shared<InventoryMove>());
         moduleList.emplace_back(std::make_shared<InventoryViewer>());
+        moduleList.emplace_back(std::make_shared<Impersonator>());
         moduleList.emplace_back(std::make_shared<Jesus>());
         moduleList.emplace_back(std::make_shared<Killaura>());
         moduleList.emplace_back(std::make_shared<LigmaNuts>());   // custom
