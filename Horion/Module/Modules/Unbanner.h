@@ -9,12 +9,20 @@ class Unbanner : public IModule {
 public:
     // Settings
     bool spoofName = true;       // Enable username spoofing
+    bool spoofDeviceId = true;   // Enable Device ID spoofing
+    bool spoofXuid = true;       // Enable Xbox Live ID (XUID) spoofing
     bool showButton = true;      // Show UI button
 
     // State
-    std::string spoofedUsername; // The spoofed username (word + 3 numbers)
+    std::string spoofedUsername;  // The spoofed username (word + 3 numbers)
+    std::string spoofedDeviceId;  // The spoofed Device ID (UUID format)
+    std::string spoofedXuid;      // The spoofed Xbox Live ID (numeric)
     bool usernameGenerated = false;
-    TextHolder* fakeNameHolder = nullptr; // Holds the TextHolder for GameData integration
+    bool deviceIdGenerated = false;
+    bool xuidGenerated = false;
+    TextHolder* fakeNameHolder = nullptr;     // Holds the TextHolder for username
+    TextHolder* fakeDeviceIdHolder = nullptr; // Holds the TextHolder for Device ID
+    TextHolder* fakeXuidHolder = nullptr;     // Holds the TextHolder for XUID
 
     Unbanner();
     ~Unbanner();
@@ -28,11 +36,16 @@ public:
     void onPostRender(MinecraftUIRenderContext* ctx) override;
     void onSendPacket(Packet* packet) override;
 
-    // Generate a new random spoofed username
+    // Generate spoofed identifiers
     void generateSpoofedUsername();
+    void generateSpoofedDeviceId();
+    void generateSpoofedXuid();
+    void generateAllSpoofedIds();
 
-    // Get the current spoofed username
+    // Get the current spoofed values
     const std::string& getSpoofedUsername() const;
+    const std::string& getSpoofedDeviceId() const;
+    const std::string& getSpoofedXuid() const;
 
 private:
     // Render the "Try Unban Me" button

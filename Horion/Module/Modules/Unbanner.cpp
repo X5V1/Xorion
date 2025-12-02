@@ -6,6 +6,8 @@
 #include "../../../Utils/Utils.h"
 #include <random>
 #include <ctime>
+#include <sstream>
+#include <iomanip>
 
 // Xorion green color (same as xorion-banner.png)
 static const MC_Color xorionGreen = MC_Color(37, 164, 64);
@@ -25,20 +27,39 @@ const char* Unbanner::wordList[] = {
 const int Unbanner::wordListSize = sizeof(wordList) / sizeof(wordList[0]);
 
 Unbanner::Unbanner()
-    : IModule(0, Category::MISC, "Spoofs your username with a random name to help avoid bans.") {
+    : IModule(0, Category::MISC, "Spoofs your identity to help avoid bans.") {
     registerBoolSetting("SpoofName", &spoofName, spoofName);
+    registerBoolSetting("SpoofDeviceId", &spoofDeviceId, spoofDeviceId);
+    registerBoolSetting("SpoofXuid", &spoofXuid, spoofXuid);
     registerBoolSetting("ShowButton", &showButton, showButton);
 }
 
 Unbanner::~Unbanner() {
     // Clean up the fake name holder if it exists
     if (fakeNameHolder != nullptr) {
-        // Only clear from GameData if we're the one who set it
         if (Game.getFakeName() == fakeNameHolder) {
             Game.setFakeName(nullptr);
         }
         delete fakeNameHolder;
         fakeNameHolder = nullptr;
+    }
+    
+    // Clean up Device ID holder
+    if (fakeDeviceIdHolder != nullptr) {
+        if (Game.getFakeDeviceId() == fakeDeviceIdHolder) {
+            Game.setFakeDeviceId(nullptr);
+        }
+        delete fakeDeviceIdHolder;
+        fakeDeviceIdHolder = nullptr;
+    }
+    
+    // Clean up XUID holder
+    if (fakeXuidHolder != nullptr) {
+        if (Game.getFakeXuid() == fakeXuidHolder) {
+            Game.setFakeXuid(nullptr);
+        }
+        delete fakeXuidHolder;
+        fakeXuidHolder = nullptr;
     }
 }
 
@@ -47,7 +68,6 @@ const char* Unbanner::getModuleName() {
 }
 
 void Unbanner::generateSpoofedUsername() {
-    // Seed random number generator
     std::random_device rd;
     std::mt19937 gen(rd());
     
@@ -62,15 +82,11 @@ void Unbanner::generateSpoofedUsername() {
         numbers += std::to_string(digitDist(gen));
     }
     
-    // Combine word and numbers
     spoofedUsername = word + numbers;
     usernameGenerated = true;
     
-    // Create a TextHolder for the fake name and set it in GameData
-    // This integrates with the existing name spoofing system
     // Clean up old holder before creating new one
     if (fakeNameHolder != nullptr) {
-        // Clear from GameData if we're the one who set it
         if (Game.getFakeName() == fakeNameHolder) {
             Game.setFakeName(nullptr);
         }
@@ -79,13 +95,89 @@ void Unbanner::generateSpoofedUsername() {
     }
     fakeNameHolder = new TextHolder(spoofedUsername);
     Game.setFakeName(fakeNameHolder);
+}
+
+void Unbanner::generateSpoofedDeviceId() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> hexDist(0, 15);
     
-    // Log the generated username
+    // Generate UUID format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    std::stringstream ss;
+    const char* hexChars = "0123456789abcdef";
+    
+    // First 8 chars
+    for (int i = 0; i < 8; i++) ss << hexChars[hexDist(gen)];
+    ss << "-";
+    // Next 4 chars
+    for (int i = 0; i < 4; i++) ss << hexChars[hexDist(gen)];
+    ss << "-";
+    // Next 4 chars
+    for (int i = 0; i < 4; i++) ss << hexChars[hexDist(gen)];
+    ss << "-";
+    // Next 4 chars
+    for (int i = 0; i < 4; i++) ss << hexChars[hexDist(gen)];
+    ss << "-";
+    // Last 12 chars
+    for (int i = 0; i < 12; i++) ss << hexChars[hexDist(gen)];
+    
+    spoofedDeviceId = ss.str();
+    deviceIdGenerated = true;
+    
+    // Clean up old holder before creating new one
+    if (fakeDeviceIdHolder != nullptr) {
+        if (Game.getFakeDeviceId() == fakeDeviceIdHolder) {
+            Game.setFakeDeviceId(nullptr);
+        }
+        delete fakeDeviceIdHolder;
+        fakeDeviceIdHolder = nullptr;
+    }
+    fakeDeviceIdHolder = new TextHolder(spoofedDeviceId);
+    Game.setFakeDeviceId(fakeDeviceIdHolder);
+}
+
+void Unbanner::generateSpoofedXuid() {
+    std::random_device rd;
+    std::mt19937_64 gen(rd());
+    
+    // XUID is typically a 16-digit number starting with "2" for Xbox Live accounts
+    std::uniform_int_distribution<uint64_t> dist(1000000000000000ULL, 2999999999999999ULL);
+    uint64_t xuidValue = dist(gen);
+    
+    spoofedXuid = std::to_string(xuidValue);
+    xuidGenerated = true;
+    
+    // Clean up old holder before creating new one
+    if (fakeXuidHolder != nullptr) {
+        if (Game.getFakeXuid() == fakeXuidHolder) {
+            Game.setFakeXuid(nullptr);
+        }
+        delete fakeXuidHolder;
+        fakeXuidHolder = nullptr;
+    }
+    fakeXuidHolder = new TextHolder(spoofedXuid);
+    Game.setFakeXuid(fakeXuidHolder);
+}
+
+void Unbanner::generateAllSpoofedIds() {
+    if (spoofName) generateSpoofedUsername();
+    if (spoofDeviceId) generateSpoofedDeviceId();
+    if (spoofXuid) generateSpoofedXuid();
+    
+    // Log the generated values
     auto clientInstance = Game.getClientInstance();
     if (clientInstance != nullptr) {
         auto guiData = clientInstance->getGuiData();
         if (guiData != nullptr) {
-            guiData->displayClientMessageF("[Unbanner] Generated spoofed username: %s", spoofedUsername.c_str());
+            if (spoofName && usernameGenerated) {
+                guiData->displayClientMessageF("[Unbanner] Username: %s", spoofedUsername.c_str());
+            }
+            if (spoofDeviceId && deviceIdGenerated) {
+                guiData->displayClientMessageF("[Unbanner] Device ID: %s", spoofedDeviceId.c_str());
+            }
+            if (spoofXuid && xuidGenerated) {
+                guiData->displayClientMessageF("[Unbanner] XUID: %s", spoofedXuid.c_str());
+            }
         }
     }
 }
@@ -94,49 +186,83 @@ const std::string& Unbanner::getSpoofedUsername() const {
     return spoofedUsername;
 }
 
+const std::string& Unbanner::getSpoofedDeviceId() const {
+    return spoofedDeviceId;
+}
+
+const std::string& Unbanner::getSpoofedXuid() const {
+    return spoofedXuid;
+}
+
 void Unbanner::onEnable() {
-    // Generate a new spoofed username when the module is enabled
-    generateSpoofedUsername();
+    generateAllSpoofedIds();
     
     auto clientInstance = Game.getClientInstance();
     if (clientInstance != nullptr) {
         auto guiData = clientInstance->getGuiData();
         if (guiData != nullptr) {
-            guiData->displayClientMessageF("[Unbanner] Enabled - Your spoofed name: %s", spoofedUsername.c_str());
-            guiData->displayClientMessageF("[Unbanner] Reconnect to apply the spoofed name to the server.");
+            guiData->displayClientMessageF("[Unbanner] Enabled - Spoofed identities generated.");
+            guiData->displayClientMessageF("[Unbanner] Reconnect to apply spoofed IDs to the server.");
         }
     }
 }
 
 void Unbanner::onDisable() {
-    // Clear the fake name from GameData
+    // Clear all fake IDs from GameData
     Game.setFakeName(nullptr);
+    Game.setFakeDeviceId(nullptr);
+    Game.setFakeXuid(nullptr);
+    
     if (fakeNameHolder != nullptr) {
         delete fakeNameHolder;
         fakeNameHolder = nullptr;
     }
+    if (fakeDeviceIdHolder != nullptr) {
+        delete fakeDeviceIdHolder;
+        fakeDeviceIdHolder = nullptr;
+    }
+    if (fakeXuidHolder != nullptr) {
+        delete fakeXuidHolder;
+        fakeXuidHolder = nullptr;
+    }
     
     usernameGenerated = false;
+    deviceIdGenerated = false;
+    xuidGenerated = false;
     spoofedUsername.clear();
+    spoofedDeviceId.clear();
+    spoofedXuid.clear();
     
     auto clientInstance = Game.getClientInstance();
     if (clientInstance != nullptr) {
         auto guiData = clientInstance->getGuiData();
         if (guiData != nullptr) {
-            guiData->displayClientMessageF("[Unbanner] Disabled - Username spoofing deactivated.");
+            guiData->displayClientMessageF("[Unbanner] Disabled - Identity spoofing deactivated.");
         }
     }
 }
 
 void Unbanner::onTick(GameMode* gm) {
-    // Ensure we have a spoofed username
+    // Ensure we have spoofed IDs generated
     if (spoofName && !usernameGenerated) {
         generateSpoofedUsername();
     }
+    if (spoofDeviceId && !deviceIdGenerated) {
+        generateSpoofedDeviceId();
+    }
+    if (spoofXuid && !xuidGenerated) {
+        generateSpoofedXuid();
+    }
     
-    // Keep the fake name in GameData synchronized
+    // Keep the fake values in GameData synchronized
     if (spoofName && usernameGenerated && Game.getFakeName() == nullptr && fakeNameHolder != nullptr) {
         Game.setFakeName(fakeNameHolder);
+    }
+    if (spoofDeviceId && deviceIdGenerated && Game.getFakeDeviceId() == nullptr && fakeDeviceIdHolder != nullptr) {
+        Game.setFakeDeviceId(fakeDeviceIdHolder);
+    }
+    if (spoofXuid && xuidGenerated && Game.getFakeXuid() == nullptr && fakeXuidHolder != nullptr) {
+        Game.setFakeXuid(fakeXuidHolder);
     }
 }
 
@@ -188,7 +314,7 @@ void Unbanner::renderUnbanButton(MinecraftUIRenderContext* ctx) {
     Vec2 windowSize = guiData->windowSize;
 
     // Button dimensions
-    const float buttonWidth = 180.0f;
+    const float buttonWidth = 220.0f;
     const float buttonHeight = 35.0f;
 
     // Center button horizontally, position near bottom
@@ -213,8 +339,14 @@ void Unbanner::renderUnbanButton(MinecraftUIRenderContext* ctx) {
     MC_Color buttonColor = isHovered ? xorionGreen.lerp(whiteColor, 0.2f) : xorionGreen;
     DrawUtils::fillRectangle(buttonRect, buttonColor, 1.0f);
 
-    // Draw button text with current spoofed name
-    std::string buttonText = usernameGenerated ? ("Name: " + spoofedUsername) : "Generate New Name";
+    // Draw button text showing spoofed name (truncated if too long)
+    std::string buttonText = "Regenerate Identity";
+    if (usernameGenerated) {
+        buttonText = spoofedUsername;
+        if (buttonText.length() > 20) {
+            buttonText = buttonText.substr(0, 17) + "...";
+        }
+    }
     float textWidth = DrawUtils::getTextWidth(&buttonText, 1.0f);
     float textHeight = DrawUtils::getFont(Fonts::SMOOTH)->getLineHeight();
     Vec2 textPos(
@@ -223,9 +355,9 @@ void Unbanner::renderUnbanButton(MinecraftUIRenderContext* ctx) {
     );
     DrawUtils::drawText(textPos, &buttonText, whiteColor, 1.0f, 1.0f);
 
-    // Handle click - regenerate username
+    // Handle click - regenerate all spoofed IDs
     if (isHovered && DrawUtils::shouldToggleLeftClick) {
         DrawUtils::shouldToggleLeftClick = false;
-        generateSpoofedUsername();
+        generateAllSpoofedIds();
     }
 }

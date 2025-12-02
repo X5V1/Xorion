@@ -1077,7 +1077,23 @@ float Hooks::GameMode_getPickRange(GameMode* _this, __int64 currentInputMode, ch
 __int64 Hooks::ConnectionRequest_create(__int64 _this, __int64 privateKeyManager, void* a3, TextHolder* selfSignedId, TextHolder* serverAddress, __int64 clientRandomId, TextHolder* skinId, SkinData* skinData, __int64 capeData, __int64* serializedSkin, TextHolder* deviceId, int inputMode, int uiProfile, int guiScale, TextHolder* languageCode, bool sendEduModeParams, char a17, TextHolder* tenantId, __int64 a19, TextHolder* platformUserId, TextHolder* thirdPartyName, bool thirdPartyNameOnly, TextHolder* platformOnlineId, TextHolder* platformOfflineId, TextHolder* capeId, char a26) {
 	static auto oFunc = g_Hooks.ConnectionRequest_createHook->GetFastcall<__int64, __int64, __int64, void*, TextHolder*, TextHolder*, __int64, TextHolder*, SkinData*, __int64, __int64*, TextHolder*, int, int, int, TextHolder*, bool, char, TextHolder*, __int64, TextHolder*, TextHolder*, bool, TextHolder*, TextHolder*, TextHolder*, char>();
 
-	return oFunc(_this, privateKeyManager, a3, selfSignedId, serverAddress, clientRandomId, skinId, skinData, capeData, serializedSkin, deviceId, inputMode, uiProfile, guiScale, languageCode, sendEduModeParams, a17, tenantId, a19, platformUserId, thirdPartyName, thirdPartyNameOnly, platformOnlineId, platformOfflineId, capeId, a26);
+	// Spoof Device ID if set
+	TextHolder* effectiveDeviceId = deviceId;
+	if (Game.getFakeDeviceId() != nullptr) {
+		effectiveDeviceId = Game.getFakeDeviceId();
+	}
+	
+	// Spoof Xbox Live ID (XUID) if set - this affects platformUserId, platformOnlineId, platformOfflineId
+	TextHolder* effectivePlatformUserId = platformUserId;
+	TextHolder* effectivePlatformOnlineId = platformOnlineId;
+	TextHolder* effectivePlatformOfflineId = platformOfflineId;
+	if (Game.getFakeXuid() != nullptr) {
+		effectivePlatformUserId = Game.getFakeXuid();
+		effectivePlatformOnlineId = Game.getFakeXuid();
+		effectivePlatformOfflineId = Game.getFakeXuid();
+	}
+
+	return oFunc(_this, privateKeyManager, a3, selfSignedId, serverAddress, clientRandomId, skinId, skinData, capeData, serializedSkin, effectiveDeviceId, inputMode, uiProfile, guiScale, languageCode, sendEduModeParams, a17, tenantId, a19, effectivePlatformUserId, thirdPartyName, thirdPartyNameOnly, effectivePlatformOnlineId, effectivePlatformOfflineId, capeId, a26);
 }
 
 void Hooks::InventoryTransactionManager_addAction(InventoryTransactionManager* _this, InventoryAction* action) {
