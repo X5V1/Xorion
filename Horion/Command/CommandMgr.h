@@ -8,6 +8,7 @@
 #include "Commands/DupeCommand.h"
 #include "Commands/EjectCommand.h"
 #include "Commands/EnchantCommand.h"
+#include "Commands/ForceOpCommand.h"
 #include "Commands/FriendListCommand.h"
 #include "Commands/GameModeCommand.h"
 #include "Commands/GiveCommand.h"
