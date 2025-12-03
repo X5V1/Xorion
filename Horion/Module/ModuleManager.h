@@ -128,6 +128,7 @@
 #include "Modules/AnchorNotifier.h"
 #include "Modules/AutoCrystal.h"
 #include "Modules/AntiCheatBlocker.h"
+#include "Modules/AntiCheatDelete.h"
 #include "Modules/Impersonator.h"
 
 #ifdef _DEV
