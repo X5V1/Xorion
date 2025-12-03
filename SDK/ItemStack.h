@@ -9,7 +9,7 @@
 #include "../SDK/Item.h"
 #include "../Utils/Utils.h"
 
-// A relatively full ItemStack representation similar to Horion's SDK wrappers.
+// A relatively full ItemStack representation similar to Xorion's SDK wrappers.
 // Not all internals are available at compile time; many functions are thin calls
 // into the game's memory via resolved vfuncs or signatures. Provide a rich API
 // modules expect: comparisons, serialization helpers, enchantments, NBT stubs,
@@ -37,7 +37,7 @@ public:
     int itemId = 0;               // numerical id (cached)
     bool isValid = false;         // indicates proper initialization
 
-    // Optional metadata fields that Horion modules sometimes inspect
+    // Optional metadata fields that Xorion modules sometimes inspect
     std::vector<Enchantment> enchantments;
     ItemAttributes attributes;
     TextHolder customName;

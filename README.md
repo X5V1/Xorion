@@ -1,7 +1,7 @@
 <div align="center">
   <br />
     <p>
-      <a href="https://horion.download"><img src="https://raw.githubusercontent.com/X5V1/Xorion/master/resources/xorion-banner.png" width="800" alt="Horion" /></a>
+      <a href="https://horion.download"><img src="https://raw.githubusercontent.com/X5V1/Xorion/master/resources/xorion-banner.png" width="800" alt="Xorion" /></a>
     </p>
   <br />
   <p>
@@ -10,7 +10,7 @@
     <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img src="https://img.shields.io/static/v1?label=license&message=BY-NC%204.0&color=orange&logo=creative%20commons&logoColor=white" alt="License" /></a>
   </p>
   <p>
-    <b>Xorion</b> is a Horion-based Minecraft: Bedrock Edition Utility Client designed to enhance gameplay. We do not take responsibility in anything done with this Hacking Client.
+    <b>Xorion</b> is a Minecraft: Bedrock Edition Utility Client designed to enhance gameplay. We do not take responsibility in anything done with this Hacking Client.
 If you want to contribute to this project, feel free to fork this repository and submit a pull request.
   </p>
 </div>

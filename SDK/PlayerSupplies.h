@@ -8,7 +8,7 @@
 #include "../SDK/TextHolder.h"
 #include "../Utils/Utils.h"
 
-// PlayerSupplies is a Horion-style wrapper for a player's inventory/hotbar/armor/offhand.
+// PlayerSupplies is a Xorion-style wrapper for a player's inventory/hotbar/armor/offhand.
 // Provide a complete set of helpers modules call: searching, swapping, adding, removing,
 // quick-moving, serialization, slot indexes, and network updates.
 
@@ -200,7 +200,7 @@ struct PlayerSupplies {
 
     // Notify engine that slot changed; modules rely on this to refresh UI or send packets
     void onInventoryChanged(int slotIdx) {
-        // Placeholder: in Horion this often calls Player::sendInventory or a vfunc on Player
+        // Placeholder: in Xorion this often calls Player::sendInventory or a vfunc on Player
         (void)slotIdx;
         // e.g., Utils::CallVFunc</*idx*/ 200, void>(ownerPlayer, ...);
     }

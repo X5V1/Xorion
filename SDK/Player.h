@@ -8,7 +8,7 @@
 #include "Entity.h"
 #include "Packet.h"
 
-// High-level Player wrapper in Horion style.
+// High-level Player wrapper in Xorion style.
 // Exposes a stable, feature‑rich interface to game player objects.
 // Implementation in Player.cpp resolves vfunc indices / signatures at runtime.
 

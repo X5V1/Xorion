@@ -281,5 +281,5 @@ public:
     inline bool getHide() const { return shouldHideB; }
 };
 
-// Singleton instance (classic Horion style)
+// Singleton instance (classic Xorion style)
 extern GameData Game;
