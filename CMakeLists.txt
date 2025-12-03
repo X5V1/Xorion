@@ -520,6 +520,8 @@ add_library(Xorion SHARED
         Xorion/Module/Modules/Unbanner.h
         Xorion/Module/Modules/AntiCheatBlocker.cpp
         Xorion/Module/Modules/AntiCheatBlocker.h
+        Xorion/Module/Modules/AntiCheatDelete.cpp
+        Xorion/Module/Modules/AntiCheatDelete.h
         Xorion/Module/Modules/Impersonator.cpp
         Xorion/Module/Modules/Impersonator.h
         Xorion/Command/Commands/ImpersonateCommand.cpp
