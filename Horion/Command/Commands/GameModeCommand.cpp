@@ -36,9 +36,7 @@ bool GameModeCommand::execute(std::vector<std::string>* args) {
 				clientMessageF("[%sXorion%s] %sForce attempt %d/%d - Gamemode %d", GOLD, WHITE, GRAY, i, MAX_AGGRESSIVE_ATTEMPTS, gamemode);
 			}
 
-			// Final verification attempt
-			Game.getLocalPlayer()->setPlayerGameType(static_cast<GameType>(gamemode));
-			clientMessageF("[%sXorion%s] %sGamemode %d forced! %s(Multiple bypass attempts completed)", GOLD, WHITE, GREEN, gamemode, GRAY);
+			clientMessageF("[%sXorion%s] %sGamemode %d forced! %s(%d bypass attempts completed)", GOLD, WHITE, GREEN, gamemode, GRAY, MAX_AGGRESSIVE_ATTEMPTS);
 		} else {
 			// Standard mode - single attempt
 			Game.getLocalPlayer()->setPlayerGameType(static_cast<GameType>(gamemode));
