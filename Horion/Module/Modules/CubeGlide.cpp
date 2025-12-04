@@ -15,9 +15,12 @@ const char* CubeGlide::getModuleName() {
 	return "CubeGlide";
 }
 
+// TODO: isFlashMode removed from IModule in 1.21.123
+/*
 bool CubeGlide::isFlashMode() {
 	return true;
 }
+*/
 
 void CubeGlide::onEnable() {
 	g_Data.getLocalPlayer()->setPos(g_Data.getLocalPlayer()->getPos().add(vec3_t(0, 1, 0)));

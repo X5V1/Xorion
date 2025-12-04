@@ -27,11 +27,12 @@ using json = nlohmann::json;
 
 
 TestModule::TestModule() : IModule(0, Category::MISC, "For testing purposes only!") {
-	enum1.addEntry(EnumEntry("1", 1)).addEntry(EnumEntry("2", 2)).addEntry(EnumEntry("3", 3));
+	// TODO: Settings system redesigned in 1.21.123
+	/*enum1.addEntry(EnumEntry("1", 1)).addEntry(EnumEntry("2", 2)).addEntry(EnumEntry("3", 3));
 	registerFloatSetting("float1", &float1, 0, -10, 10);
 	registerIntSetting("int1", &int1, 0, -10, 10);
 	registerEnumSetting("Enum1", &enum1, 0);
-	registerBoolSetting("bool1", &bool1, true);
+	registerBoolSetting("bool1", &bool1, true);*/
 }
 
 TestModule::~TestModule() {
@@ -41,9 +42,12 @@ const char* TestModule::getModuleName() {
 	return "TestModule";
 }
 
+// TODO: isFlashMode removed from IModule in 1.21.123
+/*
 bool TestModule::isFlashMode() {
 	return false;
 }
+*/
 
 void TestModule::onEnable() {
 	LocalPlayer* player = g_Data.getLocalPlayer();
@@ -58,8 +62,11 @@ void TestModule::onEnable() {
 void TestModule::onTick(GameMode* gm) {
 }
 
+// TODO: onMove removed from IModule in 1.21.123
+/*
 void TestModule::onMove(MoveInputHandler* hand){
 }
+*/
 
 void TestModule::onPreRender(MinecraftUIRenderContext* renderCtx) {
 	/* LocalPlayer* player = Game.getLocalPlayer();

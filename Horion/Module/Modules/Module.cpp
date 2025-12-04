@@ -8,8 +8,5 @@ using json = nlohmann::json;
 
 // Most IModule methods are inline in Module.h
 // Only define methods that are declared but not defined inline
-
-bool IModule::callWhenDisabled() {
-	return false;
-}
+// callWhenDisabled is now inline in Module.h
 

@@ -11,14 +11,16 @@ public:
 	float float1 = 0;
 	int int1 = 0;
 	bool bool1 = true;
-	SettingEnum enum1 = SettingEnum(this);
+	// TODO: SettingEnum removed in 1.21.123
+	//SettingEnum enum1 = SettingEnum(this);
 
 	TestModule();
 	~TestModule();
 
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
-	virtual bool isFlashMode() override;
+	// TODO: isFlashMode removed from IModule in 1.21.123
+	//virtual bool isFlashMode() override;
 	virtual void onEnable() override;
 	virtual void onTick(GameMode* gm) override;
 	virtual void onPreRender(MinecraftUIRenderContext* renderCtx) override;
@@ -26,7 +28,8 @@ public:
 	virtual void onSendPacket(Packet* p) override;
 	// TODO: onSendClientPacket not in IModule base class
 	// virtual void onSendClientPacket(Packet* p) override;
-	virtual void onMove(MoveInputHandler* hand) override;
+	// TODO: onMove removed from IModule in 1.21.123
+	//virtual void onMove(MoveInputHandler* hand) override;
 	virtual void onDisable() override;
 	// TODO: onKey not in IModule base class
 	// virtual void onKey(int key, bool isDown, bool& cancel) override;

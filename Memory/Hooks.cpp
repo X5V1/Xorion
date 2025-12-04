@@ -1253,7 +1253,7 @@ bool Hooks::Actor__isInWall(Entity* ent) {
 	static auto func = g_Hooks.ActorisInWallHook->GetFastcall<bool, Entity*>();
 	static auto nofallMod = moduleMgr->getModule<NoFall>();
 
-	if (nofallMod->isEnabled() && nofallMod->mode.selected == 4 /*&& Game.getLocalPlayer() == ent*/) {
+	if (nofallMod->isEnabled() && nofallMod->mode == 4 /*&& Game.getLocalPlayer() == ent*/) {
 		return false;
 	}
 

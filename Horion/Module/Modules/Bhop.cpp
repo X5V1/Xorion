@@ -13,6 +13,8 @@ const char* Bhop::getModuleName() {
 	return "Bhop";
 }
 
+// TODO: onMove removed from IModule in 1.21.123
+/*
 void Bhop::onMove(MoveInputHandler* input) {
 	auto player = Game.getLocalPlayer();
 	if (player == nullptr) return;
@@ -63,3 +65,4 @@ void Bhop::onMove(MoveInputHandler* input) {
 		if (pressed) player->lerpMotion(moveVec);
 	}
 }
+*/

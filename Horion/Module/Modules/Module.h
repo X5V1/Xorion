@@ -31,7 +31,8 @@ enum class Category : uint8_t {
     PLAYER,
     WORLD,
     MISC,
-    CLIENT
+    CLIENT,
+    CUSTOM
 };
 
 // Base module interface used by all modules.
@@ -74,6 +75,9 @@ public:
 
     // Returns true if this module should still receive hooks when disabled
     virtual bool callWhenDisabled() { return false; }
+
+    // Get module tooltip/description
+    virtual const char* getTooltip() { return description.c_str(); }
 
     // Toggle helpers
     bool isEnabled() const { return enabled; }

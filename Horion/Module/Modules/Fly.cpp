@@ -163,6 +163,8 @@ void Fly::onDisable() {
 	}
 }
 
+// TODO: onMove removed from IModule in 1.21.123
+/*
 void Fly::onMove(MoveInputHandler *input) {
 	LocalPlayer *localPlayer = g_Data.getLocalPlayer();
 	if (localPlayer == nullptr)
@@ -321,3 +323,4 @@ void Fly::onMove(MoveInputHandler *input) {
 		break;
 	}
 }
+*/

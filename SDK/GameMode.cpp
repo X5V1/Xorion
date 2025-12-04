@@ -121,3 +121,10 @@ void Init_AllGameModeMappings() {
     Init_GameMode_Attack();
     Init_GameMode_Other();
 }
+
+// Stub implementation for useItemOn - needs signature resolution
+void GameMode::useItemOn(ItemStack* stack, const Vec3i& blockPos, uint8_t face, const Vec3 & hitPos) {
+    // TODO: Resolve through signature scanning in 1.21.123
+    // For now, log and skip to prevent linker errors
+    logF("[GameMode] useItemOn called but not implemented for 1.21.123");
+}

@@ -1,14 +1,15 @@
 #include "Killaura.h"
 
 Killaura::Killaura() : IModule('P', Category::COMBAT, "Attacks entities around you automatically.") {
-	mode.addEntry(EnumEntry("Single", 0))
+	// TODO: Settings system redesigned in 1.21.123
+	/*mode.addEntry(EnumEntry("Single", 0))
 		.addEntry(EnumEntry("Multi", 1));
 	registerEnumSetting("Mode", &mode, 0);
 	rotationMode.addEntry(EnumEntry("None", 0))
 		.addEntry(EnumEntry("Silent", 1))
 		.addEntry(EnumEntry("Strafe", 2))
 		.addEntry(EnumEntry("Normal", 3));
-	registerEnumSetting("Rotations", &rotationMode, 2);
+	registerEnumSetting("Rotations", &rotationMode, 2);*/
 	registerBoolSetting("MobAura", &isMobAura, isMobAura);
 	registerFloatSetting("Range", &range, range, 2.f, 20.f);
 	registerIntSetting("Delay", &delay, delay, 0, 20);
@@ -107,7 +108,7 @@ void Killaura::onTick(GameMode* gm) {
 		}
 
 		// Attack all entitys in targetList
-		if (mode.selected == 1) {
+		if (mode == 1) {
 			for (auto& i : targetList) {
 				if (!(i->damageTime > 1 && hurttime)) {
 					g_Data.getLocalPlayer()->swing();
@@ -130,7 +131,7 @@ void Killaura::onEnable() {
 }
 
 void Killaura::onSendPacket(Packet* packet) {
-	if (g_Data.getLocalPlayer() != nullptr && rotationMode.selected == 1 && !targetList.empty()) {
+	if (g_Data.getLocalPlayer() != nullptr && rotationMode == 1 && !targetList.empty()) {
 		if (targetList[0] == nullptr)
 			return;
 
@@ -145,15 +146,15 @@ void Killaura::onSendPacket(Packet* packet) {
 }
 
 void Killaura::onPlayerTick(Player* player) {
-	if (g_Data.getLocalPlayer() != nullptr && !targetList.empty() && rotationMode.selected > 1) {
+	if (g_Data.getLocalPlayer() != nullptr && !targetList.empty() && rotationMode > 1) {
 		if (targetList[0] == nullptr)
 			return;
 
 		Vec2 angle = g_Data.getLocalPlayer()->getPos().CalcAngle(targetList[0]->getMovementProxy()->getAttachPos(ActorLocation::Eyes, 1.f));
 
-		if (rotationMode.selected == 3)
+		if (rotationMode == 3)
 			player->getActorRotationComponent()->rot.x = angle.x;
-		else if (rotationMode.selected == 2)
+		else if (rotationMode == 2)
 			player->getActorRotationComponent()->rot = angle;
 
 		player->getActorHeadRotationComponent()->rot.y = angle.y;

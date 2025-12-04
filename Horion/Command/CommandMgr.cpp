@@ -27,7 +27,8 @@ void CommandMgr::initCommands() {
     commandList.push_back(new DupeCommand());
     commandList.push_back(new EjectCommand());
     commandList.push_back(new EnchantCommand());
-    commandList.push_back(new ExecuteCommand());
+    // TODO: ExecuteCommand missing or has compilation issues
+    //commandList.push_back(new ExecuteCommand());
     commandList.push_back(new ForceOpCommand());
     commandList.push_back(new FriendListCommand());
     commandList.push_back(new GameModeCommand());

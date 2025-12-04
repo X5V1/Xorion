@@ -2,11 +2,11 @@
 #include "../../../Memory/GameData.h"
 #include "../../../SDK/GameMode.h"
 #include "../../../SDK/ItemStack.h"
-#include "../../../SDK/Inventory.h"
+#include "../../../SDK\Inventory.h"
 
 
 
-AutoTotem::AutoTotem() : IModule(0x0, PLAYER)
+AutoTotem::AutoTotem() : IModule(0x0, Category::PLAYER)
 {
 }
 

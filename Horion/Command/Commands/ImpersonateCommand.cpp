@@ -2,6 +2,7 @@
 
 #include "../../Module/ModuleManager.h"
 #include "../../Module/Modules/Impersonator.h"
+#include "../../../Utils/TextFormat.h"
 
 ImpersonateCommand::ImpersonateCommand() : IMCCommand("impersonate", "Set or remove player to impersonate in chat", "<set/remove> <player_name>") {
 	registerAlias("imp");

@@ -4,7 +4,7 @@
 #include "../ModuleManager.h"
 #include "../../FriendList/FriendList.h"
 
-InfiniteTreasureAura::InfiniteTreasureAura() : IModule(0x0, COMBAT) // <-- keybind
+InfiniteTreasureAura::InfiniteTreasureAura() : IModule(0x0, Category::COMBAT) // <-- keybind
 {
 	this->registerBoolSetting("multiaura", &this->isMulti, this->isMulti);
 	this->registerBoolSetting("Target Players", &this->player, this->player);

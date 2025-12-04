@@ -28,6 +28,8 @@ void ClickGuiMod::onPostRender(MinecraftUIRenderContext* renderCtx) {
 	if (g_Data.canUseMoveKeys())
 		Game.getClientInstance()->releaseMouse();
 }
+// TODO: onLoadConfig/onSaveConfig removed from IModule in 1.21.123
+/*
 void ClickGuiMod::onLoadConfig(void* conf) {
 	IModule::onLoadConfig(conf);
 	ClickGui::onLoadConfig(conf);
@@ -36,4 +38,5 @@ void ClickGuiMod::onSaveConfig(void* conf) {
 	IModule::onSaveConfig(conf);
 	ClickGui::onSaveConfig(conf);
 }
+*/
 

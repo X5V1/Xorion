@@ -41,14 +41,14 @@ using LocalPlayer_applyTurn_t = void(__cdecl*)(void*, Vec2*);
 using LocalPlayer_getGameMode_t = GameMode*(__cdecl*)(void*);
 using LocalPlayer_unlock_t = void(__cdecl*)(void*);
 
-// Resolved function pointers (initialized once)
-static Player_getName_t       s_getName_fn = nullptr;
-static Player_getHeldItem_t  s_getHeldItem_fn = nullptr;
-static Player_getPos_t       s_getPos_fn = nullptr;
-static Player_setPos_t       s_setPos_fn = nullptr;
-static Player_getHealth_t    s_getHealth_fn = nullptr;
-static Player_setHealth_t    s_setHealth_fn = nullptr;
-static Player_sendPacket_t   s_sendNetworkPacket_fn = nullptr;
+// Define Player class static members (declared in Player.h)
+void* (*Player::s_getHeldItem_fn)(void*) = nullptr;
+const char* (*Player::s_getName_fn)(void*) = nullptr;
+Vec3 (*Player::s_getPos_fn)(void*) = nullptr;
+void (*Player::s_setPos_fn)(void*, const Vec3&) = nullptr;
+float (*Player::s_getHealth_fn)(void*) = nullptr;
+void (*Player::s_setHealth_fn)(void*, float) = nullptr;
+void (*Player::s_sendNetworkPacket_fn)(void*, Packet&) = nullptr;
 
 static LocalPlayer_swing_t   s_local_swing_fn = nullptr;
 static LocalPlayer_turn_t    s_local_turn_fn = nullptr;
@@ -66,25 +66,25 @@ static void ResolvePlayerSignaturesOnce() {
     void* p;
 
     p = ResolvePlayerGetName();
-    if (p) s_getName_fn = reinterpret_cast<Player_getName_t>(p);
+    if (p) Player::s_getName_fn = reinterpret_cast<const char*(*)(void*)>(p);
 
     p = ResolvePlayerGetHeldItem();
-    if (p) s_getHeldItem_fn = reinterpret_cast<Player_getHeldItem_t>(p);
+    if (p) Player::s_getHeldItem_fn = reinterpret_cast<void*(*)(void*)>(p);
 
     p = ResolvePlayerGetPos();
-    if (p) s_getPos_fn = reinterpret_cast<Player_getPos_t>(p);
+    if (p) Player::s_getPos_fn = reinterpret_cast<Vec3(*)(void*)>(p);
 
     p = ResolvePlayerSetPos();
-    if (p) s_setPos_fn = reinterpret_cast<Player_setPos_t>(p);
+    if (p) Player::s_setPos_fn = reinterpret_cast<void(*)(void*, const Vec3&)>(p);
 
     p = ResolvePlayerGetHealth();
-    if (p) s_getHealth_fn = reinterpret_cast<Player_getHealth_t>(p);
+    if (p) Player::s_getHealth_fn = reinterpret_cast<float(*)(void*)>(p);
 
     p = ResolvePlayerSetHealth();
-    if (p) s_setHealth_fn = reinterpret_cast<Player_setHealth_t>(p);
+    if (p) Player::s_setHealth_fn = reinterpret_cast<void(*)(void*, float)>(p);
 
     p = ResolvePlayerSendPacket();
-    if (p) s_sendNetworkPacket_fn = reinterpret_cast<Player_sendPacket_t>(p);
+    if (p) Player::s_sendNetworkPacket_fn = reinterpret_cast<void(*)(void*, Packet&)>(p);
 
     // LocalPlayer
     p = ResolveLocalPlayerSwing();
@@ -122,15 +122,13 @@ static constexpr ptrdiff_t ITEM_OFF_TAG     = ITEM_RAW_OFF_TAG;
 static constexpr ptrdiff_t LOCALPLAYER_GAMEMODE_PTR = LOCALPLAYER_GAMEMODE_OFF;
 
 // TODO: Entity has reference members, can't default construct
-// Player constructor disabled - Player objects shouldn't be constructed, they're memory overlays
-/*
+// Player constructor - memory overlay pattern (wraps existing game object)
 Player::Player(void* mcPlayerPtr) : mcPlayerPtr(mcPlayerPtr) {
     // Defer heavy resolution; but it's useful to kick it early if possible
     ResolvePlayerSignaturesOnce();
 }
 
 Player::~Player() = default;
-*/
 
 void Player::ensureIntegration() const {
     ResolvePlayerSignaturesOnce();

@@ -21,13 +21,13 @@ void NoFall::onSendPacket(Packet* packet) {
 	if (localPlayer == nullptr)
 		return;
 
-	if (localPlayer->getFallDistanceComponent()->fallDistance > 2.f && mode.selected == 0) {
+	if (localPlayer->getFallDistanceComponent()->fallDistance > 2.f && mode == 0) {
 		if (packet->isInstanceOf<MovePlayerPacket>()) {
 			MovePlayerPacket* movePacket = reinterpret_cast<MovePlayerPacket*>(packet);
 			movePacket->onGround = true;
 		}
 	}
-	if (mode.selected == 4) {
+	if (mode == 4) {
 		if (packet->isInstanceOf<PlayerAuthInputPacket>() && !g_Data.getLocalPlayer()->isOnGround()) {
 			PlayerAuthInputPacket* authInput = reinterpret_cast<PlayerAuthInputPacket*>(packet);
 			authInput->pos = closestGround;
@@ -52,7 +52,7 @@ void NoFall::onTick(GameMode* gm) {
 	LocalPlayer* localPlayer = g_Data.getLocalPlayer();
 	if (localPlayer != nullptr) {
 		if (localPlayer->getFallDistanceComponent()->fallDistance > 2.f) {
-			switch (mode.selected) {
+			switch (mode) {
 			case 0: {
 				PlayerActionPacket actionPacket;
 				actionPacket.action = 7;  // Respawn

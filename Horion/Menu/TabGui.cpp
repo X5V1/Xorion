@@ -102,13 +102,14 @@ void TabGui::renderLevel() {
 				static bool lastVal = toggleCurrentSelection;
 
 				if (toggleCurrentSelection) {
-					if (label.mod->isFlashMode()) {
+					// TODO: isFlashMode removed from IModule in 1.21.123
+					/*if (label.mod->isFlashMode()) {
 						label.mod->setEnabled(true);
-					} else {
+					} else {*/
 						toggleCurrentSelection = false;
 						label.mod->toggle();
-					}
-				} else if (toggleCurrentSelection != lastVal && label.mod->isFlashMode()) {
+					//}
+				} else if (toggleCurrentSelection != lastVal /*&& label.mod->isFlashMode()*/) {
 					label.mod->setEnabled(false);
 				}
 				lastVal = toggleCurrentSelection;

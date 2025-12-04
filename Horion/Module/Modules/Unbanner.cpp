@@ -430,7 +430,7 @@ void Unbanner::renderUnbanButton(MinecraftUIRenderContext* ctx) {
         }
     }
     float textWidth = DrawUtils::getTextWidth(&buttonText, 1.0f);
-    float textHeight = DrawUtils::getFont(Fonts::SMOOTH)->getLineHeight();
+    float textHeight = 10.0f; // TODO: Font type removed in 1.21.123 - DrawUtils::getFont(Fonts::SMOOTH)->getLineHeight();
     Vec2 textPos(
         buttonX + (buttonWidth - textWidth) / 2.0f,
         buttonY + (buttonHeight - textHeight) / 2.0f

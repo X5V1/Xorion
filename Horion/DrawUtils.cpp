@@ -119,10 +119,11 @@ void DrawUtils::setColor(float r, float g, float b, float a) {
 Font* DrawUtils::getFont(Fonts font) {
 	static auto fontChangerModule = moduleMgr->getModule<FontChanger>();
 
-	if (fontChangerModule->Fonts.selected == 1)
+	// TODO: Fonts enum/settings removed in 1.21.123
+	/*if (fontChangerModule->Fonts.selected == 1)
 		return Game.getClientInstance()->minecraftGame->mcFont;
 	else
-		return Game.getClientInstance()->minecraftGame->getOldFont();
+		return Game.getClientInstance()->minecraftGame->getOldFont();*/
 
 	switch (font) {
 	case Fonts::SMOOTH:

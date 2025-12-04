@@ -165,9 +165,10 @@ void ModuleManager::onLoadConfig(void* confVoid) {
     if (!isInitialized())
         return;
     auto lock = lockModuleList();
-    for (auto& mod : moduleList) {
+    // TODO: onLoadConfig removed from IModule in 1.21.123
+    /*for (auto& mod : moduleList) {
         mod->onLoadConfig(conf);
-    }
+    }*/
 
     // Reassert default states
     if (auto cg = getModule<ClickGuiMod>()) cg->setEnabled(false);
@@ -182,9 +183,10 @@ void ModuleManager::onSaveConfig(void* confVoid) {
     if (!isInitialized())
         return;
     auto lock = lockModuleList();
-    for (auto& mod : moduleList) {
+    // TODO: onSaveConfig removed from IModule in 1.21.123
+    /*for (auto& mod : moduleList) {
         mod->onSaveConfig(conf);
-    }
+    }*/
 }
 
 void ModuleManager::onWorldTick(GameMode* gameMode) {
@@ -312,6 +314,8 @@ int ModuleManager::getEnabledModuleCount() {
     return i;
 }
 
+// TODO: onMove removed from IModule in 1.21.123
+/*
 void ModuleManager::onMove(MoveInputHandler* hand) {
     if (!isInitialized())
         return;
@@ -321,6 +325,7 @@ void ModuleManager::onMove(MoveInputHandler* hand) {
             it->onMove(hand);
     }
 }
+*/
 
 void ModuleManager::onPlayerTick(Player* player) {
     if (!isInitialized())
