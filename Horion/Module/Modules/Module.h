@@ -71,8 +71,6 @@ public:
     virtual void registerBoolSetting(const char* name, bool* ptr, bool defaultVal) {}
     virtual void registerIntSetting(const char* name, int* ptr, int defaultVal, int minVal, int maxVal) {}
     virtual void registerFloatSetting(const char* name, float* ptr, float defaultVal, float minVal, float maxVal) {}
-    // TODO: SettingEnum not available in 1.21.123 - settings system redesigned
-    // virtual void registerEnumSetting(const char* name, SettingEnum* setting, int defaultValue) {}
 
     // Returns true if this module should still receive hooks when disabled
     virtual bool callWhenDisabled() { return false; }
@@ -94,12 +92,6 @@ public:
     // Position for HUD/arraylist layout
     ModulePos& getModulePos() { return pos; }
     void setModulePos(float x, float y) { pos.x = x; pos.y = y; }
-
-    // Additional methods
-    virtual std::string getTooltip() { return description; }
-    virtual bool isFlashMode() { return false; }
-    virtual void onLoadConfig(void* config) { /* stub */ }
-    virtual void onSaveConfig(void* config) { /* stub */ }
 
 protected:
     bool enabled = false;
