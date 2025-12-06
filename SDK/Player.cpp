@@ -23,7 +23,7 @@ extern void* ResolveLocalPlayerApplyTurn();
 extern void* ResolveLocalPlayerGetGameMode();
 extern void* ResolveLocalPlayerUnlock();
 
-// Typedefs with calling conventions - tuned for Horion style / MSVC x64 / typical game functions.
+// Typedefs with calling conventions - tuned for Xorion style / MSVC x64 / typical game functions.
 // On MSVC/x64 all non-member functions use the x64 calling convention. On 32-bit you may need __thiscall.
 // We include explicit __fastcall/__thiscall for clarity for ports that require them.
 using Player_getName_t = const char*(__cdecl*)(void*);           // usually plain pointer returns const char*
@@ -110,7 +110,7 @@ static void ResolvePlayerSignaturesOnce() {
                (void*)s_local_swing_fn, (void*)s_local_turn_fn, (void*)s_local_applyTurn_fn, (void*)s_local_getGameMode_fn, (void*)s_local_unlock_fn);
 }
 
-// --- Player implementation (Horion-style wrappers) ---
+// --- Player implementation (Xorion-style wrappers) ---
 
 // Offsets used as validated fallbacks; keep in one place so you can tune for your build.
 static constexpr ptrdiff_t OFF_SUPPLIES_PTR = OFF_SUPPLIES_PTR_DEFAULT;
@@ -182,7 +182,7 @@ void Player::setPos(const Vec3& pos) {
         s_setPos_fn(mcPlayerPtr, pos);
         return;
     }
-    // fallback: attempt common CallVFunc index (Horion candidate)
+    // fallback: attempt common CallVFunc index (Xorion candidate)
     Utils::CallVFunc</*idx*/ 100, void, const Vec3&>(mcPlayerPtr, pos);
 }
 

@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{499784D2-7EA3-4CBE-BD93-EC0DBBC42FCD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <SpectreMitigation>false</SpectreMitigation>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <SpectreMitigation>false</SpectreMitigation>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;D:\ProgrammeX\Dxx\Lib\x64;$(ProjectDir)minhook;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\ProgrammeX\Dxx\Include;$(ProjectDir)include\glm;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x64;$(ProjectDir)minhook;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)include\glm</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>NOMINMAX;%(PreprocessorDefinitions);_DEV</PreprocessorDefinitions>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+    </ClCompile>
+    <Link />
+    <Link>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>_WINDLL;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include=".clang-format" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Xorion\Command\CommandMgr.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\BindCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\BruhCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\CommandBlockExploitCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\ConfigCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\CoordsCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\DamageCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\DeviceIDCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\DupeCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\EjectCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\EnchantCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\FriendListCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\GameModeCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\GiveCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\HelpCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\HideCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\ICommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\ModulesCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\NameSpoofCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\NbtCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\PanicCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\PathCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\PlayerTeleportCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\RelativeTeleportCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\RenameCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\RepairCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\SayCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\SeedCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\ServerCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\SetLoreCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\SetOffhandCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\SetPrefixCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\SpammerCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\TeleportCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\TestCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\ToggleCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\TopCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\UnbindCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\WaypointCommand.cpp" />
+    <ClCompile Include="Xorion\Command\Commands\XpCommand.cpp" />
+    <ClCompile Include="Xorion\Config\ConfigManager.cpp" />
+    <ClCompile Include="Xorion\DrawUtils.cpp" />
+    <ClCompile Include="Xorion\FriendList\FriendsManager.cpp" />
+    <ClCompile Include="Xorion\GuiUtils.cpp" />
+    <ClCompile Include="Xorion\Loader.cpp" />
+    <ClCompile Include="Xorion\Menu\ClickGui.cpp" />
+    <ClCompile Include="Xorion\Menu\TabGui.cpp" />
+    <ClCompile Include="Xorion\Module\ModuleManager.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Aimbot.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AirJump.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AirSwim.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AntiBot.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AntiImmobile.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AntiInvis.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AntiVoid.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Arraylist.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AutoArmor.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AutoClicker.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AutoGapple.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AutoSneak.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AutoSplitter.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AutoSprint.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\AutoTotem.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Bhop.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Blink.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\BowAimbot.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\ChestAura.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\ReachDisplay.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Reducer.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Criticals.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\OffhandAllow.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\StorageESP.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\ChestStealer.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\ClickGuiMod.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\ClientTheme.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Compass.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Crasher.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\CrystalAura.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Derp.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\EditionFaker.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\ESP.cpp" />
+    <!--    <ClCompile Include="Xorion\Module\Modules\FastEat.cpp" /> -->
+    <ClCompile Include="Xorion\Module\Modules\FastLadder.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Fly.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\FollowPathModule.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\FontChanger.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Freecam.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Breaker.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\FullBright.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Glide.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Godmode.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\HighJump.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Hitbox.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\HudModule.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\BlockReach.cpp" />
+    <!--    <ClCompile Include="Xorion\Module\Modules\InfiniteAura.cpp" /> -->
+    <ClCompile Include="Xorion\Module\Modules\InstaBreak.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\InventoryCleaner.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\InventoryMove.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Jesus.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Killaura.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\MidClick.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Module.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NameTags.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Nbt.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NightMode.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NoFall.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NoFriends.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NoHurtcam.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NoPacket.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NoSlowDown.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NoSwing.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NoWeb.cpp" />
+    <!-- <ClCompile Include="Xorion\Module\Modules\Notifications.cpp" /> -->
+    <ClCompile Include="Xorion\Module\Modules\Nuker.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\PacketLogger.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Phase.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Radar.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\RainbowSky.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Reach.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Scaffold.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Spammer.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Speed.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Spider.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\StackableItem.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Step.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Teams.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Teleport.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\TestModule.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Timer.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\TimeChanger.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Tower.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Tracer.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\TriggerBot.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Twerk.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\VanillaPlus.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\ViewModel.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Velocity.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Waypoints.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\Xray.cpp" />
+    <ClCompile Include="Xorion\path\goals\JoeGoal.cpp" />
+    <ClCompile Include="Xorion\path\goals\JoeGoalXYZ.cpp" />
+    <ClCompile Include="Xorion\path\goals\JoeGoalXZ.cpp" />
+    <ClCompile Include="Xorion\path\goals\JoeGoalY.cpp" />
+    <ClCompile Include="Xorion\path\JoeConstants.cpp" />
+    <ClCompile Include="Xorion\path\JoeMovementController.cpp" />
+    <ClCompile Include="Xorion\path\JoePath.cpp" />
+    <ClCompile Include="Xorion\path\JoePathFinder.cpp" />
+    <ClCompile Include="Xorion\path\JoeSegment.cpp" />
+    <ClCompile Include="Memory\GameData.cpp" />
+    <ClCompile Include="Memory\Hooks.cpp" />
+    <ClCompile Include="Memory\SlimMem.cpp" />
+    <ClCompile Include="SDK\Attribute.h" />
+    <ClCompile Include="SDK\BlockLegacy.cpp" />
+    <ClCompile Include="SDK\Camera.cpp" />
+    <ClCompile Include="SDK\ClientInstance.cpp" />
+    <ClCompile Include="SDK\ComplexInventoryTransaction.cpp" />
+    <ClCompile Include="SDK\Entity.cpp" />
+    <ClCompile Include="SDK\GameMode.cpp" />
+    <ClCompile Include="SDK\Inventory.cpp" />
+    <ClCompile Include="SDK\InventoryTransaction.cpp" />
+    <ClCompile Include="SDK\Item.cpp" />
+    <ClCompile Include="SDK\Level.cpp" />
+    <ClCompile Include="SDK\Packet.cpp" />
+    <ClCompile Include="SDK\MatrixStack.cpp" />
+    <ClCompile Include="SDK\Tag.cpp" />
+    <ClCompile Include="SDK\Tessellator.cpp" />
+    <ClCompile Include="Utils\ClientColors.cpp" />
+    <ClCompile Include="Utils\Logger.cpp" />
+    <ClCompile Include="Utils\Target.cpp" />
+    <ClCompile Include="Utils\TextFormat.cpp" />
+    <ClCompile Include="Utils\Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Xorion\Command\CommandMgr.h" />
+    <ClInclude Include="Xorion\Command\Commands\BindCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\BruhCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\CommandBlockExploitCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\ConfigCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\CoordsCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\DamageCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\DeviceIDCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\DupeCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\EjectCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\EnchantCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\FriendListCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\GameModeCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\GiveCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\HelpCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\HideCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\ICommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\ModulesCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\NameSpoofCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\NbtCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\PanicCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\PathCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\PlayerTeleportCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\RelativeTeleportCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\RenameCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\RepairCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\SayCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\SeedCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\ServerCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\SetLoreCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\SetOffhandCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\SetPrefixCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\SpammerCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\TeleportCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\TestCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\ToggleCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\TopCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\UnbindCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\WaypointCommand.h" />
+    <ClInclude Include="Xorion\Command\Commands\XpCommand.h" />
+    <ClInclude Include="Xorion\Config\ConfigManager.h" />
+    <ClInclude Include="Xorion\DrawUtils.h" />
+    <ClInclude Include="Xorion\FriendList\FriendsManager.h" />
+    <ClInclude Include="Xorion\GuiUtils.h" />
+    <ClInclude Include="Xorion\Loader.h" />
+    <ClInclude Include="Xorion\Menu\ClickGui.h" />
+    <ClInclude Include="Xorion\Menu\TabGui.h" />
+    <ClInclude Include="Xorion\Module\ModuleManager.h" />
+    <ClInclude Include="Xorion\Module\Modules\Aimbot.h" />
+    <ClInclude Include="Xorion\Module\Modules\AirJump.h" />
+    <ClInclude Include="Xorion\Module\Modules\AirSwim.h" />
+    <ClInclude Include="Xorion\Module\Modules\AntiBot.h" />
+    <ClInclude Include="Xorion\Module\Modules\AntiImmobile.h" />
+    <ClInclude Include="Xorion\Module\Modules\AntiInvis.h" />
+    <ClInclude Include="Xorion\Module\Modules\AntiVoid.h" />
+    <ClInclude Include="Xorion\Module\Modules\Arraylist.h" />
+    <ClInclude Include="Xorion\Module\Modules\AutoArmor.h" />
+    <ClInclude Include="Xorion\Module\Modules\AutoClicker.h" />
+    <ClInclude Include="Xorion\Module\Modules\AutoGapple.h" />
+    <ClInclude Include="Xorion\Module\Modules\AutoSneak.h" />
+    <ClInclude Include="Xorion\Module\Modules\AutoSplitter.h" />
+    <ClInclude Include="Xorion\Module\Modules\AutoSprint.h" />
+    <ClInclude Include="Xorion\Module\Modules\AutoTotem.h" />
+    <ClInclude Include="Xorion\Module\Modules\Bhop.h" />
+    <ClInclude Include="Xorion\Module\Modules\Blink.h" />
+    <ClInclude Include="Xorion\Module\Modules\BowAimbot.h" />
+    <ClInclude Include="Xorion\Module\Modules\ChestAura.h" />
+    <ClInclude Include="Xorion\Module\Modules\ChestStealer.h" />
+    <ClInclude Include="Xorion\Module\Modules\ClickGuiMod.h" />
+    <ClInclude Include="Xorion\Module\Modules\ClientTheme.h" />
+    <ClInclude Include="Xorion\Module\Modules\Compass.h" />
+    <ClInclude Include="Xorion\Module\Modules\Crasher.h" />
+    <ClInclude Include="Xorion\Module\Modules\Criticals.h" />
+    <ClInclude Include="Xorion\Module\Modules\CrystalAura.h" />
+    <ClInclude Include="Xorion\Module\Modules\Derp.h" />
+    <ClInclude Include="Xorion\Module\Modules\EditionFaker.h" />
+    <ClInclude Include="Xorion\Module\Modules\ESP.h" />
+    <!--    <ClInclude Include="Xorion\Module\Modules\FastEat.h" /> -->
+    <ClInclude Include="Xorion\Module\Modules\FastLadder.h" />
+    <ClInclude Include="Xorion\Module\Modules\FastStop.h" />
+    <ClInclude Include="Xorion\Module\Modules\Fly.h" />
+    <ClInclude Include="Xorion\Module\Modules\FollowPathModule.h" />
+    <ClInclude Include="Xorion\Module\Modules\FontChanger.h" />
+    <ClInclude Include="Xorion\Module\Modules\Freecam.h" />
+    <ClInclude Include="Xorion\Module\Modules\Freelook.h" />
+    <ClInclude Include="Xorion\Module\Modules\Breaker.h" />
+    <ClInclude Include="Xorion\Module\Modules\FullBright.h" />
+    <ClInclude Include="Xorion\Module\Modules\Glide.h" />
+    <ClInclude Include="Xorion\Module\Modules\Godmode.h" />
+    <ClInclude Include="Xorion\Module\Modules\HighJump.h" />
+    <ClInclude Include="Xorion\Module\Modules\Hitbox.h" />
+    <ClInclude Include="Xorion\Module\Modules\HudModule.h" />
+    <ClInclude Include="Xorion\Module\Modules\BlockReach.h" />
+    <!--    <ClInclude Include="Xorion\Module\Modules\InfiniteAura.h" /> -->
+    <ClInclude Include="Xorion\Module\Modules\InstaBreak.h" />
+    <ClInclude Include="Xorion\Module\Modules\InventoryCleaner.h" />
+    <ClInclude Include="Xorion\Module\Modules\InventoryMove.h" />
+    <ClInclude Include="Xorion\Module\Modules\Jesus.h" />
+    <ClInclude Include="Xorion\Module\Modules\Killaura.h" />
+    <ClInclude Include="Xorion\Module\Modules\MidClick.h" />
+    <ClInclude Include="Xorion\Module\Modules\Module.h" />
+    <ClInclude Include="Xorion\Module\Modules\NameTags.h" />
+    <ClInclude Include="Xorion\Module\Modules\Nbt.h" />
+    <ClInclude Include="Xorion\Module\Modules\NightMode.h" />
+    <ClInclude Include="Xorion\Module\Modules\NoFall.h" />
+    <ClInclude Include="Xorion\Module\Modules\NoFriends.h" />
+    <ClInclude Include="Xorion\Module\Modules\NoHurtcam.h" />
+    <ClInclude Include="Xorion\Module\Modules\NoPacket.h" />
+    <ClInclude Include="Xorion\Module\Modules\NoSlowDown.h" />
+    <ClInclude Include="Xorion\Module\Modules\NoSwing.h" />
+    <ClInclude Include="Xorion\Module\Modules\NoWeb.h" />
+    <!--    <ClCompile Include="Xorion\Module\Modules\Notifications.h" /> -->
+    <ClInclude Include="Xorion\Module\Modules\Nuker.h" />
+    <ClInclude Include="Xorion\Module\Modules\OffhandAllow.h" />
+    <ClInclude Include="Xorion\Module\Modules\PacketLogger.h" />
+    <ClInclude Include="Xorion\Module\Modules\Phase.h" />
+    <ClInclude Include="Xorion\Module\Modules\Radar.h" />
+    <ClInclude Include="Xorion\Module\Modules\RainbowSky.h" />
+    <ClInclude Include="Xorion\Module\Modules\Reach.h" />
+    <ClInclude Include="Xorion\Module\Modules\ReachDisplay.h" />
+    <ClInclude Include="Xorion\Module\Modules\Reducer.h" />
+    <ClInclude Include="Xorion\Module\Modules\Scaffold.h" />
+    <ClInclude Include="Xorion\Module\Modules\Spammer.h" />
+    <ClInclude Include="Xorion\Module\Modules\Speed.h" />
+    <ClInclude Include="Xorion\Module\Modules\Spider.h" />
+    <ClInclude Include="Xorion\Module\Modules\StackableItem.h" />
+    <ClInclude Include="Xorion\Module\Modules\Step.h" />
+    <ClInclude Include="Xorion\Module\Modules\StorageESP.h" />
+    <ClInclude Include="Xorion\Module\Modules\Teams.h" />
+    <ClInclude Include="Xorion\Module\Modules\Teleport.h" />
+    <ClInclude Include="Xorion\Module\Modules\TestModule.h" />
+    <ClInclude Include="Xorion\Module\Modules\Timer.h" />
+    <ClInclude Include="Xorion\Module\Modules\TimeChanger.h" />
+    <ClInclude Include="Xorion\Module\Modules\Tower.h" />
+    <ClInclude Include="Xorion\Module\Modules\Tracer.h" />
+    <ClInclude Include="Xorion\Module\Modules\TriggerBot.h" />
+    <ClInclude Include="Xorion\Module\Modules\Twerk.h" />
+    <ClInclude Include="Xorion\Module\Modules\VanillaPlus.h" />
+    <ClInclude Include="Xorion\Module\Modules\ViewModel.h" />
+    <ClInclude Include="Xorion\Module\Modules\Velocity.h" />
+    <ClInclude Include="Xorion\Module\Modules\Waypoints.h" />
+    <ClInclude Include="Xorion\Module\Modules\Xray.h" />
+    <ClInclude Include="Xorion\Module\Modules\Zoom.h" />
+    <ClInclude Include="Xorion\path\goals\JoeGoal.h" />
+    <ClInclude Include="Xorion\path\goals\JoeGoalXYZ.h" />
+    <ClInclude Include="Xorion\path\goals\JoeGoalXZ.h" />
+    <ClInclude Include="Xorion\path\goals\JoeGoalY.h" />
+    <ClInclude Include="Xorion\path\JoeConstants.h" />
+    <ClInclude Include="Xorion\path\JoeMovementController.h" />
+    <ClInclude Include="Xorion\path\JoePath.h" />
+    <ClInclude Include="Xorion\path\JoePathFinder.h" />
+    <ClInclude Include="Xorion\path\JoeSegment.h" />
+    <ClInclude Include="include\atlrx.h" />
+    <ClInclude Include="include\RegExp.h" />
+    <ClInclude Include="include\StringProcess.h" />
+    <ClInclude Include="include\WinHttpClient.h" />
+    <ClInclude Include="Memory\GameData.h" />
+    <ClInclude Include="Memory\Hooks.h" />
+    <ClInclude Include="Memory\MinHook.h" />
+    <ClInclude Include="Memory\SlimMem.h" />
+    <ClInclude Include="SDK\ActorFlags.h" />
+    <ClInclude Include="SDK\BlockLegacy.h" />
+    <ClInclude Include="SDK\Camera.h" />
+    <ClInclude Include="SDK\ChestBlockActor.h" />
+    <ClInclude Include="SDK\ClientInstance.h" />
+    <ClInclude Include="SDK\ClientInstanceScreenModel.h" />
+    <ClInclude Include="SDK\ComplexInventoryTransaction.h" />
+    <ClInclude Include="SDK\Components.h" />
+    <ClInclude Include="SDK\Entity.h" />
+    <ClInclude Include="SDK\EntityContext.h" />
+    <ClInclude Include="SDK\EntityList.h" />
+    <ClInclude Include="SDK\EntityRefs.h" />
+    <ClInclude Include="SDK\GameMode.h" />
+    <ClInclude Include="SDK\GameSettingsInput.h" />
+    <ClInclude Include="SDK\GameType.h" />
+    <ClInclude Include="SDK\HIDController.h" />
+    <ClInclude Include="SDK\HitResult.h" />
+    <ClInclude Include="SDK\Inventory.h" />
+    <ClInclude Include="SDK\InventoryTransaction.h" />
+    <ClInclude Include="SDK\Item.h" />
+    <ClInclude Include="SDK\Level.h" />
+    <ClInclude Include="SDK\LoopbackPacketSender.h" />
+    <ClInclude Include="SDK\MinecraftUIRenderContext.h" />
+    <ClInclude Include="SDK\MoveInputHandler.h" />
+    <ClInclude Include="SDK\Packet.h" />
+    <ClInclude Include="SDK\PlayerMovementProxy.h" />
+    <ClInclude Include="SDK\RakNetConnector.h" />
+    <ClInclude Include="SDK\Ref.h" />
+    <ClInclude Include="SDK\ScreenContext.h" />
+    <ClInclude Include="SDK\UIScene.h" />
+    <ClInclude Include="SDK\Dimension.h" />
+    <ClInclude Include="SDK\MatrixStack.h" />
+    <ClInclude Include="SDK\MojangsonToken.h" />
+    <ClInclude Include="SDK\Tag.h" />
+    <ClInclude Include="SDK\Tessellator.h" />
+    <ClInclude Include="SDK\TextHolder.h" />
+    <ClInclude Include="SDK\Weather.h" />
+    <ClInclude Include="Utils\ClientColors.h" />
+    <ClInclude Include="Utils\ColorUtil.h" />
+    <ClInclude Include="Utils\DllHelper.h" />
+    <ClInclude Include="Utils\HMath.h" />
+    <ClInclude Include="Utils\Json.hpp" />
+    <ClInclude Include="Utils\keys.h" />
+    <ClInclude Include="Utils\Logger.h" />
+    <ClInclude Include="Utils\Target.h" />
+    <ClInclude Include="Utils\TextFormat.h" />
+    <ClInclude Include="Utils\Utils.h" />
+    <ClInclude Include="Utils\xorstr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="minhook\MinHook.x64.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ItemGroup>
+  <!-- Pixel Shader -->
+  <FxCompile Include="Xorion\Shaders\UnlitTintPS.hlsl">
+    <ShaderType>Pixel</ShaderType>
+    <ShaderModel>5.0</ShaderModel>
+    <EntryPointName>main</EntryPointName>
+    <ObjectFileOutput>$(OutDir)UnlitTintPS.cso</ObjectFileOutput>
+  </FxCompile>
+
+  <!-- Vertex Shader -->
+  <FxCompile Include="Xorion\Shaders\UnlitTintVS.hlsl">
+    <ShaderType>Vertex</ShaderType>
+    <ShaderModel>5.0</ShaderModel>
+    <EntryPointName>main</EntryPointName>
+    <ObjectFileOutput>$(OutDir)UnlitTintVS.cso</ObjectFileOutput>
+  </FxCompile>
+</ItemGroup>
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

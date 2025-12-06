@@ -109,7 +109,7 @@ Item ***ItemRegistry::lookUpByName(void *a1, void *a2, TextHolder &text) {
 	return ItemRegistry__lookupByNameF(a1, a2, text);
 }
 
-void ItemDescriptor::fromStack(ItemStack *item) { //all credit to horion continued and floppy dolphin for this
+void ItemDescriptor::fromStack(ItemStack *item) { //all credit to xorion continued and floppy dolphin for this
 	using ItemDescriptor_ctorT = void (*)(ItemDescriptor *, ItemStack *);
 	static ItemDescriptor_ctorT ItemDescriptor_ctor = (ItemDescriptor_ctorT)FindSignature("48 89 5C 24 ? 55 56 57 41 56 41 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 44 24 ? 48 8B F2 48 8B F9 48 89 4C 24 ? 0F B6 5A");
 	ItemDescriptor_ctor(this, item);

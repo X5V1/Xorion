@@ -8,8 +8,8 @@
 #include <glm/mat4x4.hpp>         // mat4
 #include <glm/trigonometric.hpp>  // radians
 
-#include "../Horion/Loader.h"
-#include "../Horion/Menu/TabGui.h"
+#include "../Xorion/Loader.h"
+#include "../Xorion/Menu/TabGui.h"
 #include "../SDK/Tag.h"
 #include "../SDK/Font.h"
 #include "../Utils/ClientColors.h"
@@ -314,7 +314,7 @@ void Hooks::ClientInstanceScreenModel_sendChatMessage(void* _this, TextHolder* t
 	} else if (*message == '.') {
 		static std::once_flag flag;
 		std::call_once(flag, [] {
-			Game.getClientInstance()->getGuiData()->displayClientMessageF("%sYour Horion prefix is: \"%s%c%s\"", RED, YELLOW, cmdMgr->prefix, RED);
+			Game.getClientInstance()->getGuiData()->displayClientMessageF("%sYour Xorion prefix is: \"%s%c%s\"", RED, YELLOW, cmdMgr->prefix, RED);
 			Game.getClientInstance()->getGuiData()->displayClientMessageF("%sEnter \"%s%cprefix .%s\" to reset your prefix", RED, YELLOW, cmdMgr->prefix, RED);
 		});
 	}
@@ -427,9 +427,9 @@ __int64 Hooks::RenderText(__int64 a1, MinecraftUIRenderContext* renderCtx) {
 			// Main Menu
 			std::string screenName(g_Hooks.currentScreenName);
 			if (strcmp(screenName.c_str(), "start_screen") == 0) {
-				// Draw BIG epic horion watermark
+				// Draw BIG epic xorion watermark
 				{
-					std::string text = "H O R I O N";
+					std::string text = "X O R I O N";
 					Vec2 textPos = Vec2(wid.x / 2.f - DrawUtils::getTextWidth(&text, 8.f) / 2.f, wid.y / 9.5f);
 					Vec4 rectPos = Vec4(textPos.x - 55.f, textPos.y - 15.f, textPos.x + DrawUtils::getTextWidth(&text, 8.f) + 55.f, textPos.y + 75.f);
 					DrawUtils::fillRectangle(rectPos, ClientColors::menuBackgroundColor, 1.f);
@@ -454,7 +454,7 @@ __int64 Hooks::RenderText(__int64 a1, MinecraftUIRenderContext* renderCtx) {
 				{
 					Vec2 windowSize = Game.getClientInstance()->getGuiData()->windowSize;
 
-					// Draw Horion logo
+					// Draw Xorion logo
 					if (shouldRenderWatermark) {
 						constexpr float nameTextSize = 1.5f;
 						constexpr float versionTextSize = 0.7f;
@@ -462,7 +462,7 @@ __int64 Hooks::RenderText(__int64 a1, MinecraftUIRenderContext* renderCtx) {
 						constexpr float borderPadding = 1;
 						constexpr float margin = 5;
 
-						static std::string name = "Horion";
+						static std::string name = "Xorion";
 #ifdef _DEV
 						static std::string version = "dev";
 #elif defined _BETA

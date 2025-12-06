@@ -1,6 +1,6 @@
 // Memory/SignatureResolver.cpp
 #include "SignatureGlobals.h"
-#include "../Horion/Render/Signatures.h"
+#include "../Xorion/Render/Signatures.h"
 #include "SlimMem.h"   // signature scanning utility
 #include "../Utils/Logger.h"    // logF or similar
 #include "../Utils/Utils.h"     // for FindSignature macro
