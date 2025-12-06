@@ -1,7 +1,7 @@
 <div align="center">
   <br />
     <p>
-      <a href="https://horion.download"><img src="https://raw.githubusercontent.com/X5V1/Xorion/master/resources/xorion-banner.png" width="800" alt="Horion" /></a>
+      <a href="https://xorion-latest.github.io"><img src="https://raw.githubusercontent.com/X4V1-code/Xorion/master/resources/xorion-banner.png" width="800" alt="Horion" /></a>
     </p>
   <br />
   <p>
@@ -19,7 +19,7 @@ If you want to contribute to this project, feel free to fork this repository and
 To contribute, simply **fork the repository**, edit the code, and **submit a pull request**.
 We will then check your pull request and accept/deny it.
 Make sure to follow the existing code style and include comments where necessary.
-If you need any help with understanding our code, join the [official Discord server](https://horion.download/discord)
+If you need any help with understanding our code, join the [official Discord server](https://discord.gg/WzNVyYYh)
 
 ## Licensing
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
