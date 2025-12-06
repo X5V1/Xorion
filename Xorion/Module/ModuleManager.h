@@ -45,6 +45,7 @@
 #include "Modules/RainbowSky.h"
 #include "Modules/NoSlowDown.h"
 #include "Modules/InstaBreak.h"
+#include "Modules/NoBreak.h"
 #include "Modules/BlockReach.h"
 #include "Modules/FullBright.h"
 #include "Modules/FastLadder.h"

@@ -252,6 +252,8 @@ add_library(Xorion SHARED
         Xorion/Module/Modules/NoFall.h
         Xorion/Module/Modules/NoFriends.cpp
         Xorion/Module/Modules/NoFriends.h
+        Xorion/Module/Modules/NoBreak.cpp
+        Xorion/Module/Modules/NoBreak.h
         Xorion/Module/Modules/NoHurtcam.cpp
         Xorion/Module/Modules/NoHurtcam.h
         Xorion/Module/Modules/NoPacket.cpp
