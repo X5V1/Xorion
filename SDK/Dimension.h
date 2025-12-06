@@ -30,7 +30,7 @@ public:
 
 class BlockSource;
 class CompoundTag;
-class Entity;
+struct Entity;
 class Block;
 
 class Weather {

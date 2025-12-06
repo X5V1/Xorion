@@ -128,3 +128,10 @@ void GameMode::useItemOn(ItemStack* stack, const Vec3i& blockPos, uint8_t face, 
     // For now, log and skip to prevent linker errors
     logF("[GameMode] useItemOn called but not implemented for 1.21.123");
 }
+
+// Stub implementation for buildBlock - needs signature resolution
+void GameMode::buildBlock(Vec3i* blockPos, uint8_t face, bool useBlockSide) {
+    // TODO: Resolve through signature scanning in 1.21.123
+    // For now, log and skip to prevent linker errors
+    logF("[GameMode] buildBlock called but not implemented for 1.21.123");
+}

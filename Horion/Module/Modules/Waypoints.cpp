@@ -1,6 +1,9 @@
 #include "Waypoints.h"
 
 #include <algorithm>
+#include "../../../Memory/GameData.h"
+#include "../../../SDK/LocalPlayer.h"
+#include "../../../SDK/Font.h"
 
 Waypoints::Waypoints() : IModule(0, Category::VISUAL, "Shows holograms for user-defined coordinates.") {
 	registerFloatSetting("Size", &size, size, 0.3f, 1.6f);
@@ -16,8 +19,8 @@ const char* Waypoints::getModuleName() {
 }
 
 void Waypoints::onPreRender(MinecraftUIRenderContext* renderCtx) {
-	LocalPlayer* localPlayer = g_Data.getLocalPlayer();
-	if (localPlayer == nullptr || !g_Data.canUseMoveKeys())
+	LocalPlayer* localPlayer = Game.getLocalPlayer();
+	if (localPlayer == nullptr || !Game.canUseMoveKeys())
 		return;
 	int currentDimension = localPlayer->dimension->dimensionId;
 
@@ -36,7 +39,8 @@ void Waypoints::onPreRender(MinecraftUIRenderContext* renderCtx) {
 			pos.z *= 8;
 		} else if (currentDimension != wpDimension)
 			continue;
-		float dist = pos.dist(g_Data.getLocalPlayer()->getPos());
+		Vec3 playerPos = localPlayer->getPos();
+		float dist = pos.dist(playerPos);
 
 		constexpr bool useFloatingPoint = false;
 		constexpr bool fadeOutAtDistance = true;
@@ -62,7 +66,8 @@ void Waypoints::onPreRender(MinecraftUIRenderContext* renderCtx) {
 
 		if (fadeOutAtDistance && dist > 15) {
 				
-			Vec2 angle = localPlayer->getPos().CalcAngle(pos);
+			Vec3 lpPos = localPlayer->getPos();
+			Vec2 angle = lpPos.CalcAngle(pos);
 			float diff = angle.sub(localPlayer->getActorHeadRotationComponent()->rot).normAngles().magnitude();
 			if (dist > 30) {
 				float neededDiff = lerp(40, 15, std::min((dist - 30) / 300, 1.f));
@@ -128,6 +133,8 @@ void Waypoints::onPreRender(MinecraftUIRenderContext* renderCtx) {
 	
 }
 
+// Config loading/saving removed - onLoadConfig/onSaveConfig not available in IModule
+/*
 using json = nlohmann::json;
 void Waypoints::onLoadConfig(void* confVoid) {
 	IModule::onLoadConfig(confVoid);  // retain keybinds & enabled state
@@ -206,4 +213,5 @@ void Waypoints::onSaveConfig(void* confVoid) {
 
 	conf->emplace(modName.c_str(), obj);
 }
+*/
 

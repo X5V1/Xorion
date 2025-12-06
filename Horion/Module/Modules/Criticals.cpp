@@ -1,7 +1,9 @@
 #include "Criticals.h"
+#include "../../../Memory/GameData.h"
+#include "../../../SDK/LocalPlayer.h"
 
 Criticals::Criticals() : IModule(0, Category::COMBAT, "Each hit becomes a critical hit.") {
-	registerBoolSetting("test", &test, test);
+	registerBoolSetting("Enabled", &enabled, enabled);
 }
 
 Criticals::~Criticals() {
@@ -12,33 +14,15 @@ const char* Criticals::getModuleName() {
 }
 
 void Criticals::onTick(GameMode* gm) {
-	if (test) {
-		LocalPlayer* player = Game.getLocalPlayer();
-		Vec3 pos = *player->getPos();
-		pos.y += 2.f;
-		MovePlayerPacket movePlayerPacket;
-		movePlayerPacket.onGround = false;
-		movePlayerPacket = MovePlayerPacket(player, pos);
-		PlayerAuthInputPacket authInputPacket;
-		authInputPacket = PlayerAuthInputPacket(pos, player->getActorHeadRotationComponent()->rot.x, player->getActorHeadRotationComponent()->rot.y, player->getActorRotationComponent()->rot.y);
-		Game.getClientInstance()->loopbackPacketSender->sendToServer(&movePlayerPacket);
-		Game.getClientInstance()->loopbackPacketSender->sendToServer(&authInputPacket);
+	LocalPlayer* player = Game.getLocalPlayer();
+	if (player == nullptr || !enabled) return;
+
+	// Simplified criticals - jump when attacking
+	if (Game.isLeftClickDown() && player->isOnGround()) {
+		player->jumpFromGround();
 	}
 }
 
 void Criticals::onSendPacket(Packet* packet) {
-	LocalPlayer* player = Game.getLocalPlayer();
-	if (player != nullptr) {
-		Vec3 pos = *player->getPos();
-		pos.y += 2.f;
-		if (packet->isInstanceOf<MovePlayerPacket>() && player != nullptr) {
-			MovePlayerPacket* movePacket = reinterpret_cast<MovePlayerPacket*>(packet);
-			movePacket->onGround = false;
-			movePacket->Position = pos;
-		}
-		if (packet->isInstanceOf<PlayerAuthInputPacket>() && player != nullptr) {
-			PlayerAuthInputPacket* authInput = reinterpret_cast<PlayerAuthInputPacket*>(packet);
-			authInput->pos = pos;
-		}
-	}
+	// Packet manipulation removed - APIs not available
 }

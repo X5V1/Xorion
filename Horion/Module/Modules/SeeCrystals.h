@@ -18,9 +18,9 @@ private:
     float m_color[4] = { 0x74 / 255.0f, 0x18 / 255.0f, 0xD6 / 255.0f, 1.0f };
     bool  m_throughWalls = true;
 
-    void renderCrystalNormal(class Entity* ent, ID3D11Device* dev, ID3D11DeviceContext* ctx);
-    void renderCrystalOverlay(class Entity* ent, ID3D11Device* dev, ID3D11DeviceContext* ctx);
+    void renderCrystalNormal(struct Entity* ent, ID3D11Device* dev, ID3D11DeviceContext* ctx);
+    void renderCrystalOverlay(struct Entity* ent, ID3D11Device* dev, ID3D11DeviceContext* ctx);
 
     void rebuildCrystalCache();
-    std::vector<class Entity*> m_crystals;
+    std::vector<struct Entity*> m_crystals;
 };

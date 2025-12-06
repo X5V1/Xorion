@@ -136,8 +136,8 @@ void Fly::onTick(GameMode *gm) {
 		bool jumping = GameData::isKeyDown(*inputf->spaceBarKey);
 		bool sneaking = GameData::isKeyDown(*inputf->sneakKey);
 
-		if (gameTick = 15 && !jumping && !sneaking) {
-			motion = -0.04;
+		if (gameTick == 15 && !jumping && !sneaking) {
+			motion = -0.04f;
 			gameTick = 0;
 		}
 

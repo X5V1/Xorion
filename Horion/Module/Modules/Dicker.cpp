@@ -46,7 +46,7 @@ void Dicker::onTick(GameMode* gm) {
 
     Vec3 posFloat = lp->getPos();
     Vec3 floored = posFloat.floor();
-    vec3_ti playerBlockPos = vec3_ti(floored.x, floored.y, floored.z);
+    vec3_ti playerBlockPos = vec3_ti(static_cast<int>(floored.x), static_cast<int>(floored.y), static_cast<int>(floored.z));
 
     // Facing direction
     float yaw = lp->getActorHeadRotationComponent()->rot.y * (PI / 180.f);

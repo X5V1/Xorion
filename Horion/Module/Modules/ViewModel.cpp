@@ -1,4 +1,6 @@
 #include "ViewModel.h"
+#include "../../../Memory/GameData.h"
+#include "../../../SDK/LocalPlayer.h"
 
 
 ViewModel::ViewModel() : IModule(0, Category::VISUAL, "Custom item view model.") {
@@ -23,7 +25,7 @@ const char* ViewModel::getModuleName() {
 }
 
 void ViewModel::onTick(GameMode* gm) {
-	if (g_Data.getLocalPlayer() == nullptr)
+	if (Game.getLocalPlayer() == nullptr)
 		return;
 
 	if (Reset) {

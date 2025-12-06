@@ -26,6 +26,14 @@ void LigmaNuts::pickNextDelay() {
     nextDelayMs = minMs + (rand() % (maxMs - minMs + 1));
 }
 
+void LigmaNuts::sendCompliment() {
+    // TODO: Implement actual compliment sending logic
+    // For now, just log that we attempted to send
+    LocalPlayer* lp = g_Data.getLocalPlayer();
+    if (!lp) return;
+    // g_Data.getGuiData()->displayClientMessageF("[LigmaNuts] Compliment sent!");
+}
+
 // TODO: sendJoke method not implemented
 /*
 void LigmaNuts::sendJoke() {

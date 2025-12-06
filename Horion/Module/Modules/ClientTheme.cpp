@@ -2,8 +2,7 @@
 
 #include "../../../Utils/ClientColors.h"
 ClientTheme::ClientTheme() : IModule(0, Category::CLIENT, "Go for a retro style or streamline.") {
-	Theme.addEntry(EnumEntry("Dark", 0)).addEntry(EnumEntry("Legacy", 1));
-	registerEnumSetting("Client Theme", &Theme, 0);
+	registerIntSetting("Theme", &themeMode, themeMode, 0, 1);
 }
 
 ClientTheme::~ClientTheme() {
@@ -13,13 +12,11 @@ const char* ClientTheme::getModuleName() {
 	return "ClientTheme";
 }
 
-unsigned char mode = 0;
-auto lastMode = mode;
+int lastMode = -1;
 
 void ClientTheme::onRender(MinecraftUIRenderContext* renderCtx) {
-	mode = Theme.GetSelectedEntry().GetValue();
-	if (lastMode != mode) {
-		switch (Theme.selected) {
+	if (lastMode != themeMode) {
+		switch (themeMode) {
 		case 0: {
 			// TabGui
 			ClientColors::setTabGuiBackground(MC_Color(12, 12, 12));
@@ -87,6 +84,6 @@ void ClientTheme::onRender(MinecraftUIRenderContext* renderCtx) {
 			break;
 		}
 		}
-		lastMode = mode;
+		lastMode = themeMode;
 	}
 }

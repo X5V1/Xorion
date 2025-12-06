@@ -15,24 +15,29 @@
 // Forward declarations to reduce include coupling.
 // Include the real headers in GameData.cpp where definitions are required.
 struct AABB;
-struct ChestBlockActor;
-struct ClientInstance;
+class ChestBlockActor;    // changed to class
 struct GameMode;          // unified as struct
-struct HIDController;
+class HIDController;
 struct MoveInputHandler;
 struct RakNetConnector;
 struct GuiData;
-struct TextHolder;
+class TextHolder;         // changed to class
 struct Entity;
 struct EntityList;
 
-// Include ClientInstance to avoid incomplete type errors in files that include GameData.h
+// ClientInstance needed for inline methods
 #include "../SDK/ClientInstance.h"
+
+// Forward declaration
+namespace SlimUtils {
+    class SlimMem;
+    struct SlimModule;
+}
 
 // If you need methods from SlimMem/SlimModule directly, include their headers in GameData.cpp.
 namespace SlimUtils {
     class SlimMem;
-    class SlimModule;
+    struct SlimModule;
 }
 
 // InfoBoxData: UI notification with a fade lifecycle.
@@ -108,27 +113,26 @@ public:
     static bool keys[0x256];
 
     // Key state queries
-    bool canUseMoveKeys();
+    static bool canUseMoveKeys();
     static bool isKeyDown(int key);
     static bool isKeyPressed(int key);
-    bool isRightClickDown();
-    bool isLeftClickDown();
-    bool isWheelDown();
+    static bool isRightClickDown();
+    static bool isLeftClickDown();
+    static bool isWheelDown();
 
     // Lifecycle flags
-    bool shouldTerminate();
-    bool shouldHide();
-    void hide();
-    void terminate();
+    static bool shouldTerminate();
+    static bool shouldHide();
+    static void hide();
+    static void terminate();
 
     // Initialization and update hooks
-    void updateGameData(GameMode* gameMode);
-    void initGameData(const SlimUtils::SlimModule* gameModule, SlimUtils::SlimMem* slimMem, void* hDllInst);
-    void addChestToList(ChestBlockActor* ChestBlock2);
-    void EntityList_tick(EntityList* list);
-    void setHIDController(HIDController* Hid);
-    void displayMessages(GuiData* guiData);
-    void log(const char* fmt, ...);
+    static void updateGameData(GameMode* gameMode);
+    static void initGameData(const SlimUtils::SlimModule* gameModule, SlimUtils::SlimMem* slimMem, void* hDllInst);
+    static void addChestToList(ChestBlockActor* ChestBlock2);
+    static void EntityList_tick(EntityList* list);
+    static void displayMessages(GuiData* guiData);
+    static void log(const char* fmt, ...);
 
     // Metrics
     float fov = 0.0f;
@@ -202,12 +206,26 @@ public:
     }
 
     inline void* getDllModule() { return hDllInst; }
-    ClientInstance* getClientInstance();
-    GuiData* getGuiData();
-    class LocalPlayer* getLocalPlayer();
-    class LocalPlayer** getPtrLocalPlayer();
-    bool isInGame();
-    RakNetConnector* getRakNetConnector();
+    inline ClientInstance* getClientInstance() { return clientInstance; }
+    inline GuiData* getGuiData() {
+        return clientInstance ? clientInstance->getGuiData() : nullptr;
+    }
+
+    inline class LocalPlayer* getLocalPlayer() {
+        // Refresh local player from client each call
+        if (clientInstance)
+            // ClientInstance must define getCILocalPlayer(); forward declared LocalPlayer here
+            return clientInstance->getCILocalPlayer();
+        return nullptr;
+    }
+
+    // If callers truly need a pointer-to-pointer
+    inline class LocalPlayer** getPtrLocalPlayer() {
+        static class LocalPlayer* lp = getLocalPlayer();
+        return &lp;
+    }
+
+    bool isInGame() { return getLocalPlayer() != nullptr; }
 
     const SlimUtils::SlimModule* getModule() { return gameModule; }
     const SlimUtils::SlimMem* getSlimMem() { return slimMem; }
@@ -216,6 +234,15 @@ public:
     EntityList* getEntityList() { return entityList; }
 
     HIDController** getHIDController() { return &hidController; }
+
+    RakNetConnector* getRakNetConnector() {
+        if (!clientInstance || !clientInstance->loopbackPacketSender ||
+            !clientInstance->loopbackPacketSender->networkSystem ||
+            !clientInstance->loopbackPacketSender->networkSystem->remoteConnectorComposite)
+            return nullptr;
+
+        return clientInstance->loopbackPacketSender->networkSystem->remoteConnectorComposite->rakNetConnector;
+    }
 
     std::unordered_set<AABB, AABBHasher>& getChestList() { return chestList; }
     auto lockChestList() { return std::lock_guard<std::mutex>(chestListMutex); }
@@ -259,9 +286,16 @@ public:
     inline void setHide(bool v) { shouldHideB = v; }
     inline bool getTerminate() const { return shouldTerminateB; }
     inline bool getHide() const { return shouldHideB; }
+    
+    // Inline implementation to work around linker bug - can't use Game here as it's declared after class
+    // So keep it non-static and use instance member
+    inline void setHIDController(HIDController* Hid) { hidController = Hid; }
 };
 
-// Singleton instance (classic Horion style)
+
+// Singleton instance (classic Xorion style)
 extern GameData Game;
-// Legacy alias
+
+// Alias for backward compatibility with modules using g_Data
 #define g_Data Game
+

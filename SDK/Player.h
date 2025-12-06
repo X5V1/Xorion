@@ -44,10 +44,7 @@ public:
     // Raw pointer access
     inline void* getMcPlayer() const { return mcPlayerPtr; }
 
-protected:
-    void* mcPlayerPtr = nullptr;
-
-    // Resolved function pointers (populated in ensureIntegration)
+    // Resolved function pointers (populated in ensureIntegration) - public for external initialization
     static void* (*s_getHeldItem_fn)(void* mcPlayer);
     static const char* (*s_getName_fn)(void* mcPlayer);
     static Vec3 (*s_getPos_fn)(void* mcPlayer);
@@ -55,6 +52,9 @@ protected:
     static float (*s_getHealth_fn)(void* mcPlayer);
     static void (*s_setHealth_fn)(void* mcPlayer, float);
     static void (*s_sendNetworkPacket_fn)(void* mcPlayer, Packet&);
+
+protected:
+    void* mcPlayerPtr = nullptr;
 
     // Offsets (fall back to reading at offsets if vfuncs not available)
     static constexpr ptrdiff_t OFF_ITEM_PTR = 0x10;

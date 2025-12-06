@@ -21,14 +21,14 @@
 
 // Unify all forward declarations as struct to eliminate C4099 warnings
 struct GameMode;
-struct Level;
+class Level;
 
 class Player; // Player is now a class
-struct Dimension;
+class Dimension;
 struct MobEffect;
 struct MobEffectInstance;
 struct Packet;
-struct BlockActor;
+class BlockActor;
 
 struct EntityLocation {
     Vec3 pos;
@@ -39,8 +39,16 @@ struct EntityLocation {
 #pragma pack(push, 4)
 struct Entity {
 public:
-    EntityContext ctx;
+    // Memory overlay pattern: ctx is never constructed, only overlaid from game memory
+    // Using union to bypass reference member initialization requirement
+    union {
+        EntityContext ctx;
+        char ctx_storage[sizeof(EntityContext)];
+    };
 
+    // Constructor only needed for inheritance - never actually constructs EntityContext
+    Entity() : ctx_storage{} {}
+    
     BUILD_ACCESS(this, __int64 **, entityRegistryBase, 0x8);
     BUILD_ACCESS(this, uint32_t, entityId, 0x10);
     BUILD_ACCESS(this, int16_t, damageTime, 0x188);

@@ -4,13 +4,13 @@
 #include "Attribute.h"
 #include "../Utils/HMath.h"
 
-class Entity;
+struct Entity;
 class TextHolder;
 class HashedString;
-class MobEffect;
+struct MobEffect;
 class BlockLegacy;
 class Block;
-class PlayerActionPacket;
+struct PlayerActionPacket;
 
 enum class ActorLocation : int32_t {
 	Feet = 0x0,

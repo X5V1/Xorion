@@ -2,6 +2,8 @@
 
 #include "../../DrawUtils.h"
 #include "../../../Utils/ClientColors.h"
+#include "../../../Memory/GameData.h"
+#include "../../../SDK/LocalPlayer.h"
 
 ReachDisplay::ReachDisplay() : IModule(0, Category::PLAYER, "Displays your reach.") {
 	registerFloatSetting("Scale", &this->scale, this->scale, 0.5f, 1.5f);
@@ -18,35 +20,37 @@ void ReachDisplay::onEnable() {
 	this->ticks = 0;
 
 	this->reachStr = (char*)malloc(6);
-	sprintf(this->reachStr, "0.0");
+	sprintf_s(this->reachStr, 6, "0.0");
 }
 
 void ReachDisplay::onTick(GameMode* gm) {
-	if (g_Data.getLocalPlayer() == nullptr) return;
+	LocalPlayer* player = Game.getLocalPlayer();
+	if (player == nullptr) return;
 
 	this->ticks++;
 
-	if (g_Data.isLeftClickDown() && g_Data.getLocalPlayer()->level->hasEntity() != 0) {
-		Entity* entity = g_Data.getLocalPlayer()->level->getEntity();
+	if (Game.isLeftClickDown() && player->level->hasEntity() != 0) {
+		Entity* entity = player->level->getEntity();
 
-		if (entity->damageTime > 0) {
+		if (entity != nullptr && entity->damageTime > 0) {
 			this->ticks = 0;
-			this->currReach = entity->getPos()->dist(g_Data.getLocalPlayer()->getPos());
-
-			sprintf(this->reachStr, "%.2f", this->currReach);
+			Vec3 entityPos = *entity->getPos();
+			Vec3 playerPos = player->getPos();
+			this->currReach = entityPos.dist(playerPos);
+			sprintf_s(this->reachStr, 6, "%.2f", this->currReach);
 		}
 	}
 }
 
 void ReachDisplay::onPostRender(MinecraftUIRenderContext* renderCtx) {
-	if (g_Data.getLocalPlayer() == nullptr) return;
+	if (Game.getLocalPlayer() == nullptr) return;
 
 	Vec2 windowSize = Game.getClientInstance()->getGuiData()->windowSize;
 
 	if (this->ticks >= 80 && this->currReach > 0.0f) {
 		this->currReach = 0.0f;
 
-		sprintf(this->reachStr, "0.0");
+		sprintf_s(this->reachStr, 6, "0.0");
 	}
 
 	std::string reachDisplay = std::string("Reach: ") + std::string(this->reachStr);

@@ -194,10 +194,10 @@ void ModuleManager::onWorldTick(GameMode* gameMode) {
         return;
     auto lock = lockModuleList();
     for (auto& mod : moduleList) {
-        if (mod->isEnabled() || mod->callWhenDisabled())
+        if (mod->isEnabled() || mod->callWhenDisabled()) {
             // TODO: onWorldTick removed from IModule
             // mod->onWorldTick(gameMode);
-            ;
+        }
     }
 }
 
@@ -216,10 +216,10 @@ void ModuleManager::onAttack(Entity* attackEnt) {
         return;
     auto lock = lockModuleList();
     for (auto& mod : moduleList) {
-        if (mod->isEnabled() || mod->callWhenDisabled())
+        if (mod->isEnabled() || mod->callWhenDisabled()) {
             // TODO: onAttack removed from IModule
             // mod->onAttack(attackEnt);
-            ;
+        }
     }
 }
 
@@ -237,10 +237,10 @@ void ModuleManager::onKey(int key, bool isDown, bool& shouldCancel) {
         return;
     auto lock = lockModuleList();
     for (auto& mod : moduleList) {
-        if (mod->isEnabled() || mod->callWhenDisabled())
+        if (mod->isEnabled() || mod->callWhenDisabled()) {
             // TODO: onKey removed from IModule
             // mod->onKey(key, isDown, shouldCancel);
-            ;
+        }
     }
 }
 
@@ -269,10 +269,10 @@ void ModuleManager::onSendClientPacket(Packet* packet) {
         return;
     auto lock = lockModuleList();
     for (auto& mod : moduleList) {
-        if (mod->isEnabled() || mod->callWhenDisabled())
+        if (mod->isEnabled() || mod->callWhenDisabled()) {
             // TODO: onSendClientPacket removed from IModule
             // mod->onSendClientPacket(packet);
-            ;
+        }
     }
 }
 
@@ -314,18 +314,10 @@ int ModuleManager::getEnabledModuleCount() {
     return i;
 }
 
-// TODO: onMove removed from IModule in 1.21.123
-/*
 void ModuleManager::onMove(MoveInputHandler* hand) {
-    if (!isInitialized())
-        return;
-    auto lock = lockModuleList();
-    for (auto& it : moduleList) {
-        if (it->isEnabled() || it->callWhenDisabled())
-            it->onMove(hand);
-    }
+    // Stub: onMove removed from IModule in 1.21.123
+    // This method is still called from Hooks but does nothing
 }
-*/
 
 void ModuleManager::onPlayerTick(Player* player) {
     if (!isInitialized())

@@ -32,8 +32,6 @@ JsValueRef createItem(C_ItemStack *stack) {
 }
 */
 
-// TODO: PlayerInventory::getItemStack doesn't exist in new API
-/*
 JsValueRef CALLBACK InventoryFunctions::getItems(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = g_Data.getLocalPlayer();
 	if (ent == nullptr) {
@@ -45,14 +43,9 @@ JsValueRef CALLBACK InventoryFunctions::getItems(JsValueRef callee, bool isConst
 	JsValueRef inventoryArr;
 	chakra.JsCreateArray_(36, &inventoryArr);
 
-	for (int i = 0; i < 36; i++) {
-		auto stack = plr->getSupplies()->inventory->getItemStack(i);
-		chakra.arraySet(inventoryArr, i, createItem(stack));
-	};
-
+	// Stub: Return empty array since getItemStack API doesn't exist
 	return inventoryArr;
 }
-*/
 
 JsValueRef CALLBACK InventoryFunctions::getArmor(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = g_Data.getLocalPlayer();
@@ -77,8 +70,6 @@ JsValueRef CALLBACK InventoryFunctions::getArmor(JsValueRef callee, bool isConst
 	return JS_INVALID_REFERENCE;
 }
 
-// TODO: getHeld uses removed getItemStack API
-/*
 JsValueRef CALLBACK InventoryFunctions::getHeld(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = g_Data.getLocalPlayer();
 	if (ent == nullptr) {
@@ -98,10 +89,11 @@ JsValueRef CALLBACK InventoryFunctions::getHeld(JsValueRef callee, bool isConstr
 		THROW(L"Argument 1 not a valid integer");
 	}
 
-	auto stack = plr->getSupplies()->inventory->getItemStack(slot);
-	return createItem(stack);
+	// Stub: Return empty object since getItemStack API doesn't exist
+	JsValueRef obj;
+	chakra.JsCreateObject_(&obj);
+	return obj;
 }
-*/
 
 JsValueRef CALLBACK InventoryFunctions::setSelected(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = g_Data.getLocalPlayer();
@@ -129,8 +121,6 @@ JsValueRef CALLBACK InventoryFunctions::setSelected(JsValueRef callee, bool isCo
 	return chakra.trueValue();
 }
 
-// TODO: getSlot uses removed getItemStack API
-/*
 JsValueRef CALLBACK InventoryFunctions::getSlot(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = g_Data.getLocalPlayer();
 	if (ent == nullptr) {
@@ -140,13 +130,12 @@ JsValueRef CALLBACK InventoryFunctions::getSlot(JsValueRef callee, bool isConstr
 	const auto plr = reinterpret_cast<LocalPlayer*>(ent);
 	const int currSlot = plr->getSupplies()->selectedHotbarSlot;
 
-	auto stack = plr->getSupplies()->inventory->getItemStack(currSlot);
-	return createItem(stack);
+	// Stub: Return empty object since getItemStack API doesn't exist
+	JsValueRef obj;
+	chakra.JsCreateObject_(&obj);
+	return obj;
 }
-*/
 
-// TODO: isFull uses removed API
-/*
 JsValueRef CALLBACK InventoryFunctions::isFull(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = g_Data.getLocalPlayer();
 	if (ent == nullptr) {
@@ -155,9 +144,9 @@ JsValueRef CALLBACK InventoryFunctions::isFull(JsValueRef callee, bool isConstru
 
 	const auto plr = reinterpret_cast<LocalPlayer*>(ent);
 
-	return chakra.toBoolean(plr->getSupplies()->inventory->isFull());
+	// Stub: Always return false since isFull API doesn't exist
+	return chakra.toBoolean(false);
 }
-*/
 
 JsValueRef CALLBACK InventoryFunctions::moveItem(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = g_Data.getLocalPlayer();

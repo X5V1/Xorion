@@ -1,10 +1,9 @@
 #include "Reducer.h"
+#include "../../../Memory/GameData.h"
+#include "../../../SDK/LocalPlayer.h"
 
 Reducer::Reducer() : IModule(0, Category::COMBAT, "Tries do reduce your knockback relatively legit") {
-	this->mode.addEntry(EnumEntry("Jump", 0))
-			   .addEntry(EnumEntry("Sneak", 1))
-			   .addEntry(EnumEntry("JumpReset", 2));
-	this->registerEnumSetting("Mode", &this->mode, 0);
+	this->registerIntSetting("Mode", &this->mode, this->mode, 0, 2);
 }
 
 Reducer::~Reducer() {
@@ -13,7 +12,11 @@ Reducer::~Reducer() {
 const char* Reducer::getModuleName() {
 	if (this->isEnabled()) {
 		static char modName[64];
-		snprintf(modName, 64, "Reducer [%s]", this->mode.GetSelectedEntry().GetName().c_str());
+		const char* modeName = "Unknown";
+		if (mode == 0) modeName = "Jump";
+		else if (mode == 1) modeName = "Sneak";
+		else if (mode == 2) modeName = "JumpReset";
+		snprintf(modName, 64, "Reducer [%s]", modeName);
 		return modName;
 	}
 
@@ -25,7 +28,7 @@ const char* Reducer::getRawModuleName() {
 }
 
 void Reducer::onEnable() {
-	if (g_Data.getLocalPlayer() == nullptr) {
+	if (Game.getLocalPlayer() == nullptr) {
 		this->setEnabled(false);
 		return;
 	}
@@ -35,11 +38,11 @@ void Reducer::onEnable() {
 }
 
 void Reducer::onTick(GameMode* gm) {
-	if (g_Data.getLocalPlayer() == nullptr) return;
+	if (Game.getLocalPlayer() == nullptr) return;
 
-	LocalPlayer* player = g_Data.getLocalPlayer();
+	LocalPlayer* player = Game.getLocalPlayer();
 
-	switch (this->mode.selected) {
+	switch (this->mode) {
 	case 0:
 		if (player->damageTime > 0 && player->isOnGround())
 			player->jumpFromGround();

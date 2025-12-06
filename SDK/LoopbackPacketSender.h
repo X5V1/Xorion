@@ -24,5 +24,5 @@ public:
 
 class RemoteConnectorComposite {
 public:
-	BUILD_ACCESS(this, class RakNetConnector*, rakNetConnector, 0x58);
+	BUILD_ACCESS(this, struct RakNetConnector*, rakNetConnector, 0x58);
 };

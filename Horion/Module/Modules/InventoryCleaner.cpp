@@ -43,7 +43,7 @@ void InventoryCleaner::onTick(GameMode* gm) {
 			for (int n = 0; n < 36; n++) {
 				ItemStack* stack = inv->getByGlobalIndex(n);
 				if (stack->item != NULL) {
-					float currentDamage = stack->getAttackingDamageWithEnchants();
+					float currentDamage = static_cast<float>(stack->getAttackingDamageWithEnchants());
 					if (currentDamage > damage) {
 						damage = currentDamage;
 						item = n;
@@ -178,19 +178,19 @@ std::vector<int> InventoryCleaner::findUselessItems() {
 				switch (armor->ArmorSlot) {
 				case 0:
 					if (helmets.size() > 0)
-						testArmorValue = helmets.at(0)->getArmorValueWithEnchants();
+						testArmorValue = static_cast<float>(helmets.at(0)->getArmorValueWithEnchants());
 					break;
 				case 1:
 					if (chestplates.size() > 0)
-						testArmorValue = chestplates.at(0)->getArmorValueWithEnchants();
+						testArmorValue = static_cast<float>(chestplates.at(0)->getArmorValueWithEnchants());
 					break;
 				case 2:
 					if (leggings.size() > 0)
-						testArmorValue = leggings.at(0)->getArmorValueWithEnchants();
+						testArmorValue = static_cast<float>(leggings.at(0)->getArmorValueWithEnchants());
 					break;
 				case 3:
 					if (boots.size() > 0)
-						testArmorValue = boots.at(0)->getArmorValueWithEnchants();
+						testArmorValue = static_cast<float>(boots.at(0)->getArmorValueWithEnchants());
 					break;
 				}
 				if (itemsteck->getArmorValueWithEnchants() >= testArmorValue)

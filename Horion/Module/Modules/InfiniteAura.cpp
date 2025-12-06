@@ -76,10 +76,10 @@ void InfiniteAura::onTick(C_GameMode* gm) {
 
 			vec3_t tpPos = vec3_t(targetPos.x - teleportX, targetPos.y, targetPos.z - teleportZ);
 
-			int times = ceil(localPlayerPos.dist(tpPos) / tpDistance); //tp times
+			int times = static_cast<int>(ceil(localPlayerPos.dist(tpPos) / tpDistance)); //tp times
 
 			for (int n = 1; n <= times; n++) {
-				vec3_t pos = localPlayerPos.add(tpPos.sub(localPlayerPos).div(times).mul(n));
+				vec3_t pos = localPlayerPos.add(tpPos.sub(localPlayerPos).div(static_cast<float>(times)).mul(static_cast<float>(n)));
 				MovePlayerPacket packet(localPlayer, pos);
 				g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&packet);
 
@@ -92,7 +92,7 @@ void InfiniteAura::onTick(C_GameMode* gm) {
 			//Back
 			localPlayerPos = localPlayer->getPos();
 			for (int n = 1; n <= times; n++) {
-				vec3_t pos = tpPos.add(localPlayerPos.sub(tpPos).div(times).mul(n));
+				vec3_t pos = tpPos.add(localPlayerPos.sub(tpPos).div(static_cast<float>(times)).mul(static_cast<float>(n)));
 				MovePlayerPacket packet2(localPlayer, pos);
 				g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&packet2);
 			}

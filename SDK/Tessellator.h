@@ -34,7 +34,7 @@ public:
 class Block;
 
 namespace mce {
-class Mesh;
+struct Mesh;
 }
 
 class BlockTessellator {

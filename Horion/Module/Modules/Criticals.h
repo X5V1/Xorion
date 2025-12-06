@@ -4,7 +4,7 @@
 
 class Criticals : public IModule {
 public:
-	bool test = false;
+	bool enabled = false;
 	Criticals();
 	~Criticals();
 

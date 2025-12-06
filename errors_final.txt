@@ -1,7 +1,0 @@
-MSBuild version 17.14.23+b0019275e for .NET Framework
-
-  RenderUtils.cpp
-C:\Xorion\Horion\Render\RenderUtils.cpp(102,10): error C2084: function 'void RenderUtils::drawEntityMesh(RenderUtils::Entity *,ID3D11DeviceContext *)' already has a body [C:\Xorion\build\Horion.vcxproj]
-      C:\Xorion\Horion\Render\RenderUtils.cpp(6,19):
-      see previous definition of 'RenderUtils::drawEntityMesh'
-  

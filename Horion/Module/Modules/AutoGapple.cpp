@@ -81,7 +81,7 @@ void AutoGapple::onEnable() {
 	static HealthAttribute attribute = HealthAttribute();
 	auto currentHealth = player->getAttribute(&attribute)->currentValue;
 
-	this->lastHealth = currentHealth;
+	this->lastHealth = static_cast<int>(currentHealth);
 
 	int slot = this->findGapple();
 
@@ -101,7 +101,7 @@ void AutoGapple::onTick(GameMode* gm) {
 	auto currentHealth = player->getAttribute(&attribute)->currentValue;
 
 	if (this->wait > 0 && this->lastHealth <= currentHealth) {
-		this->lastHealth = currentHealth;
+		this->lastHealth = static_cast<int>(currentHealth);
 		this->wait--;
 		return;
 	}

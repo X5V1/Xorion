@@ -1,7 +1,7 @@
 #pragma once
 #include "Item.h"
 #include "../Utils/Utils.h"
-class ItemStack;
+struct ItemStack;
 class Inventory;
 class Player;
 

@@ -33,7 +33,7 @@ public:
 	BUILD_ACCESS(this, bool, isSuperHot, 0xF);
 };
 
-class Entity;
+struct Entity;
 class Block;
 class BlockSource;
 

@@ -1,4 +1,5 @@
 #include "ScriptInstance.h"
+#include "../../Memory/GameData.h"
 
 ScriptInstance::ScriptInstance(std::wstring startScript) {
 	this->startScriptPath = startScript;
@@ -28,6 +29,7 @@ ScriptInstance::~ScriptInstance() {
 		}
 		this->registeredModules.clear();
 	}
+	*/
 }
 
 void CALLBACK promiseContinuationCallback(JsValueRef task, void* callbackState) {
@@ -93,7 +95,9 @@ case JsErrorScriptCompile:
 default:
 	logF("Script run failed: %X", err);
 	break;
-}#undef errLog
+}
+
+#undef errLog
 		returnString = L"Error! " + std::to_wstring(err) + L", you may find a stack trace in the console";
 
 		goto stopExecution;
@@ -103,9 +107,7 @@ default:
 	logF("Initial Script return: %S", returnString.c_str());
 	this->runPromises();
 
-	// TODO: GameData::shouldTerminate() doesn't exist
-	/*
-	while (this->isRunning && !GameData::shouldTerminate()) {
+	while (this->isRunning && !g_Data.shouldTerminate()) {
 		{
 			std::unique_lock<std::mutex> lk(callbackMutex);
 			this->callbackWaiter.wait_for(lk, std::chrono::milliseconds(1));
@@ -121,7 +123,6 @@ default:
 
 		this->runPromises();
 	}
-	*/
 
 stopExecution:
 	chakra.JsSetCurrentContext_(JS_INVALID_REFERENCE);

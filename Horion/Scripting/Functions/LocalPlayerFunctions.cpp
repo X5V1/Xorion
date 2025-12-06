@@ -156,7 +156,7 @@ JsValueRef CALLBACK LocalPlayerFunctions::breakBlock(JsValueRef callee, bool isC
 	}
 
 	Vec3 pos = vecOpt.value();
-	Vec3i blockPos(pos.x, pos.y, pos.z);
+	Vec3i blockPos(static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(pos.z));
 
 	g_Data.getGameMode()->destroyBlock(blockPos, 1);
 	return chakra.trueValue();
@@ -176,7 +176,7 @@ JsValueRef CALLBACK LocalPlayerFunctions::placeBlock(JsValueRef callee, bool isC
 	}
 
 	Vec3 pos = vecOpt.value();
-	Vec3i blockPos(pos.x, pos.y, pos.z);
+	Vec3i blockPos(static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(pos.z));
 
 	g_Data.getGameMode()->buildBlock(&blockPos, 1, true);
 	return chakra.trueValue();
@@ -196,7 +196,7 @@ JsValueRef CALLBACK LocalPlayerFunctions::breakBlockRelativeToPlr(JsValueRef cal
 	}
 
 	Vec3 pos = vecOpt.value().add(plr->getPos());
-	Vec3i blockPos(pos.x, pos.y, pos.z);
+	Vec3i blockPos(static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(pos.z));
 
 	g_Data.getGameMode()->destroyBlock(blockPos, 1);
 	return chakra.trueValue();
@@ -216,7 +216,7 @@ JsValueRef CALLBACK LocalPlayerFunctions::placeBlockRelativeToPlr(JsValueRef cal
 	}
 
 	Vec3 pos = vecOpt.value().add(plr->getPos());
-	Vec3i blockPos(pos.x, pos.y, pos.z);
+	Vec3i blockPos(static_cast<int>(pos.x), static_cast<int>(pos.y), static_cast<int>(pos.z));
 
 	g_Data.getGameMode()->buildBlock(&blockPos, 1, true);
 	return chakra.trueValue();

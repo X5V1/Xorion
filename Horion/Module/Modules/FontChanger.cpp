@@ -1,8 +1,7 @@
 #include "FontChanger.h"
 
 FontChanger::FontChanger() : IModule(0, Category::CLIENT, "Font Changer.") {
-	Fonts.addEntry(EnumEntry("Notosans", 0)).addEntry(EnumEntry("Mojangles", 1));
-	registerEnumSetting("Fonts", &Fonts, 0);
+	registerIntSetting("Font", &fontMode, fontMode, 0, 1);
 }
 
 FontChanger::~FontChanger() {

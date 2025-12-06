@@ -13,6 +13,5 @@ public:
 
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
-	// TODO: onMove removed from IModule in 1.21.123
-	//virtual void onMove(MoveInputHandler* input) override;
+	virtual void onTick(GameMode* gm) override;
 };

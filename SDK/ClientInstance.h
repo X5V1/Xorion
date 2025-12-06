@@ -21,11 +21,11 @@ public:
     }
 };
 
-struct Tessellator;
-struct Block;
+class Tessellator;
+class Block;
 class Font;
 
-struct BlockTessellator;
+class BlockTessellator;
 struct ResourceLocation {
 private:
     char pad[0x28];
@@ -33,7 +33,7 @@ private:
     char pad2[8];
 };
 
-struct HashedString {
+class HashedString {
 private:
     unsigned __int64 hash;
     TextHolder text;  // 0x0008
@@ -209,7 +209,7 @@ public:
 };
 
 struct MoveInputHandler;
-struct CameraManager;
+class CameraManager;
 
 struct ClientInstance {
 private:

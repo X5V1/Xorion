@@ -312,6 +312,36 @@ add_library(Horion SHARED
         Horion/Module/Modules/Xray.h
         Horion/Module/Modules/Zoom.cpp
         Horion/Module/Modules/Zoom.h
+        Horion/Module/Modules/AntiInvis.cpp
+        Horion/Module/Modules/AntiInvis.h
+        Horion/Module/Modules/Arraylist.cpp
+        Horion/Module/Modules/Arraylist.h
+        Horion/Module/Modules/AutoSplitter.cpp
+        Horion/Module/Modules/AutoSplitter.h
+        Horion/Module/Modules/BlockReach.cpp
+        Horion/Module/Modules/BlockReach.h
+        Horion/Module/Modules/ClientTheme.cpp
+        Horion/Module/Modules/ClientTheme.h
+        Horion/Module/Modules/Compass.cpp
+        Horion/Module/Modules/Compass.h
+        Horion/Module/Modules/Criticals.cpp
+        Horion/Module/Modules/Criticals.h
+        Horion/Module/Modules/FontChanger.cpp
+        Horion/Module/Modules/FontChanger.h
+        Horion/Module/Modules/OffhandAllow.cpp
+        Horion/Module/Modules/OffhandAllow.h
+        Horion/Module/Modules/Radar.cpp
+        Horion/Module/Modules/Radar.h
+        Horion/Module/Modules/ReachDisplay.cpp
+        Horion/Module/Modules/ReachDisplay.h
+        Horion/Module/Modules/Reducer.cpp
+        Horion/Module/Modules/Reducer.h
+        Horion/Module/Modules/Spider.cpp
+        Horion/Module/Modules/Spider.h
+        Horion/Module/Modules/ViewModel.cpp
+        Horion/Module/Modules/ViewModel.h
+        Horion/Module/Modules/Waypoints.cpp
+        Horion/Module/Modules/Waypoints.h
         Horion/Module/ModuleManager.cpp
         Horion/Module/ModuleManager.h
 
@@ -343,6 +373,8 @@ add_library(Horion SHARED
         Horion/Scripting/Functions/LocalPlayerFunctions.h
         Horion/Scripting/Functions/ModuleManagerFunctions.cpp
         Horion/Scripting/Functions/ModuleManagerFunctions.h
+        Horion/Scripting/Functions/Vector2Functions.cpp
+        Horion/Scripting/Functions/Vector2Functions.h
         Horion/Scripting/Functions/Vector3Functions.cpp
         Horion/Scripting/Functions/Vector3Functions.h
         Horion/Scripting/JsScriptModule.cpp
@@ -380,6 +412,8 @@ add_library(Horion SHARED
         Memory/Hooks.cpp
         Memory/Hooks.h
         Memory/MinHook.h
+        Memory/SignatureGlobals.cpp
+        Memory/SignatureGlobals.h
         Memory/SlimMem.cpp
         Memory/SlimMem.h
 
@@ -406,6 +440,8 @@ add_library(Horion SHARED
         SDK/EntityContext.h
         SDK/EntityList.h
         SDK/EntityRefs.h
+        SDK/Font.cpp
+        SDK/Font.h
         SDK/GameMode.cpp
         SDK/GameMode.h
         SDK/GameSettingsInput.h
@@ -530,6 +566,13 @@ add_library(Horion SHARED
         Horion/Module/Modules/Impersonator.h
         Horion/Command/Commands/ImpersonateCommand.cpp
         Horion/Command/Commands/ImpersonateCommand.h
+)
+
+# Link required libraries
+target_link_libraries(Horion
+    d3d11.lib
+    d3dcompiler.lib
+    chakrart.lib
 )
 
 # --- Shader compile rules (Windows-only) ---

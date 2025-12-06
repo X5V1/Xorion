@@ -403,20 +403,19 @@ __int64 Hooks::RenderText(__int64 a1, MinecraftUIRenderContext* renderCtx) {
 		if (g_Data.shouldHide() || !moduleMgr->isInitialized() || !g_Hooks.shouldRender)
 			return oText(a1, renderCtx);
 
-		static auto hudModule = moduleMgr->getModule<HudModule>();
-		static auto clickGuiModule = moduleMgr->getModule<ClickGuiMod>();
-		static auto clientThemeModule = moduleMgr->getModule<ClientTheme>();
+	static auto hudModule = moduleMgr->getModule<HudModule>();
+	static auto clickGuiModule = moduleMgr->getModule<ClickGuiMod>();
+	// ClientTheme module disabled - API incompatibility
+	// static auto clientThemeModule = moduleMgr->getModule<ClientTheme>();
 
-		Game.frameCount++;
+	Game.frameCount++;
 
-		auto wid = Game.getClientInstance()->getGuiData()->windowSize;
+	auto wid = Game.getClientInstance()->getGuiData()->windowSize;
 
-		// Call PreRender() functions
-		moduleMgr->onPreRender(renderCtx);
-		clientThemeModule->onRender(renderCtx);
-		DrawUtils::flush();
-
-		__int64 retval = oText(a1, renderCtx);
+	// Call PreRender() functions
+	moduleMgr->onPreRender(renderCtx);
+	// clientThemeModule->onRender(renderCtx);  // Disabled: ClientTheme unavailable
+	DrawUtils::flush();		__int64 retval = oText(a1, renderCtx);
 
 		bool shouldPostRender = true;
 		bool shouldRenderArrayList = true;
@@ -962,7 +961,8 @@ float Hooks::GetGamma(uintptr_t* a1) {
 	static auto xrayMod = moduleMgr->getModule<Xray>();
 	static auto nametagmod = moduleMgr->getModule<NameTags>();
 	static auto zoomMod = moduleMgr->getModule<Zoom>();
-	static auto viewMod = moduleMgr->getModule<ViewModel>();
+	// ViewModel module disabled - API incompatibility
+	// static auto viewMod = moduleMgr->getModule<ViewModel>();
 
 	uintptr_t** list = (uintptr_t**)a1;
 
@@ -988,8 +988,8 @@ float Hooks::GetGamma(uintptr_t* a1) {
 			obtainedSettings++;
 		} else if (!strcmp(settingname->getText(), "gfx_viewbobbing")) {
 			bool* viewbobbing = (bool*)((uintptr_t)list[i] + 16);
-			if (viewMod->isEnabled())
-				*viewbobbing = true;
+			// if (viewMod->isEnabled())  // ViewModel disabled
+			// 	*viewbobbing = true;
 			obtainedSettings++;
 		}
 		if (obtainedSettings == 3) break;
@@ -1061,9 +1061,10 @@ float Hooks::GameMode_getPickRange(GameMode* _this, __int64 currentInputMode, ch
 	static auto oFunc = g_Hooks.GameMode_getPickRangeHook->GetFastcall<float, GameMode*, __int64, char>();
 
 	if (Game.getLocalPlayer() != nullptr) {
-		static auto BlockReachModule = moduleMgr->getModule<BlockReach>();
-		if (BlockReachModule->isEnabled())
-			return BlockReachModule->getBlockReach();
+		// BlockReach module disabled - API incompatibility
+		// static auto BlockReachModule = moduleMgr->getModule<BlockReach>();
+		// if (BlockReachModule->isEnabled())
+		// 	return BlockReachModule->getBlockReach();
 
 		static auto teleportModule = moduleMgr->getModule<Teleport>();
 		if (teleportModule->isEnabled())
@@ -1237,16 +1238,18 @@ float Hooks::getDestroySpeed(Player* _this, Block& block) {
 
 bool Hooks::Actor_canSee(Entity* _this, Entity& entity) {
 	static auto oFunc = g_Hooks.Actor_canSeeHook->GetFastcall<bool, Entity*, Entity&>();
-	static auto antiInvisMod = moduleMgr->getModule<AntiInvis>();
+	// AntiInvis module disabled - API incompatibility
+	// static auto antiInvisMod = moduleMgr->getModule<AntiInvis>();
 
-	return antiInvisMod->isEnabled() ? true : oFunc(_this, entity);
+	return oFunc(_this, entity);  // AntiInvis disabled, use default behavior
 }
 
 bool Hooks::Actor_shouldRender(Entity* _this) {
 	static auto oFunc = g_Hooks.Actor_shouldRenderHook->GetFastcall<bool, Entity*>();
-	static auto antiInvisMod = moduleMgr->getModule<AntiInvis>();
+	// AntiInvis module disabled - API incompatibility
+	// static auto antiInvisMod = moduleMgr->getModule<AntiInvis>();
 
-	return antiInvisMod->isEnabled() ? true : oFunc(_this);
+	return oFunc(_this);  // AntiInvis disabled, use default behavior
 }
 
 bool Hooks::Actor__isInWall(Entity* ent) {

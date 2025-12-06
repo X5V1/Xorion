@@ -3,7 +3,7 @@
 #include <string>
 
 // Forward declaration
-struct TextHolder;
+class TextHolder;
 
 class Unbanner : public IModule {
 public:

@@ -39,27 +39,27 @@ JsValueRef CALLBACK EntityFunctions::getInterpolatedPosition(JsValueRef callee, 
 	return scriptMgr.prepareVector3(lerped, reinterpret_cast<ContextObjects*>(callbackState));
 }
 
-/*
 JsValueRef CALLBACK EntityFunctions::getVelocity(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
 	if (ent == nullptr) {
 		ENTITY_INVALID;
 	}
 
-	return scriptMgr.prepareVector3(ent->velocity, reinterpret_cast<ContextObjects*>(callbackState));
+	auto* entLoc = ent->entityLocation;
+	if (entLoc != nullptr) {
+		return scriptMgr.prepareVector3(entLoc->velocity, reinterpret_cast<ContextObjects*>(callbackState));
+	}
+	return scriptMgr.prepareVector3(Vec3(0, 0, 0), reinterpret_cast<ContextObjects*>(callbackState));
 }
-*/
 
-/*
 JsValueRef CALLBACK EntityFunctions::isOnGround(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
 	if (ent == nullptr) {
 		ENTITY_INVALID;
 	}
 
-	return chakra.toBoolean(ent->onGround);
+	return chakra.toBoolean(ent->isOnGround());
 }
-*/
 
 JsValueRef CALLBACK EntityFunctions::isInvisible(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
@@ -79,16 +79,15 @@ JsValueRef CALLBACK EntityFunctions::isInWater(JsValueRef callee, bool isConstru
 	return chakra.toBoolean(ent->isInWater());
 }
 
-/*
 JsValueRef CALLBACK EntityFunctions::isInLava(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
 	if (ent == nullptr) {
 		ENTITY_INVALID;
 	}
 
-	return chakra.toBoolean(ent->isInLava());
+	// Stub: isInLava doesn't exist, return false
+	return chakra.toBoolean(false);
 }
-*/
 
 JsValueRef CALLBACK EntityFunctions::isSneaking(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
@@ -99,16 +98,28 @@ JsValueRef CALLBACK EntityFunctions::isSneaking(JsValueRef callee, bool isConstr
 	return chakra.toBoolean(ent->isSneaking());
 }
 
-/*
 JsValueRef CALLBACK EntityFunctions::getSize(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
 	if (ent == nullptr) {
 		ENTITY_INVALID;
 	}
 
-	return scriptMgr.prepareVector3(vec3_t(ent->width, ent->height, ent->width), reinterpret_cast<ContextObjects*>(callbackState));
+	auto* aabbComp = ent->getAABBShapeComponent();
+	if (aabbComp != nullptr) {
+		float width = aabbComp->size.x;
+		float height = aabbComp->size.y;
+		Vec3 size = Vec3();
+		size.x = width;
+		size.y = height;
+		size.z = width;
+		return scriptMgr.prepareVector3(size, reinterpret_cast<ContextObjects*>(callbackState));
+	}
+	Vec3 defaultSize = Vec3();
+	defaultSize.x = 0.6f;
+	defaultSize.y = 1.8f;
+	defaultSize.z = 0.6f;
+	return scriptMgr.prepareVector3(defaultSize, reinterpret_cast<ContextObjects*>(callbackState));
 }
-*/
 
 JsValueRef CALLBACK EntityFunctions::toString(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
@@ -125,35 +136,45 @@ JsValueRef CALLBACK EntityFunctions::toString(JsValueRef callee, bool isConstruc
 	return ref;
 }
 
-/*
 JsValueRef CALLBACK EntityFunctions::getViewAngles(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
 	if (ent == nullptr) {
 		ENTITY_INVALID;
 	}
 
-	return scriptMgr.prepareVector3(vec3_t(ent->viewAngles, 0), reinterpret_cast<ContextObjects*>(callbackState));
+	auto* rotComp = ent->getActorRotationComponent();
+	if (rotComp != nullptr) {
+		Vec3 angles = Vec3();
+		angles.x = rotComp->rot.x;
+		angles.y = rotComp->rot.y;
+		angles.z = 0;
+		return scriptMgr.prepareVector3(angles, reinterpret_cast<ContextObjects*>(callbackState));
+	}
+	return scriptMgr.prepareVector3(Vec3(), reinterpret_cast<ContextObjects*>(callbackState));
 }
-*/
 
-/*
 JsValueRef CALLBACK EntityFunctions::getPitch(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
 	if (ent == nullptr) {
 		ENTITY_INVALID;
 	}
 
-	return chakra.toNumber(ent->pitch);
+	auto* rotComp = ent->getActorRotationComponent();
+	if (rotComp != nullptr) {
+		return chakra.toNumber(rotComp->rot.x);
+	}
+	return chakra.toNumber(0.0);
 }
-*/
 
-/*
 JsValueRef CALLBACK EntityFunctions::getYaw(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto ent = EntityFunctions::getEntityFromValue(arguments[0]);
 	if (ent == nullptr) {
 		ENTITY_INVALID;
 	}
 
-	return chakra.toNumber(ent->yaw);
+	auto* rotComp = ent->getActorRotationComponent();
+	if (rotComp != nullptr) {
+		return chakra.toNumber(rotComp->rot.y);
+	}
+	return chakra.toNumber(0.0);
 }
-*/

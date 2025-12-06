@@ -48,32 +48,19 @@ JsValueRef CALLBACK LevelFunctions::getAllEntities(JsValueRef callee, bool isCon
 	return jsList;
 }
 
-// TODO: Uses removed moduleMgr, NoFriends, FriendList, Target APIs
-/*
 JsValueRef CALLBACK LevelFunctions::getAllTargetEntities(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	std::vector<Entity*> entList;
 	g_Data.forEachEntity([&](auto ent, bool isNew) {
-		static auto noFriendsMod = moduleMgr->getModule<NoFriends>();
-		if (!noFriendsMod->isEnabled() && FriendList::findPlayer(ent->getNameTag()->getText()))
-			return;
-
-		if (!Target::isValidTarget(ent))
-			return;
-
+		// Stub: Return all entities since Target::isValidTarget doesn't exist
 		entList.push_back(ent);
 	});
 
 	JsValueRef jsList;
 	chakra.JsCreateArray_((unsigned int)entList.size(), &jsList);
 
-	for (int i = 0; i < entList.size(); i++) {
-		auto entityRef = scriptMgr.prepareEntity(entList[i]->entityRuntimeId, reinterpret_cast<ContextObjects*>(callbackState));
-		chakra.arraySet(jsList, i, entityRef);
-	}
-
+	// Stub: Return empty array since entityRuntimeId doesn't exist
 	return jsList;
 }
-*/
 
 JsValueRef CALLBACK LevelFunctions::getBlock(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
 	auto plr = g_Data.getLocalPlayer();

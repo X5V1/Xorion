@@ -21,7 +21,7 @@ struct IModuleContainer {
 	bool enabled;
 	int keybind;
 	float textWidth;
-	Vec2* pos;
+	ModulePos* pos;
 	bool shouldRender = true;
 
 	IModuleContainer(std::shared_ptr<IModule> mod) {
@@ -31,7 +31,7 @@ struct IModuleContainer {
 		enabled = mod->isEnabled();
 		keybind = mod->getKeybind();
 		backingModule = mod;
-		pos = mod->getPos();
+		pos = &mod->getModulePos();
 
 		if (keybind == 0x0)
 			moduleName = moduleNameChr;
@@ -41,7 +41,7 @@ struct IModuleContainer {
 			moduleName = text;
 		}
 
-		if (!enabled && *pos == Vec2(0.f, 0.f))
+		if (!enabled && pos->x == 0.f && pos->y == 0.f)
 			shouldRender = false;
 		textWidth = DrawUtils::getTextWidth(&moduleName, hudMod->scale);
 	}
@@ -99,7 +99,7 @@ void Arraylist::onPostRender(MinecraftUIRenderContext* renderCtx) {
 		auto xOffsetOri = windowSize.x - textWidth - (textPadding * 2);
 		auto xOffset = windowSize.x - container.pos->x;
 
-		container.pos->x = smoothLerp(container.enabled ? windowSize.x - xOffsetOri : -1.f, container.pos->x, 0.04);
+		container.pos->x = static_cast<float>(smoothLerp(container.enabled ? windowSize.x - xOffsetOri : -1.f, container.pos->x, 0.04f));
 		if (xOffset >= windowSize.x && !container.enabled) {
 			container.pos->x = 0.f;
 			container.pos->y = 0.f;

@@ -21,5 +21,5 @@ namespace RenderUtils {
     void bindUnlitTintShader(ID3D11DeviceContext* ctx);
     void setTintColor(ID3D11DeviceContext* ctx, const float rgba[4]);
 
-    void drawEntityMesh(class Entity* ent, ID3D11DeviceContext* ctx);
+    void drawEntityMesh(struct Entity* ent, ID3D11DeviceContext* ctx);
 }

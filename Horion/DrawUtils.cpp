@@ -734,7 +734,7 @@ void DrawUtils::drawCircle(Vec2 pos, Vec2 radius, MC_Color color, double quality
 	for (int i = 0; i <= 360 / quality; i++) {
 		double x2 = sin(((i * quality * PI) / 180)) * radius.x;
 		double y2 = cos(((i * quality * PI) / 180)) * radius.y;
-		tess_vertex(tessellator, pos.x + x2, pos.y + y2, 0);
+		tess_vertex(tessellator, pos.x + static_cast<float>(x2), pos.y + static_cast<float>(y2), 0);
 	}
 	meshHelper_renderImm(screenContext2d, tessellator, uiMaterial);
 }

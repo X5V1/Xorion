@@ -104,7 +104,8 @@ static void ResolvePlayerSignaturesOnce() {
 
     // Log summary
     logF("[Player] Signature resolution complete: name=%p heldItem=%p getPos=%p setPos=%p getHealth=%p sendPacket=%p\n",
-               (void*)s_getName_fn, (void*)s_getHeldItem_fn, (void*)s_getPos_fn, (void*)s_setPos_fn, (void*)s_getHealth_fn, (void*)s_sendNetworkPacket_fn);
+               (void*)Player::s_getName_fn, (void*)Player::s_getHeldItem_fn, (void*)Player::s_getPos_fn, 
+               (void*)Player::s_setPos_fn, (void*)Player::s_getHealth_fn, (void*)Player::s_sendNetworkPacket_fn);
     logF("[LocalPlayer] swing=%p turn=%p applyTurn=%p getGameMode=%p unlock=%p\n",
                (void*)s_local_swing_fn, (void*)s_local_turn_fn, (void*)s_local_applyTurn_fn, (void*)s_local_getGameMode_fn, (void*)s_local_unlock_fn);
 }
@@ -121,7 +122,6 @@ static constexpr ptrdiff_t ITEM_OFF_NAME    = ITEM_RAW_OFF_NAME;
 static constexpr ptrdiff_t ITEM_OFF_TAG     = ITEM_RAW_OFF_TAG;
 static constexpr ptrdiff_t LOCALPLAYER_GAMEMODE_PTR = LOCALPLAYER_GAMEMODE_OFF;
 
-// TODO: Entity has reference members, can't default construct
 // Player constructor - memory overlay pattern (wraps existing game object)
 Player::Player(void* mcPlayerPtr) : mcPlayerPtr(mcPlayerPtr) {
     // Defer heavy resolution; but it's useful to kick it early if possible
@@ -269,48 +269,4 @@ void Player::sendNetworkPacket(Packet& packet) {
     }
     // fallback
     Utils::CallVFunc</*idx*/ 200, void, Packet&>(mcPlayerPtr, packet);
-}
-
-// --- LocalPlayer helpers ---
-
-LocalPlayer::LocalPlayer(void* mcPlayerPtr) : Player(mcPlayerPtr) {
-    // signatures already resolved in Player::ResolvePlayerSignaturesOnce call if not, call now
-    ResolvePlayerSignaturesOnce();
-}
-
-LocalPlayer::~LocalPlayer() = default;
-
-void LocalPlayer::swingArm() {
-    if (!mcPlayerPtr) return;
-    if (s_local_swing_fn) { s_local_swing_fn(mcPlayerPtr); return; }
-    // fallback vfunc candidate
-    Utils::CallVFunc<Signatures::VF_Player_swing_fallback, void>(mcPlayerPtr);
-}
-
-void LocalPlayer::localPlayerTurn(Vec2* viewAngles) {
-    if (!mcPlayerPtr || !viewAngles) return;
-    if (s_local_turn_fn) { s_local_turn_fn(mcPlayerPtr, viewAngles); return; }
-    using TurnFn = void(__thiscall*)(void*, Vec2*);
-    static TurnFn fallback = reinterpret_cast<TurnFn>(FindSignature("48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 48 8B D1 E8 ? ? ? ?"));
-    if (fallback) fallback(mcPlayerPtr, viewAngles);
-}
-
-void LocalPlayer::applyTurnDelta(Vec2* viewAngleDelta) {
-    if (!mcPlayerPtr || !viewAngleDelta) return;
-    if (s_local_applyTurn_fn) { s_local_applyTurn_fn(mcPlayerPtr, viewAngleDelta); return; }
-    using ApplyFn = void(__thiscall*)(void*, Vec2*);
-    static ApplyFn fallback = reinterpret_cast<ApplyFn>(FindSignature("LOCALPLAYER_applyTurn_fallback_sig"));
-    if (fallback) fallback(mcPlayerPtr, viewAngleDelta);
-}
-
-GameMode* LocalPlayer::getGameMode() const {
-    if (!mcPlayerPtr) return nullptr;
-    if (s_local_getGameMode_fn) return s_local_getGameMode_fn(mcPlayerPtr);
-    return *reinterpret_cast<GameMode**>(reinterpret_cast<uintptr_t>(mcPlayerPtr) + LOCALPLAYER_GAMEMODE_PTR);
-}
-
-void LocalPlayer::unlockAchievements() {
-    if (!mcPlayerPtr) return;
-    if (s_local_unlock_fn) { s_local_unlock_fn(mcPlayerPtr); return; }
-    Utils::CallVFunc<Signatures::VF_LocalPlayer_unlockAchievements_fallback, void>(mcPlayerPtr);
 }

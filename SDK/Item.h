@@ -11,11 +11,11 @@ class BlockLegacy;
 class BlockSource;
 class Block;
 struct Entity;
-class ItemStack;
+struct ItemStack;
 class ScreenContext;
 class ItemRenderer;
 struct ClientInstance;
-class MinecraftGame;
+struct MinecraftGame;
 
 class BaseActorRenderContext {
 private:
@@ -35,7 +35,7 @@ public:
 };
 
 class Player;
-class ItemStack;
+struct ItemStack;
 class Level;
 class HashedString;
 class Inventory;

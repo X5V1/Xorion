@@ -11,3 +11,9 @@ PacketLogger::~PacketLogger() {}
 const char* PacketLogger::getModuleName() {
 return "PacketLogger";
 }
+
+void PacketLogger::onSendPacket(Packet* packet) {
+	// TODO: Implement packet logging logic
+	if (!packet) return;
+	// logF("[PacketLogger] Packet sent: %p", packet);
+}

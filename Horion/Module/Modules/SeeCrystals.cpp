@@ -42,8 +42,14 @@ void SeeCrystals::rebuildCrystalCache() {
 }
 
 // TODO: onLevelRender uses getD3DDevice and RenderUtils methods not available
-/*
 void SeeCrystals::onLevelRender() {
+    // Stub implementation - D3D device access not available in 1.21.123
+    return;
+}
+
+/*
+// Original implementation - commented out due to API changes
+void SeeCrystals::onLevelRender_ORIGINAL() {
     if (!this->isEnabled()) return;
 
     auto ci = Game.getClientInstance();

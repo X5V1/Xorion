@@ -7,8 +7,7 @@ public:
 	Reducer();
 	~Reducer();
 
-	// TODO: SettingEnum removed in 1.21.123
-	//SettingEnum mode = (*new SettingEnum(this));
+	int mode = 0; // 0 = Jump, 1 = Sneak, 2 = JumpReset
 
 	int hitCount = 0;
 	int ticks = 0;

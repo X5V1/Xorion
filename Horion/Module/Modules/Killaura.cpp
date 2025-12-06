@@ -80,7 +80,7 @@ void Killaura::findWeapon() {
 	for (int n = 0; n < 9; n++) {
 		ItemStack* stack = inv->getByGlobalIndex(n);
 		if (stack->item != nullptr) {
-			float currentDamage = stack->getAttackingDamageWithEnchants();
+			float currentDamage = static_cast<float>(stack->getAttackingDamageWithEnchants());
 			if (currentDamage > damage) {
 				damage = currentDamage;
 				slot = n;

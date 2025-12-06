@@ -111,7 +111,7 @@ JsValueRef CALLBACK DrawFunctions::drawLine2d(JsValueRef callee, bool isConstruc
 	double lineWidth = 1;
 	if (argumentCount - argIndex >= 1) {
 		auto status = chakra.JsNumberToDouble_(arguments[argIndex], &lineWidth);
-		THROW_IF_ERROR(status, L"invalid line width");
+		if (status != JsNoError) THROW(L"invalid line width");
 		argIndex++;
 	}
 	DrawUtils::drawLine(*startOpt, *endOpt, (float)lineWidth);
@@ -135,7 +135,7 @@ JsValueRef CALLBACK DrawFunctions::drawRectangle2d(JsValueRef callee, bool isCon
 	double lineWidth = 1;
 	if (argumentCount - argIndex >= 1) {
 		auto status = chakra.JsNumberToDouble_(arguments[argIndex], &lineWidth);
-		THROW_IF_ERROR(status, L"invalid line width");
+		if (status != JsNoError) THROW(L"invalid line width");
 		argIndex++;
 	}
 
@@ -184,7 +184,7 @@ JsValueRef CALLBACK DrawFunctions::drawText2d(JsValueRef callee, bool isConstruc
 
 	if (argumentCount - argIndex >= 1) {
 		auto status = chakra.JsNumberToDouble_(arguments[argIndex], &textSize);
-		THROW_IF_ERROR(status, L"invalid text size");
+		if (status != JsNoError) THROW(L"invalid text size");
 		argIndex++;
 	}
 
@@ -196,7 +196,7 @@ JsValueRef CALLBACK DrawFunctions::drawText2d(JsValueRef callee, bool isConstruc
 
 		if (argumentCount - argIndex >= 1) {
 			auto status = chakra.JsNumberToDouble_(arguments[argIndex], &alpha);
-			THROW_IF_ERROR(status, L"invalid alpha value");
+			if (status != JsNoError) THROW(L"invalid alpha value");
 			argIndex++;
 		}
 	}
@@ -225,7 +225,7 @@ JsValueRef CALLBACK DrawFunctions::getTextWidth(JsValueRef callee, bool isConstr
 
 	if (argumentCount - argIndex >= 1) {
 		auto status = chakra.JsNumberToDouble_(arguments[argIndex], &textSize);
-		THROW_IF_ERROR(status, L"invalid text size");
+		if (status != JsNoError) THROW(L"invalid text size");
 		argIndex++;
 	}
 
@@ -247,7 +247,7 @@ JsValueRef CALLBACK DrawFunctions::getTextLineHeight(JsValueRef callee, bool isC
 
 	if (argumentCount - argIndex >= 1) {
 		auto status = chakra.JsNumberToDouble_(arguments[argIndex], &textSize);
-		THROW_IF_ERROR(status, L"invalid text size");
+		if (status != JsNoError) THROW(L"invalid text size");
 		argIndex++;
 	}
 
