@@ -189,6 +189,7 @@
     <ClCompile Include="Xorion\Module\Modules\BlockReach.cpp" />
     <!--    <ClCompile Include="Xorion\Module\Modules\InfiniteAura.cpp" /> -->
     <ClCompile Include="Xorion\Module\Modules\InstaBreak.cpp" />
+    <ClCompile Include="Xorion\Module\Modules\NoBreak.cpp" />
     <ClCompile Include="Xorion\Module\Modules\InventoryCleaner.cpp" />
     <ClCompile Include="Xorion\Module\Modules\InventoryMove.cpp" />
     <ClCompile Include="Xorion\Module\Modules\Jesus.cpp" />
@@ -361,6 +362,7 @@
     <ClInclude Include="Xorion\Module\Modules\BlockReach.h" />
     <!--    <ClInclude Include="Xorion\Module\Modules\InfiniteAura.h" /> -->
     <ClInclude Include="Xorion\Module\Modules\InstaBreak.h" />
+    <ClInclude Include="Xorion\Module\Modules\NoBreak.h" />
     <ClInclude Include="Xorion\Module\Modules\InventoryCleaner.h" />
     <ClInclude Include="Xorion\Module\Modules\InventoryMove.h" />
     <ClInclude Include="Xorion\Module\Modules\Jesus.h" />

@@ -91,6 +91,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<NightMode>());
         moduleList.emplace_back(std::make_shared<NoClip>());
         moduleList.emplace_back(std::make_shared<NoFall>());
+        moduleList.emplace_back(std::make_shared<NoBreak>());
         moduleList.emplace_back(std::make_shared<NoFriends>());
         moduleList.emplace_back(std::make_shared<NoHurtcam>());
         moduleList.emplace_back(std::make_shared<NoPacket>());

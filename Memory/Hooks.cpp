@@ -1232,7 +1232,10 @@ void Hooks::LevelRendererPlayer__renderNameTags(__int64 a1, __int64 a2, TextHold
 float Hooks::getDestroySpeed(Player* _this, Block& block) {
 	static auto oFunc = g_Hooks.getDestroySpeedHook->GetFastcall<float, Player*, Block&>();
 	static auto instaBreakMod = moduleMgr->getModule<InstaBreak>();
+	static auto noBreakMod = moduleMgr->getModule<NoBreak>();
 
+	if (noBreakMod->isEnabled())
+		return 0.f;
 	return instaBreakMod->isEnabled() ? INFINITY : oFunc(_this, block);
 }
 
