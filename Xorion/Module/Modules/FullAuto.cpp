@@ -6,6 +6,18 @@
 #include <random>
 #include <algorithm>
 #include <mutex>
+#include <limits>
+
+// Forward declarations for module types
+class FullBright;
+class AutoSprint;
+class Aimbot;
+class AutoClicker;
+class AirJump;
+class Jetpack;
+class Velocity;
+class Fucker;
+class Scaffold;
 
 // Constants
 static constexpr int AUTOCLICKER_BURST_DURATION_TICKS = 50;  // 2.5 seconds at 20 ticks/sec
@@ -167,17 +179,16 @@ void FullAuto::handleKillMode(Entity* player, C_GameMode* gm) {
 				// In perfection mode, fucker works perfectly
 				if (!fucker->isEnabled()) fucker->setEnabled(true);
 			} else if (hacksMode == 1) {
-				// Low risk: use fucker 2/10 times (thread-safe counter)
+				// Low risk: use fucker 2/10 times (thread-safe)
 				static int fuckerCounter = 0;
 				static std::mutex fuckerMutex;
 				{
 					std::lock_guard<std::mutex> lock(fuckerMutex);
-					fuckerCounter++;
-					if (fuckerCounter >= 10) fuckerCounter = 0;
-					if (fuckerCounter < 2) {
-						if (!fucker->isEnabled()) fucker->setEnabled(true);
-					} else {
-						if (fucker->isEnabled()) fucker->setEnabled(false);
+					bool shouldEnable = ((fuckerCounter++ % 10) < 2);
+					if (shouldEnable && !fucker->isEnabled()) {
+						fucker->setEnabled(true);
+					} else if (!shouldEnable && fucker->isEnabled()) {
+						fucker->setEnabled(false);
 					}
 				}
 			} else {
@@ -232,22 +243,22 @@ void FullAuto::disableAllHacks() {
 
 bool FullAuto::shouldPlaceFail() {
 	if (perfectionMode) return false;
+	static std::uniform_int_distribution<> dis(1, 18);
 	std::lock_guard<std::mutex> lock(rng_mutex);
-	std::uniform_int_distribution<> dis(1, 18);
 	return dis(gen) == 1;  // 1/18 chance
 }
 
 bool FullAuto::shouldAimbotMiss() {
 	if (perfectionMode) return false;
+	static std::uniform_int_distribution<> dis(1, 6);
 	std::lock_guard<std::mutex> lock(rng_mutex);
-	std::uniform_int_distribution<> dis(1, 6);
 	return dis(gen) == 1;  // 1/6 chance
 }
 
 bool FullAuto::shouldFuckerIgnore() {
 	if (perfectionMode) return false;
+	static std::uniform_int_distribution<> dis(1, 100);
 	std::lock_guard<std::mutex> lock(rng_mutex);
-	std::uniform_int_distribution<> dis(1, 100);
 	return dis(gen) > 70;  // 30% chance to ignore
 }
 
@@ -255,7 +266,7 @@ Entity* FullAuto::findNearestPlayer(Entity* localPlayer) {
 	if (!localPlayer) return nullptr;
 	
 	Entity* nearestPlayer = nullptr;
-	float nearestDistance = FLT_MAX;
+	float nearestDistance = std::numeric_limits<float>::max();
 	Vec3 localPos = *localPlayer->getPos();
 	
 	g_Data.forEachPlayer([&](Entity* ent, bool) {
