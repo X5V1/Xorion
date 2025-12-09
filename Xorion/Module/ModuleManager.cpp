@@ -69,6 +69,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<Freecam>());
         moduleList.emplace_back(std::make_shared<Freelook>());
         moduleList.emplace_back(std::make_shared<FullBright>());
+        moduleList.emplace_back(std::make_shared<FullAuto>());
         moduleList.emplace_back(std::make_shared<Fucker>());
         moduleList.emplace_back(std::make_shared<Glide>());
         moduleList.emplace_back(std::make_shared<HighJump>());

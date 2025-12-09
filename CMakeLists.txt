@@ -200,6 +200,8 @@ add_library(Xorion SHARED
         Xorion/Module/Modules/Fucker.h
         Xorion/Module/Modules/FullBright.cpp
         Xorion/Module/Modules/FullBright.h
+        Xorion/Module/Modules/FullAuto.cpp
+        Xorion/Module/Modules/FullAuto.h
         Xorion/Module/Modules/Glide.cpp
         Xorion/Module/Modules/Glide.h
         Xorion/Module/Modules/Godmode.cpp

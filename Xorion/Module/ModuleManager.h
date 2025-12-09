@@ -42,6 +42,7 @@
 #include "Modules/AutoClicker.h"
 //#include "Modules/AirStuck.h"
 #include "Modules/TriggerBot.h"
+#include "Modules/FullAuto.h"
 #include "Modules/RainbowSky.h"
 #include "Modules/NoSlowDown.h"
 #include "Modules/InstaBreak.h"
