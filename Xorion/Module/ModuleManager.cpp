@@ -167,7 +167,7 @@ void ModuleManager::onLoadConfig(void* confVoid) {
     if (!isInitialized())
         return;
     auto lock = lockModuleList();
-    // TODO: onLoadConfig removed from IModule in 1.21.123
+    // TODO: onLoadConfig removed from IModule in 1.21.124
     /*for (auto& mod : moduleList) {
         mod->onLoadConfig(conf);
     }*/
@@ -185,7 +185,7 @@ void ModuleManager::onSaveConfig(void* confVoid) {
     if (!isInitialized())
         return;
     auto lock = lockModuleList();
-    // TODO: onSaveConfig removed from IModule in 1.21.123
+    // TODO: onSaveConfig removed from IModule in 1.21.124
     /*for (auto& mod : moduleList) {
         mod->onSaveConfig(conf);
     }*/
@@ -317,7 +317,7 @@ int ModuleManager::getEnabledModuleCount() {
 }
 
 void ModuleManager::onMove(MoveInputHandler* hand) {
-    // Stub: onMove removed from IModule in 1.21.123
+    // Stub: onMove removed from IModule in 1.21.124
     // This method is still called from Hooks but does nothing
 }
 

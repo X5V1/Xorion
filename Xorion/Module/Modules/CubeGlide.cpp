@@ -15,7 +15,7 @@ const char* CubeGlide::getModuleName() {
 	return "CubeGlide";
 }
 
-// TODO: isFlashMode removed from IModule in 1.21.123
+// TODO: isFlashMode removed from IModule in 1.21.124
 /*
 bool CubeGlide::isFlashMode() {
 	return true;
