@@ -37,6 +37,7 @@ Three risk levels implemented:
 - Jetpack for enhanced movement
 - Scaffold for bridging
 - Fucker works continuously
+- Movement enhancement modules enabled: Spider (wall climbing), Speed (faster movement), Bhop (bunny hopping), Step (higher step height), HighJump (higher jumps)
 - All modules enabled when contextually appropriate
 
 ### 4. Section 3: Mode ✅

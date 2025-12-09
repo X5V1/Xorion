@@ -49,6 +49,7 @@ Controls which hacks are enabled based on risk level.
   - Jetpack for movement
   - Scaffold for bridging
   - Fucker works continuously
+  - Movement enhancement: Spider, Speed, Bhop, Step, HighJump
   - All modules enabled when convenient
 
 ### Section 3: Mode

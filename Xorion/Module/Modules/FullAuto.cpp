@@ -18,6 +18,11 @@ class Jetpack;
 class Velocity;
 class Fucker;
 class Scaffold;
+class Spider;
+class Speed;
+class Bhop;
+class Step;
+class HighJump;
 
 // Constants
 static constexpr int AUTOCLICKER_BURST_DURATION_TICKS = 50;  // 2.5 seconds at 20 ticks/sec
@@ -223,6 +228,13 @@ void FullAuto::enableFullHacks() {
 	// Enable scaffold for bridging
 	if (auto sc = moduleMgr->getModule<Scaffold>()) sc->setEnabled(true);
 	
+	// Enable movement enhancement modules for maximum speed
+	if (auto spider = moduleMgr->getModule<Spider>()) spider->setEnabled(true);
+	if (auto speed = moduleMgr->getModule<Speed>()) speed->setEnabled(true);
+	if (auto bhop = moduleMgr->getModule<Bhop>()) bhop->setEnabled(true);
+	if (auto step = moduleMgr->getModule<Step>()) step->setEnabled(true);
+	if (auto highJump = moduleMgr->getModule<HighJump>()) highJump->setEnabled(true);
+	
 	// Other modules are enabled on-demand in handleKillMode
 }
 
@@ -239,6 +251,12 @@ void FullAuto::disableAllHacks() {
 	if (auto vel = moduleMgr->getModule<Velocity>()) vel->setEnabled(false);
 	if (auto sc = moduleMgr->getModule<Scaffold>()) sc->setEnabled(false);
 	if (auto fucker = moduleMgr->getModule<Fucker>()) fucker->setEnabled(false);
+	// Disable movement enhancement modules
+	if (auto spider = moduleMgr->getModule<Spider>()) spider->setEnabled(false);
+	if (auto speed = moduleMgr->getModule<Speed>()) speed->setEnabled(false);
+	if (auto bhop = moduleMgr->getModule<Bhop>()) bhop->setEnabled(false);
+	if (auto step = moduleMgr->getModule<Step>()) step->setEnabled(false);
+	if (auto highJump = moduleMgr->getModule<HighJump>()) highJump->setEnabled(false);
 }
 
 bool FullAuto::shouldPlaceFail() {
