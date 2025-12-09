@@ -220,14 +220,19 @@ void Hooks::Init() {
 
 		// Weather::vtable for particle blocking
 		{
+			// Weather constructor vtable assignment signature
 			uintptr_t sigOffset = FindSignature("48 8D 05 ? ? ? ? 48 89 01 48 89 91 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC 48 89 5C 24");
 			if (sigOffset != 0x0) {
 				int offset = *reinterpret_cast<int*>(sigOffset + 3);
+				// Calculate vtable address: signature + offset + instruction length (7 bytes)
 				uintptr_t** weatherVtable = reinterpret_cast<uintptr_t**>(sigOffset + offset + 7);
 				if (weatherVtable != 0x0) {
-					// addParticle is at vtable index 11, addParticleEffect is at index 13
-					g_Hooks.Weather_addParticleHook = std::make_unique<FuncHook>(weatherVtable[11], Hooks::Weather_addParticle);
-					g_Hooks.Weather_addParticleEffectHook = std::make_unique<FuncHook>(weatherVtable[13], Hooks::Weather_addParticleEffect);
+					// Hook particle spawning methods (from Weather class virtual functions)
+					constexpr int WEATHER_ADD_PARTICLE_INDEX = 11;        // addParticle(ParticleType, ...)
+					constexpr int WEATHER_ADD_PARTICLE_EFFECT_INDEX = 13; // addParticleEffect(HashedString, ...)
+					
+					g_Hooks.Weather_addParticleHook = std::make_unique<FuncHook>(weatherVtable[WEATHER_ADD_PARTICLE_INDEX], Hooks::Weather_addParticle);
+					g_Hooks.Weather_addParticleEffectHook = std::make_unique<FuncHook>(weatherVtable[WEATHER_ADD_PARTICLE_EFFECT_INDEX], Hooks::Weather_addParticleEffect);
 				} else {
 					logF("Weather vtable is null!");
 				}
