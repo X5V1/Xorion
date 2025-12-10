@@ -43,6 +43,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<AutoSprint>());
         moduleList.emplace_back(std::make_shared<AutoTotem>());
         moduleList.emplace_back(std::make_shared<BedAura>());     // custom (baked into list)
+        moduleList.emplace_back(std::make_shared<BedStack>());    // custom
         moduleList.emplace_back(std::make_shared<Blink>());
         moduleList.emplace_back(std::make_shared<BlockReach>());
         moduleList.emplace_back(std::make_shared<Bhop>());
@@ -108,6 +109,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<Reach>());
         moduleList.emplace_back(std::make_shared<ReachDisplay>());
         moduleList.emplace_back(std::make_shared<Reducer>());
+        moduleList.emplace_back(std::make_shared<Replenish>());
         moduleList.emplace_back(std::make_shared<Scaffold>());
         moduleList.emplace_back(std::make_shared<SeeCrystals>());   // custom
         moduleList.emplace_back(std::make_shared<Spammer>());

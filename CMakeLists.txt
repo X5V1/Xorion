@@ -560,6 +560,10 @@ add_library(Xorion SHARED
         # Added modules
         Xorion/Module/Modules/BedAura.cpp
         Xorion/Module/Modules/BedAura.h
+        Xorion/Module/Modules/BedStack.cpp
+        Xorion/Module/Modules/BedStack.h
+        Xorion/Module/Modules/Replenish.cpp
+        Xorion/Module/Modules/Replenish.h
         Xorion/Module/Modules/AutoAnchor.cpp
         Xorion/Module/Modules/AutoAnchor.h
         Xorion/Module/Modules/Unbanner.cpp
