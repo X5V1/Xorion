@@ -5,7 +5,7 @@
 
 class NoFall : public IModule {
 public:
-	// TODO: SettingEnum removed in 1.21.123 - using dummy default
+	// TODO: SettingEnum removed in 1.21.124 - using dummy default
 	//SettingEnum mode = SettingEnum(this);
 	int mode = 0; // Dummy variable
 	Vec3 closestGround;

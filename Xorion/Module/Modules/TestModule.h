@@ -11,7 +11,7 @@ public:
 	float float1 = 0;
 	int int1 = 0;
 	bool bool1 = true;
-	// TODO: SettingEnum removed in 1.21.123
+	// TODO: SettingEnum removed in 1.21.124
 	//SettingEnum enum1 = SettingEnum(this);
 
 	TestModule();
@@ -19,7 +19,7 @@ public:
 
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
-	// TODO: isFlashMode removed from IModule in 1.21.123
+	// TODO: isFlashMode removed from IModule in 1.21.124
 	//virtual bool isFlashMode() override;
 	virtual void onEnable() override;
 	virtual void onTick(GameMode* gm) override;
@@ -28,7 +28,7 @@ public:
 	virtual void onSendPacket(Packet* p) override;
 	// TODO: onSendClientPacket not in IModule base class
 	// virtual void onSendClientPacket(Packet* p) override;
-	// TODO: onMove removed from IModule in 1.21.123
+	// TODO: onMove removed from IModule in 1.21.124
 	//virtual void onMove(MoveInputHandler* hand) override;
 	virtual void onDisable() override;
 	// TODO: onKey not in IModule base class

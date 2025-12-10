@@ -24,6 +24,6 @@ public:
 	void onEnable() override;
 	void onDisable() override;
 	void onLevelRender() override;
-	// TODO: onMove removed from IModule in 1.21.123
+	// TODO: onMove removed from IModule in 1.21.124
 	//void onMove(MoveInputHandler *handler) override;
 };

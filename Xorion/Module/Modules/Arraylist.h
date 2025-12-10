@@ -12,7 +12,7 @@ public:
 	float alpha = 1.f;
 
 	// I will make do this another time
-	// TODO: SettingEnum removed in 1.21.123
+	// TODO: SettingEnum removed in 1.21.124
 	//SettingEnum style = SettingEnum(this);
 
 	Arraylist();
