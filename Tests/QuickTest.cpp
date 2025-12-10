@@ -2,10 +2,11 @@
 #include "GameData.h"
 #include "SDK/LocalPlayer.h"
 #include "Utils/Logger.h"
+#include "SDK/VersionTag.h"
 
 void RunQuickTests() {
     auto lp = g_Data.getLocalPlayer();
-    if (!lp) { logF("[QuickTest] LocalPlayer null (1.21.124)"); return; }
+    if (!lp) { logF("[QuickTest] LocalPlayer null (%s)", kMinecraftVersion.c_str()); return; }
     try {
         auto name = lp->getName();
         auto pos  = lp->getPos();

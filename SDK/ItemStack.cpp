@@ -2,6 +2,7 @@
 #include "ItemStack.h"
 #include <stdexcept>
 #include "Utils/Logger.h"
+#include "VersionTag.h"
 
 int   (*ItemStack::ItemStack_getCount_fn)(void*) = nullptr;
 void  (*ItemStack::ItemStack_setCount_fn)(void*, int) = nullptr;
@@ -14,7 +15,7 @@ void ItemStack::ensureIntegration() const {
     if (!itemPtr ||
         !ItemStack_getCount_fn ||
         !ItemStack_getName_fn) {
-        logF("[ItemStack] Missing integration. Ensure InitSDK() succeeded for 1.21.124.");
+        logF("[ItemStack] Missing integration. Ensure InitSDK() succeeded for %s.", kMinecraftVersion.c_str());
         throw std::runtime_error("ItemStack SDK not initialized");
     }
 }
@@ -27,7 +28,7 @@ int ItemStack::getCount() const {
 void ItemStack::setCount(int newCount) {
     ensureIntegration();
     if (!ItemStack_setCount_fn) {
-        logF("[ItemStack] setCount signature missing for 1.21.124");
+        logF("[ItemStack] setCount signature missing for %s", kMinecraftVersion.c_str());
         return;
     }
     ItemStack_setCount_fn(itemPtr, newCount);
