@@ -19,7 +19,7 @@ static inline bool isBedItem(Item* item) {
 		return true;
 	}
 	
-	// Fallback: Check if the name contains "bed" (case-insensitive substring match)
+	// Fallback: Check if the name contains "bed" (substring match)
 	// This handles mod beds or non-standard IDs, but only called if ID check fails
 	const std::string& name = item->name.getText();
 	return name.find("bed") != std::string::npos;
@@ -55,8 +55,12 @@ void BedStack::onTick(C_GameMode* gm) {
 
 		// Check if this is a bed item
 		if (isBedItem(stack->item)) {
-			// Set the max stack size to allow stacking
-			stack->item->setMaxStackSize(static_cast<uint8_t>(maxStackSize));
+			// Only modify if properties are not already set to avoid unnecessary operations
+			if (stack->item->maxStackSize != static_cast<int16_t>(maxStackSize)) {
+				stack->item->setMaxStackSize(static_cast<uint8_t>(maxStackSize));
+			}
+			// Note: setStackedByData is typically set once and doesn't need repeated calls
+			// but we call it to ensure it's properly set for newly acquired beds
 			stack->item->setStackedByData(true);
 		}
 	}
