@@ -11,7 +11,7 @@ private:
 	int Odelay = 0;
 	bool autoweapon = false;
 	void findWeapon();
-	// TODO: SettingEnum removed in 1.21.123 - using dummy defaults
+	// TODO: SettingEnum removed in 1.21.124 - using dummy defaults
 	//SettingEnum mode{this};
 	//SettingEnum rotationMode{this};
 	int mode = 0; // Dummy: 0=Single, 1=Multi

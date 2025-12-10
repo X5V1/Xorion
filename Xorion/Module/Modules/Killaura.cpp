@@ -1,7 +1,7 @@
 #include "Killaura.h"
 
 Killaura::Killaura() : IModule('P', Category::COMBAT, "Attacks entities around you automatically.") {
-	// TODO: Settings system redesigned in 1.21.123
+	// TODO: Settings system redesigned in 1.21.124
 	/*mode.addEntry(EnumEntry("Single", 0))
 		.addEntry(EnumEntry("Multi", 1));
 	registerEnumSetting("Mode", &mode, 0);

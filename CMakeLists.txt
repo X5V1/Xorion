@@ -200,6 +200,8 @@ add_library(Xorion SHARED
         Xorion/Module/Modules/Fucker.h
         Xorion/Module/Modules/FullBright.cpp
         Xorion/Module/Modules/FullBright.h
+        Xorion/Module/Modules/FullAuto.cpp
+        Xorion/Module/Modules/FullAuto.h
         Xorion/Module/Modules/Glide.cpp
         Xorion/Module/Modules/Glide.h
         Xorion/Module/Modules/Godmode.cpp
@@ -260,6 +262,8 @@ add_library(Xorion SHARED
         Xorion/Module/Modules/NoPacket.h
         Xorion/Module/Modules/NoPaintingCrash.cpp
         Xorion/Module/Modules/NoPaintingCrash.h
+        Xorion/Module/Modules/NoRender.cpp
+        Xorion/Module/Modules/NoRender.h
         Xorion/Module/Modules/NoSlowDown.cpp
         Xorion/Module/Modules/NoSlowDown.h
         Xorion/Module/Modules/NoSwing.cpp
@@ -556,6 +560,10 @@ add_library(Xorion SHARED
         # Added modules
         Xorion/Module/Modules/BedAura.cpp
         Xorion/Module/Modules/BedAura.h
+        Xorion/Module/Modules/BedStack.cpp
+        Xorion/Module/Modules/BedStack.h
+        Xorion/Module/Modules/Replenish.cpp
+        Xorion/Module/Modules/Replenish.h
         Xorion/Module/Modules/AutoAnchor.cpp
         Xorion/Module/Modules/AutoAnchor.h
         Xorion/Module/Modules/Unbanner.cpp

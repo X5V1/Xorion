@@ -17,7 +17,7 @@ public:
 	~Jetpack();
 
 	virtual void onTick(C_GameMode* gm) override;
-	// TODO: isFlashMode removed from IModule in 1.21.123
+	// TODO: isFlashMode removed from IModule in 1.21.124
 	//virtual bool isFlashMode() override;
 
 	// Inherited via IModule

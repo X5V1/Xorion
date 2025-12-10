@@ -43,6 +43,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<AutoSprint>());
         moduleList.emplace_back(std::make_shared<AutoTotem>());
         moduleList.emplace_back(std::make_shared<BedAura>());     // custom (baked into list)
+        moduleList.emplace_back(std::make_shared<BedStack>());    // custom
         moduleList.emplace_back(std::make_shared<Blink>());
         moduleList.emplace_back(std::make_shared<BlockReach>());
         moduleList.emplace_back(std::make_shared<Bhop>());
@@ -69,6 +70,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<Freecam>());
         moduleList.emplace_back(std::make_shared<Freelook>());
         moduleList.emplace_back(std::make_shared<FullBright>());
+        moduleList.emplace_back(std::make_shared<FullAuto>());
         moduleList.emplace_back(std::make_shared<Fucker>());
         moduleList.emplace_back(std::make_shared<Glide>());
         moduleList.emplace_back(std::make_shared<HighJump>());
@@ -95,6 +97,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<NoFriends>());
         moduleList.emplace_back(std::make_shared<NoHurtcam>());
         moduleList.emplace_back(std::make_shared<NoPacket>());
+        moduleList.emplace_back(std::make_shared<NoRender>());
         moduleList.emplace_back(std::make_shared<NoSlowDown>());
         moduleList.emplace_back(std::make_shared<NoSwing>());
         moduleList.emplace_back(std::make_shared<NoWeb>());
@@ -106,6 +109,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<Reach>());
         moduleList.emplace_back(std::make_shared<ReachDisplay>());
         moduleList.emplace_back(std::make_shared<Reducer>());
+        moduleList.emplace_back(std::make_shared<Replenish>());
         moduleList.emplace_back(std::make_shared<Scaffold>());
         moduleList.emplace_back(std::make_shared<SeeCrystals>());   // custom
         moduleList.emplace_back(std::make_shared<Spammer>());
@@ -166,7 +170,7 @@ void ModuleManager::onLoadConfig(void* confVoid) {
     if (!isInitialized())
         return;
     auto lock = lockModuleList();
-    // TODO: onLoadConfig removed from IModule in 1.21.123
+    // TODO: onLoadConfig removed from IModule in 1.21.124
     /*for (auto& mod : moduleList) {
         mod->onLoadConfig(conf);
     }*/
@@ -184,7 +188,7 @@ void ModuleManager::onSaveConfig(void* confVoid) {
     if (!isInitialized())
         return;
     auto lock = lockModuleList();
-    // TODO: onSaveConfig removed from IModule in 1.21.123
+    // TODO: onSaveConfig removed from IModule in 1.21.124
     /*for (auto& mod : moduleList) {
         mod->onSaveConfig(conf);
     }*/
@@ -316,7 +320,7 @@ int ModuleManager::getEnabledModuleCount() {
 }
 
 void ModuleManager::onMove(MoveInputHandler* hand) {
-    // Stub: onMove removed from IModule in 1.21.123
+    // Stub: onMove removed from IModule in 1.21.124
     // This method is still called from Hooks but does nothing
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "OffsetConstants.h"
 
 //
 // PlayerSignatures.h
@@ -10,17 +11,6 @@
 // NOTE: If your FindSignature implementation expects a different wildcard syntax,
 // adapt the patterns below accordingly.
 //
-
-// Offsets validated per build (adjust if you discover different offsets).
-// These are the fallbacks Xorion-style code uses until signatures are replaced by verified offsets.
-constexpr ptrdiff_t OFF_SUPPLIES_PTR_DEFAULT = 0x360; // try 0x360, 0x370, 0x378, 0x3D0 if needed
-constexpr ptrdiff_t OFF_DEVICE_ID_DEFAULT   = 0x848;
-constexpr ptrdiff_t ITEM_RAW_OFF_PTR        = 0x10;
-constexpr ptrdiff_t ITEM_RAW_OFF_COUNT      = 0x14;
-constexpr ptrdiff_t ITEM_RAW_OFF_AUX        = 0x18;
-constexpr ptrdiff_t ITEM_RAW_OFF_NAME       = 0x20;
-constexpr ptrdiff_t ITEM_RAW_OFF_TAG        = 0x40;
-constexpr ptrdiff_t LOCALPLAYER_GAMEMODE_OFF= 0xEF8;
 
 // Signature pattern arrays. Ordered high->low reliability.
 // These strings are heuristics and should be verified against the target binary.

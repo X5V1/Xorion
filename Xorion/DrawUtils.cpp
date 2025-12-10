@@ -24,7 +24,7 @@ Vec2 fov;
 Vec2 screenSize;
 Vec3 origin;
 float lerpT;
-// TODO: TexturePtr not available in 1.21.123
+// TODO: TexturePtr not available in 1.21.124
 class TexturePtr;
 class FilePath;
 TexturePtr* texturePtr = nullptr;
@@ -119,7 +119,7 @@ void DrawUtils::setColor(float r, float g, float b, float a) {
 Font* DrawUtils::getFont(Fonts font) {
 	static auto fontChangerModule = moduleMgr->getModule<FontChanger>();
 
-	// TODO: Fonts enum/settings removed in 1.21.123
+	// TODO: Fonts enum/settings removed in 1.21.124
 	/*if (fontChangerModule->Fonts.selected == 1)
 		return Game.getClientInstance()->minecraftGame->mcFont;
 	else
@@ -161,7 +161,7 @@ float DrawUtils::getTextWidth(std::string* textStr, float textSize, Fonts font) 
 
 	Font* fontPtr = getFont(font);
 
-	// TODO: getLineLength removed from MinecraftUIRenderContext in 1.21.123
+	// TODO: getLineLength removed from MinecraftUIRenderContext in 1.21.124
 	//float ret = renderCtx->getLineLength(fontPtr, &text, textSize, false);
 	float ret = textStr->length() * textSize * 6.0f; // Approximate fallback
 
@@ -171,7 +171,7 @@ float DrawUtils::getTextWidth(std::string* textStr, float textSize, Fonts font) 
 float DrawUtils::getFontHeight(float textSize, Fonts font) {
 	Font* fontPtr = getFont(font);
 
-	// TODO: Font->getLineHeight() not available in 1.21.123
+	// TODO: Font->getLineHeight() not available in 1.21.124
 	//float ret = fontPtr->getLineHeight() * textSize;
 	float ret = 10.0f * textSize; // Approximate fallback
 
@@ -179,7 +179,7 @@ float DrawUtils::getFontHeight(float textSize, Fonts font) {
 }
 
 void DrawUtils::flush() {
-	// TODO: flushText removed from MinecraftUIRenderContext in 1.21.123
+	// TODO: flushText removed from MinecraftUIRenderContext in 1.21.124
 	//renderCtx->flushText(0);
 }
 
@@ -240,7 +240,7 @@ void DrawUtils::drawText(const Vec2& pos, std::string* textStr, const MC_Color& 
 	posF[2] = pos.y - 1;
 	posF[3] = pos.y + 1000;
 
-	// TODO: TextMeasureData removed in 1.21.123
+	// TODO: TextMeasureData removed in 1.21.124
 	//TextMeasureData textMeasure{};
 	//memset(&textMeasure, 0, sizeof(TextMeasureData));
 	//textMeasure.textSize = textSize;
@@ -451,7 +451,7 @@ void DrawUtils::draw2DBox(const Vec3& lower, const Vec3& upper, float lineWidth,
 }
 
 void DrawUtils::drawImage(std::string filePath, Vec2& imagePos, Vec2& ImageDimension, Vec2& idk) {
-	// TODO: TexturePtr/FilePath not available in 1.21.123
+	// TODO: TexturePtr/FilePath not available in 1.21.124
 	/*if (texturePtr == nullptr) {
 		texturePtr = new TexturePtr();
 		FilePath file(filePath);
@@ -476,7 +476,7 @@ void DrawUtils::drawNameTags(Entity* ent, float textSize, bool drawHealth, bool 
 	text = Utils::sanitize(text);
 
 	float textWidth = getTextWidth(&text, textSize);
-	// TODO: Font->getLineHeight() not available in 1.21.123
+	// TODO: Font->getLineHeight() not available in 1.21.124
 	//float textHeight = DrawUtils::getFont(Fonts::SMOOTH)->getLineHeight() * textSize;
 	float textHeight = 10.0f * textSize; // Approximate fallback
 
@@ -514,7 +514,7 @@ void DrawUtils::drawNameTags(Entity* ent, float textSize, bool drawHealth, bool 
 			}
 			// item
 			{
-				// TODO: getSelectedItem removed from Player in 1.21.123
+				// TODO: getSelectedItem removed from Player in 1.21.124
 				/*ItemStack* stack = player->getSelectedItem();
 				if (stack->item != nullptr) {
 					DrawUtils::drawItem(stack, Vec2(rectPos.z - 1.f - 15.f * scale, y), 1.f, scale, stack->isEnchanted());
