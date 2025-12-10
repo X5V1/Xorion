@@ -5,7 +5,7 @@
 
 void RunQuickTests() {
     auto lp = g_Data.getLocalPlayer();
-    if (!lp) { logF("[QuickTest] LocalPlayer null (1.21.121)"); return; }
+    if (!lp) { logF("[QuickTest] LocalPlayer null (1.21.124)"); return; }
     try {
         auto name = lp->getName();
         auto pos  = lp->getPos();

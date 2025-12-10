@@ -1,7 +1,7 @@
 #include "NoFall.h"
 
 NoFall::NoFall() : IModule(VK_NUMPAD3, Category::PLAYER, "Prevents you from taking falldamage") {
-	// TODO: Settings system redesigned in 1.21.123
+	// TODO: Settings system redesigned in 1.21.124
 	/*mode.addEntry(EnumEntry("Vanilla", 0))
 		.addEntry(EnumEntry("Mineplex", 1))
 		.addEntry(EnumEntry("CubeCraft", 2))

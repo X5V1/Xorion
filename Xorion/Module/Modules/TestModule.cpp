@@ -27,7 +27,7 @@ using json = nlohmann::json;
 
 
 TestModule::TestModule() : IModule(0, Category::MISC, "For testing purposes only!") {
-	// TODO: Settings system redesigned in 1.21.123
+	// TODO: Settings system redesigned in 1.21.124
 	/*enum1.addEntry(EnumEntry("1", 1)).addEntry(EnumEntry("2", 2)).addEntry(EnumEntry("3", 3));
 	registerFloatSetting("float1", &float1, 0, -10, 10);
 	registerIntSetting("int1", &int1, 0, -10, 10);
@@ -42,7 +42,7 @@ const char* TestModule::getModuleName() {
 	return "TestModule";
 }
 
-// TODO: isFlashMode removed from IModule in 1.21.123
+// TODO: isFlashMode removed from IModule in 1.21.124
 /*
 bool TestModule::isFlashMode() {
 	return false;
@@ -62,7 +62,7 @@ void TestModule::onEnable() {
 void TestModule::onTick(GameMode* gm) {
 }
 
-// TODO: onMove removed from IModule in 1.21.123
+// TODO: onMove removed from IModule in 1.21.124
 /*
 void TestModule::onMove(MoveInputHandler* hand){
 }

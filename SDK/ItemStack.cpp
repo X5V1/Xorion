@@ -14,7 +14,7 @@ void ItemStack::ensureIntegration() const {
     if (!itemPtr ||
         !ItemStack_getCount_fn ||
         !ItemStack_getName_fn) {
-        logF("[ItemStack] Missing integration. Ensure InitSDK() succeeded for 1.21.121.");
+        logF("[ItemStack] Missing integration. Ensure InitSDK() succeeded for 1.21.124.");
         throw std::runtime_error("ItemStack SDK not initialized");
     }
 }
@@ -27,7 +27,7 @@ int ItemStack::getCount() const {
 void ItemStack::setCount(int newCount) {
     ensureIntegration();
     if (!ItemStack_setCount_fn) {
-        logF("[ItemStack] setCount signature missing for 1.21.121");
+        logF("[ItemStack] setCount signature missing for 1.21.124");
         return;
     }
     ItemStack_setCount_fn(itemPtr, newCount);

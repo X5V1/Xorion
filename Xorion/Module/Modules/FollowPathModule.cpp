@@ -105,7 +105,7 @@ void FollowPathModule::onTick(GameMode *mode) {
 	});
 }
 
-// TODO: onMove removed from IModule in 1.21.123
+// TODO: onMove removed from IModule in 1.21.124
 /*
 void FollowPathModule::onMove(MoveInputHandler *handler) {
 	if(movementController){

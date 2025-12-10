@@ -28,7 +28,7 @@ public:
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
 	virtual void onPreRender(MinecraftUIRenderContext* renderCtx) override;
-	// TODO: onLoadConfig/onSaveConfig removed from IModule in 1.21.123
+	// TODO: onLoadConfig/onSaveConfig removed from IModule in 1.21.124
 	//virtual void onLoadConfig(void* confVoid) override;
 	//virtual void onSaveConfig(void* confVoid) override;
 

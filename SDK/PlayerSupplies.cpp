@@ -11,7 +11,7 @@ void PlayerSupplies::ensureIntegration() const {
     if (!suppliesPtr ||
         !PlayerSupplies_getSelectedSlot_fn ||
         !PlayerSupplies_getItemStack_fn) {
-        logF("[PlayerSupplies] Missing integration. Ensure InitSDK() succeeded for 1.21.121.");
+        logF("[PlayerSupplies] Missing integration. Ensure InitSDK() succeeded for 1.21.124.");
         throw std::runtime_error("PlayerSupplies SDK not initialized");
     }
 }
@@ -24,7 +24,7 @@ int PlayerSupplies::getSelectedHotbarSlot() const {
 void PlayerSupplies::setSelectedHotbarSlot(int slot) {
     ensureIntegration();
     if (!PlayerSupplies_setSelectedSlot_fn) {
-        logF("[PlayerSupplies] setSelectedHotbarSlot signature missing for 1.21.121");
+        logF("[PlayerSupplies] setSelectedHotbarSlot signature missing for 1.21.124");
         return;
     }
     PlayerSupplies_setSelectedSlot_fn(suppliesPtr, slot);

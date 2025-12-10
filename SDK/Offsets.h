@@ -1,6 +1,6 @@
 #pragma once
 
-// Minecraft 1.21.123 offsets
+// Minecraft 1.21.124 offsets
 // Replace placeholder values with real offsets from IDA/Ghidra/x64dbg
 
 struct LocalPlayerOffsets {
