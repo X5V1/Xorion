@@ -169,6 +169,7 @@ JsValueRef CALLBACK Vector2Functions::add(JsValueRef callee, bool isConstructCal
 	}
 
 	THROW(L"Invalid arguments");
+	return JS_INVALID_REFERENCE;
 }
 
 JsValueRef CALLBACK Vector2Functions::sub(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
@@ -225,6 +226,7 @@ JsValueRef CALLBACK Vector2Functions::sub(JsValueRef callee, bool isConstructCal
 	}
 
 	THROW(L"Invalid arguments");
+	return JS_INVALID_REFERENCE;
 }
 
 JsValueRef CALLBACK Vector2Functions::div(JsValueRef callee, bool isConstructCall, JsValueRef* arguments, unsigned short argumentCount, void* callbackState) {
@@ -281,6 +283,7 @@ JsValueRef CALLBACK Vector2Functions::div(JsValueRef callee, bool isConstructCal
 	}
 
 	THROW(L"Invalid arguments");
+	return JS_INVALID_REFERENCE;
 }
 
 
@@ -338,4 +341,5 @@ JsValueRef CALLBACK Vector2Functions::mul(JsValueRef callee, bool isConstructCal
 	}
 
 	THROW(L"Invalid arguments");
+	return JS_INVALID_REFERENCE;
 }

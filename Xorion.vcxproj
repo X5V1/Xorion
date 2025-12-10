@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -9,494 +12,906 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{499784D2-7EA3-4CBE-BD93-EC0DBBC42FCD}</ProjectGuid>
+    <ProjectGuid>{F9F83A92-CA3C-3783-8868-6D73DB74B176}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>Xorion</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <SpectreMitigation>false</SpectreMitigation>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <SpectreMitigation>false</SpectreMitigation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;D:\ProgrammeX\Dxx\Lib\x64;$(ProjectDir)minhook;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\ProgrammeX\Dxx\Include;$(ProjectDir)include\glm;$(IncludePath)</IncludePath>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Xorion\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Xorion.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Xorion</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Xorion\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Xorion.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Xorion</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Xorion\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Xorion.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Xorion</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Xorion\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Xorion.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Xorion</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\lib\x64;$(ProjectDir)minhook;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)include\glm</IncludePath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
-      <PreprocessorDefinitions>NOMINMAX;%(PreprocessorDefinitions);_DEV</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;CMAKE_INTDIR="Debug";Xorion_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
-    <Link />
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;CMAKE_INTDIR=\"Debug\";Xorion_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
     <Link>
-      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;chakrart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Xorion/minhook;C:/Xorion/minhook/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Xorion/build/Debug/Xorion.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/Xorion/build/Debug/Xorion.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem></SubSystem>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>_WINDLL;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;CMAKE_INTDIR="Release";Xorion_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;CMAKE_INTDIR=\"Release\";Xorion_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
     <Link>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;chakrart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Xorion/minhook;C:/Xorion/minhook/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Xorion/build/Release/Xorion.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/Xorion/build/Release/Xorion.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem></SubSystem>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;CMAKE_INTDIR="MinSizeRel";Xorion_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;CMAKE_INTDIR=\"MinSizeRel\";Xorion_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;chakrart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Xorion/minhook;C:/Xorion/minhook/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Xorion/build/MinSizeRel/Xorion.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/Xorion/build/MinSizeRel/Xorion.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem></SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;CMAKE_INTDIR="RelWithDebInfo";Xorion_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;CMAKE_INTDIR=\"RelWithDebInfo\";Xorion_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Xorion\.;C:\Xorion\include;C:\Xorion\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;chakrart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/Xorion/minhook;C:/Xorion/minhook/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Xorion/build/RelWithDebInfo/Xorion.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/Xorion/build/RelWithDebInfo/Xorion.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem></SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include=".clang-format" />
+    <CustomBuild Include="C:\Xorion\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Xorion/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Xorion -BC:/Xorion/build --check-stamp-file C:/Xorion/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerSupport.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CrayClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Diab-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OrangeC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Renesas-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TIClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeDetermineLinkerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCXXLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeCCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Xorion\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Xorion/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Xorion -BC:/Xorion/build --check-stamp-file C:/Xorion/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerSupport.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CrayClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Diab-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OrangeC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Renesas-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TIClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeDetermineLinkerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCXXLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeCCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Xorion\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Xorion/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Xorion -BC:/Xorion/build --check-stamp-file C:/Xorion/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerSupport.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CrayClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Diab-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OrangeC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Renesas-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TIClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeDetermineLinkerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCXXLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeCCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Xorion\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Xorion/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Xorion -BC:/Xorion/build --check-stamp-file C:/Xorion/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCCompilerABI.c;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerSupport.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CrayClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Diab-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OrangeC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Renesas-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TIClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeDetermineLinkerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCXXLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeCCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeCXXCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeRCCompiler.cmake;C:\Xorion\build\CMakeFiles\4.1.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Xorion\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Xorion\Command\CommandMgr.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\BindCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\BruhCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\CommandBlockExploitCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\ConfigCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\CoordsCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\DamageCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\DeviceIDCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\DupeCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\EjectCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\EnchantCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\FriendListCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\GameModeCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\GiveCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\HelpCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\HideCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\ICommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\ModulesCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\NameSpoofCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\NbtCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\PanicCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\PathCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\PlayerTeleportCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\RelativeTeleportCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\RenameCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\RepairCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\SayCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\SeedCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\ServerCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\SetLoreCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\SetOffhandCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\SetPrefixCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\SpammerCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\TeleportCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\TestCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\ToggleCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\TopCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\UnbindCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\WaypointCommand.cpp" />
-    <ClCompile Include="Xorion\Command\Commands\XpCommand.cpp" />
-    <ClCompile Include="Xorion\Config\ConfigManager.cpp" />
-    <ClCompile Include="Xorion\DrawUtils.cpp" />
-    <ClCompile Include="Xorion\FriendList\FriendsManager.cpp" />
-    <ClCompile Include="Xorion\GuiUtils.cpp" />
-    <ClCompile Include="Xorion\Loader.cpp" />
-    <ClCompile Include="Xorion\Menu\ClickGui.cpp" />
-    <ClCompile Include="Xorion\Menu\TabGui.cpp" />
-    <ClCompile Include="Xorion\Module\ModuleManager.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Aimbot.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AirJump.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AirSwim.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AntiBot.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AntiImmobile.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AntiInvis.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AntiVoid.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Arraylist.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AutoArmor.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AutoClicker.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AutoGapple.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AutoSneak.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AutoSplitter.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AutoSprint.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\AutoTotem.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Bhop.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Blink.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\BowAimbot.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\ChestAura.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\ReachDisplay.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Reducer.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Criticals.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\OffhandAllow.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\StorageESP.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\ChestStealer.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\ClickGuiMod.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\ClientTheme.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Compass.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Crasher.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\CrystalAura.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Derp.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\EditionFaker.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\ESP.cpp" />
-    <!--    <ClCompile Include="Xorion\Module\Modules\FastEat.cpp" /> -->
-    <ClCompile Include="Xorion\Module\Modules\FastLadder.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Fly.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\FollowPathModule.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\FontChanger.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Freecam.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Breaker.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\FullBright.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Glide.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Godmode.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\HighJump.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Hitbox.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\HudModule.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\BlockReach.cpp" />
-    <!--    <ClCompile Include="Xorion\Module\Modules\InfiniteAura.cpp" /> -->
-    <ClCompile Include="Xorion\Module\Modules\InstaBreak.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NoBreak.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\InventoryCleaner.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\InventoryMove.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Jesus.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Killaura.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\MidClick.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Module.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NameTags.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Nbt.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NightMode.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NoFall.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NoFriends.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NoHurtcam.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NoPacket.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NoSlowDown.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NoSwing.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\NoWeb.cpp" />
-    <!-- <ClCompile Include="Xorion\Module\Modules\Notifications.cpp" /> -->
-    <ClCompile Include="Xorion\Module\Modules\Nuker.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\PacketLogger.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Phase.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Radar.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\RainbowSky.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Reach.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Scaffold.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Spammer.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Speed.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Spider.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\StackableItem.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Step.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Teams.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Teleport.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\TestModule.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Timer.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\TimeChanger.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Tower.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Tracer.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\TriggerBot.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Twerk.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\VanillaPlus.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\ViewModel.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Velocity.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Waypoints.cpp" />
-    <ClCompile Include="Xorion\Module\Modules\Xray.cpp" />
-    <ClCompile Include="Xorion\path\goals\JoeGoal.cpp" />
-    <ClCompile Include="Xorion\path\goals\JoeGoalXYZ.cpp" />
-    <ClCompile Include="Xorion\path\goals\JoeGoalXZ.cpp" />
-    <ClCompile Include="Xorion\path\goals\JoeGoalY.cpp" />
-    <ClCompile Include="Xorion\path\JoeConstants.cpp" />
-    <ClCompile Include="Xorion\path\JoeMovementController.cpp" />
-    <ClCompile Include="Xorion\path\JoePath.cpp" />
-    <ClCompile Include="Xorion\path\JoePathFinder.cpp" />
-    <ClCompile Include="Xorion\path\JoeSegment.cpp" />
-    <ClCompile Include="Memory\GameData.cpp" />
-    <ClCompile Include="Memory\Hooks.cpp" />
-    <ClCompile Include="Memory\SlimMem.cpp" />
-    <ClCompile Include="SDK\Attribute.h" />
-    <ClCompile Include="SDK\BlockLegacy.cpp" />
-    <ClCompile Include="SDK\Camera.cpp" />
-    <ClCompile Include="SDK\ClientInstance.cpp" />
-    <ClCompile Include="SDK\ComplexInventoryTransaction.cpp" />
-    <ClCompile Include="SDK\Entity.cpp" />
-    <ClCompile Include="SDK\GameMode.cpp" />
-    <ClCompile Include="SDK\Inventory.cpp" />
-    <ClCompile Include="SDK\InventoryTransaction.cpp" />
-    <ClCompile Include="SDK\Item.cpp" />
-    <ClCompile Include="SDK\Level.cpp" />
-    <ClCompile Include="SDK\Packet.cpp" />
-    <ClCompile Include="SDK\MatrixStack.cpp" />
-    <ClCompile Include="SDK\Tag.cpp" />
-    <ClCompile Include="SDK\Tessellator.cpp" />
-    <ClCompile Include="Utils\ClientColors.cpp" />
-    <ClCompile Include="Utils\Logger.cpp" />
-    <ClCompile Include="Utils\Target.cpp" />
-    <ClCompile Include="Utils\TextFormat.cpp" />
-    <ClCompile Include="Utils\Utils.cpp" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\BindCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\BindCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\BruhCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\BruhCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\CommandBlockExploitCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\CommandBlockExploitCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ConfigCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ConfigCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\CoordsCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\CoordsCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\DamageCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\DamageCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\DeviceIDCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\DeviceIDCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\DupeCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\DupeCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\EjectCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\EjectCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\EnchantCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\EnchantCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ExecuteCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ExecuteCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ForceOpCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ForceOpCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\FriendListCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\FriendListCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\GameModeCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\GameModeCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\GiveCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\GiveCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\HelpCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\HelpCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\HideCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\HideCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ICommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ICommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ModulesCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ModulesCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\NameSpoofCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\NameSpoofCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\NbtCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\NbtCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\PanicCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\PanicCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\PathCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\PathCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\PlayerTeleportCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\PlayerTeleportCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\RelativeTeleportCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\RelativeTeleportCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\RenameCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\RenameCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\RepairCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\RepairCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\SayCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\SayCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ScriptCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ScriptCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\SeedCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\SeedCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ServerCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ServerCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\SetLoreCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\SetLoreCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\SetOffhandCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\SetOffhandCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\SetPrefixCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\SetPrefixCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\SpammerCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\SpammerCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\TeleportCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\TeleportCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\TestCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\TestCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ToggleCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ToggleCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\TopCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\TopCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\UnbindCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\UnbindCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\WaypointCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\WaypointCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\XpCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\XpCommand.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\CommandMgr.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\CommandMgr.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Config\AccountInformation.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Config\AccountInformation.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Config\ConfigManager.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Config\ConfigManager.h" />
+    <ClCompile Include="C:\Xorion\Xorion\FriendList\FriendList.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\FriendList\FriendList.h" />
+    <ClCompile Include="C:\Xorion\Xorion\FriendList\FriendsManager.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\FriendList\FriendsManager.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Menu\ClickGui.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Menu\ClickGui.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Menu\TabGui.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Menu\TabGui.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Aimbot.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Aimbot.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AirJump.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AirJump.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AirStuck.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AirStuck.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AirSwim.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AirSwim.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiBot.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AntiBot.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiCrystal.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AntiCrystal.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiEffect.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AntiEffect.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiVoid.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AntiVoid.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoArmor.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoArmor.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoClicker.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoClicker.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoGapple.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoGapple.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoSneak.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoSneak.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoSprint.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoSprint.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoTotem.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoTotem.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Bhop.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Bhop.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Blink.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Blink.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\BowAimbot.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\BowAimbot.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Breadcrumbs.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Breadcrumbs.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Breaker.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Breaker.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\ChestAura.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\ChestAura.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\ChestESP.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\ChestESP.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\ChestStealer.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\ChestStealer.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\ClickGuiMod.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\ClickGuiMod.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Crasher.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Crasher.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\CrystalAura.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\CrystalAura.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\CubeGlide.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\CubeGlide.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Derp.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Derp.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Dicker.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Dicker.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\DVDLogo.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\DVDLogo.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\EditionFaker.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\EditionFaker.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\ESP.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\ESP.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\FastEat.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\FastEat.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\FastLadder.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\FastLadder.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\FeetPlace.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\FeetPlace.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Fly.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Fly.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Freecam.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Freecam.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Freelook.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Freelook.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Fucker.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Fucker.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\FullBright.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\FullBright.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Glide.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Glide.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Godmode.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Godmode.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\HighJump.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\HighJump.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Hitbox.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Hitbox.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\HudEditor.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\HudEditor.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\HudModule.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\HudModule.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\InfiniteAura.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\InfiniteAura.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\InfiniteTreasureAura.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\InfiniteTreasureAura.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\InstaBreak.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\InstaBreak.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\InventoryCleaner.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\InventoryCleaner.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\InventoryMove.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\InventoryMove.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\InventoryViewer.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\InventoryViewer.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\JavascriptModule.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\JavascriptModule.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Jesus.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Jesus.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Jetpack.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Jetpack.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Killaura.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Killaura.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\LigmaNuts.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\LigmaNuts.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\MaceHit.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\MaceHit.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\MidClick.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\MidClick.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Module.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Module.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NameTags.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NameTags.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Nbt.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Nbt.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NightMode.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NightMode.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoClip.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoClip.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoFall.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoFall.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoFriends.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoFriends.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoBreak.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoBreak.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoHurtcam.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoHurtcam.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoPacket.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoPacket.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoPaintingCrash.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoPaintingCrash.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoSlowDown.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoSlowDown.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoSwing.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoSwing.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoWeb.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoWeb.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Notifications.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Notifications.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Nuker.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Nuker.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\PacketLogger.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\PacketLogger.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Phase.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Phase.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\RainbowSky.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\RainbowSky.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Reach.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Reach.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Scaffold.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Scaffold.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\SeeCrystals.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\SeeCrystals.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Spammer.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Spammer.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Speed.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Speed.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\StackableItem.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\StackableItem.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Step.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Step.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\TargetHUD.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\TargetHUD.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Teams.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Teams.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Teleport.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Teleport.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\TestModule.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\TestModule.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Timer.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Timer.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Tower.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Tower.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Tracer.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Tracer.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\TriggerBot.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\TriggerBot.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Velocity.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Velocity.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Watermark.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Watermark.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Xray.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Xray.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Zoom.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Zoom.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiInvis.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AntiInvis.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Arraylist.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Arraylist.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoSplitter.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoSplitter.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\BlockReach.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\BlockReach.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\ClientTheme.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\ClientTheme.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Compass.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Compass.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Criticals.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Criticals.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\FontChanger.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\FontChanger.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\OffhandAllow.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\OffhandAllow.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Radar.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Radar.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\ReachDisplay.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\ReachDisplay.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Reducer.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Reducer.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Spider.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Spider.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\ViewModel.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\ViewModel.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Waypoints.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Waypoints.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\ModuleManager.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\ModuleManager.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Render\RenderGlobals.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Render\RenderGlobals.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Render\RenderInit.cpp" />
+    <ClCompile Include="C:\Xorion\Xorion\Render\RenderUtils.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Render\RenderUtils.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Render\Signatures.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Render\Signatures.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\CommandManagerFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\CommandManagerFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\DrawFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\DrawFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\EntityFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\EntityFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\GameFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\GameFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\GlobalFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\GlobalFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\XorionFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\XorionFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\InventoryFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\InventoryFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\LevelFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\LevelFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\LocalPlayerFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\LocalPlayerFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\ModuleManagerFunctions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\ModuleManagerFunctions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\Vector2Functions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\Vector2Functions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\Functions\Vector3Functions.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\Functions\Vector3Functions.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\JsScriptModule.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\JsScriptModule.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\ScriptInstance.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\ScriptInstance.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Scripting\ScriptManager.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Scripting\ScriptManager.h" />
+    <ClCompile Include="C:\Xorion\Xorion\DrawUtils.cpp">
+      <ObjectFileName>$(IntDir)/Xorion/DrawUtils.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClInclude Include="C:\Xorion\Xorion\DrawUtils.h" />
+    <ClCompile Include="C:\Xorion\Xorion\GuiUtils.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\GuiUtils.h" />
+    <ClCompile Include="C:\Xorion\Xorion\ImmediateGui.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\ImmediateGui.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Loader.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Loader.h" />
+    <ClInclude Include="C:\Xorion\include\chakra\ChakraCommon.h" />
+    <ClInclude Include="C:\Xorion\include\chakra\ChakraCommonWindows.h" />
+    <ClInclude Include="C:\Xorion\include\chakra\ChakraCore.h" />
+    <ClInclude Include="C:\Xorion\include\chakra\ChakraCoreWindows.h" />
+    <ClInclude Include="C:\Xorion\include\chakra\ChakraDebug.h" />
+    <ClInclude Include="C:\Xorion\include\atlrx.h" />
+    <ClInclude Include="C:\Xorion\include\d3dx11.h" />
+    <ClInclude Include="C:\Xorion\include\d3dx11async.h" />
+    <ClInclude Include="C:\Xorion\include\d3dx11core.h" />
+    <ClInclude Include="C:\Xorion\include\d3dx11effect.h" />
+    <ClInclude Include="C:\Xorion\include\RegExp.h" />
+    <ClInclude Include="C:\Xorion\include\StringProcess.h" />
+    <ClInclude Include="C:\Xorion\include\WinHttpClient.h" />
+    <ClCompile Include="C:\Xorion\Memory\GameData.cpp" />
+    <ClInclude Include="C:\Xorion\Memory\GameData.h" />
+    <ClCompile Include="C:\Xorion\Memory\Hooks.cpp" />
+    <ClInclude Include="C:\Xorion\Memory\Hooks.h" />
+    <ClInclude Include="C:\Xorion\Memory\MinHook.h" />
+    <ClCompile Include="C:\Xorion\Memory\SignatureGlobals.cpp" />
+    <ClInclude Include="C:\Xorion\Memory\SignatureGlobals.h" />
+    <ClCompile Include="C:\Xorion\Memory\SlimMem.cpp" />
+    <ClInclude Include="C:\Xorion\Memory\SlimMem.h" />
+    <ClInclude Include="C:\Xorion\SDK\AABB.h" />
+    <ClInclude Include="C:\Xorion\SDK\ActorFlags.h" />
+    <ClInclude Include="C:\Xorion\SDK\Attribute.h" />
+    <ClCompile Include="C:\Xorion\SDK\BlockLegacy.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\BlockLegacy.h" />
+    <ClCompile Include="C:\Xorion\SDK\Camera.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Camera.h" />
+    <ClInclude Include="C:\Xorion\SDK\ChestBlockActor.h" />
+    <ClCompile Include="C:\Xorion\SDK\ClientInstance.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\ClientInstance.h" />
+    <ClInclude Include="C:\Xorion\SDK\ClientInstanceScreenModel.h" />
+    <ClCompile Include="C:\Xorion\SDK\ComplexInventoryTransaction.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\ComplexInventoryTransaction.h" />
+    <ClInclude Include="C:\Xorion\SDK\Components.h" />
+    <ClInclude Include="C:\Xorion\SDK\Dimension.h" />
+    <ClCompile Include="C:\Xorion\SDK\DrawUtils.cpp">
+      <ObjectFileName>$(IntDir)/SDK/DrawUtils.cpp.obj</ObjectFileName>
+    </ClCompile>
+    <ClInclude Include="C:\Xorion\SDK\DrawUtils.h" />
+    <ClCompile Include="C:\Xorion\SDK\Entity.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Entity.h" />
+    <ClInclude Include="C:\Xorion\SDK\EntityContext.h" />
+    <ClInclude Include="C:\Xorion\SDK\EntityList.h" />
+    <ClInclude Include="C:\Xorion\SDK\EntityRefs.h" />
+    <ClCompile Include="C:\Xorion\SDK\Font.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Font.h" />
+    <ClCompile Include="C:\Xorion\SDK\GameMode.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\GameMode.h" />
+    <ClInclude Include="C:\Xorion\SDK\GameSettingsInput.h" />
+    <ClInclude Include="C:\Xorion\SDK\GameType.h" />
+    <ClInclude Include="C:\Xorion\SDK\HIDController.h" />
+    <ClInclude Include="C:\Xorion\SDK\HitResult.h" />
+    <ClCompile Include="C:\Xorion\SDK\XorionNameTag.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\XorionNameTag.h" />
+    <ClCompile Include="C:\Xorion\SDK\InitSDK.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\InitSDK.h" />
+    <ClCompile Include="C:\Xorion\SDK\Inventory.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Inventory.h" />
+    <ClCompile Include="C:\Xorion\SDK\InventoryTransaction.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\InventoryTransaction.h" />
+    <ClCompile Include="C:\Xorion\SDK\Item.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Item.h" />
+    <ClInclude Include="C:\Xorion\SDK\ItemStack.h" />
+    <ClCompile Include="C:\Xorion\SDK\Level.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Level.h" />
+    <ClCompile Include="C:\Xorion\SDK\LocalPlayer.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\LocalPlayer.h" />
+    <ClInclude Include="C:\Xorion\SDK\LoopbackPacketSender.h" />
+    <ClInclude Include="C:\Xorion\SDK\MC_Color.h" />
+    <ClInclude Include="C:\Xorion\SDK\MathUtils.h" />
+    <ClCompile Include="C:\Xorion\SDK\MatrixStack.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\MatrixStack.h" />
+    <ClInclude Include="C:\Xorion\SDK\MinecraftUIRenderContext.h" />
+    <ClInclude Include="C:\Xorion\SDK\MojangsonToken.h" />
+    <ClInclude Include="C:\Xorion\SDK\MoveInputHandler.h" />
+    <ClCompile Include="C:\Xorion\SDK\Offsets.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Offsets.h" />
+    <ClCompile Include="C:\Xorion\SDK\Packet.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Packet.h" />
+    <ClCompile Include="C:\Xorion\SDK\Player.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Player.h" />
+    <ClInclude Include="C:\Xorion\SDK\PlayerMovementProxy.h" />
+    <ClInclude Include="C:\Xorion\SDK\PlayerSignatures.h" />
+    <ClInclude Include="C:\Xorion\SDK\PlayerSupplies.h" />
+    <ClInclude Include="C:\Xorion\SDK\RakNetConnector.h" />
+    <ClCompile Include="C:\Xorion\SDK\RayTracer.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\RayTracer.h" />
+    <ClInclude Include="C:\Xorion\SDK\Ref.h" />
+    <ClInclude Include="C:\Xorion\SDK\ScreenContext.h" />
+    <ClCompile Include="C:\Xorion\SDK\Tag.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Tag.h" />
+    <ClCompile Include="C:\Xorion\SDK\Tessellator.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\Tessellator.h" />
+    <ClInclude Include="C:\Xorion\SDK\TextHolder.h" />
+    <ClCompile Include="C:\Xorion\SDK\TimerUtil.cpp" />
+    <ClInclude Include="C:\Xorion\SDK\TimerUtil.h" />
+    <ClInclude Include="C:\Xorion\SDK\UIScene.h" />
+    <ClInclude Include="C:\Xorion\SDK\Vec2.h" />
+    <ClInclude Include="C:\Xorion\SDK\Vec3.h" />
+    <ClInclude Include="C:\Xorion\SDK\Vec3i.h" />
+    <ClInclude Include="C:\Xorion\SDK\VersionTag.h" />
+    <ClInclude Include="C:\Xorion\SDK\Weather.h" />
+    <ClInclude Include="C:\Xorion\Utils\ChakraHelper.h" />
+    <ClCompile Include="C:\Xorion\Utils\ClientColors.cpp" />
+    <ClInclude Include="C:\Xorion\Utils\ClientColors.h" />
+    <ClInclude Include="C:\Xorion\Utils\DllHelper.h" />
+    <ClInclude Include="C:\Xorion\Utils\HMath.h" />
+    <ClInclude Include="C:\Xorion\Utils\Json.hpp" />
+    <ClCompile Include="C:\Xorion\Utils\Logger.cpp" />
+    <ClInclude Include="C:\Xorion\Utils\Logger.h" />
+    <ClCompile Include="C:\Xorion\Utils\SkinUtil.cpp" />
+    <ClInclude Include="C:\Xorion\Utils\SkinUtil.h" />
+    <ClCompile Include="C:\Xorion\Utils\Target.cpp" />
+    <ClInclude Include="C:\Xorion\Utils\Target.h" />
+    <ClCompile Include="C:\Xorion\Utils\TextFormat.cpp" />
+    <ClInclude Include="C:\Xorion\Utils\TextFormat.h" />
+    <ClCompile Include="C:\Xorion\Utils\Utils.cpp" />
+    <ClInclude Include="C:\Xorion\Utils\Utils.h" />
+    <ClInclude Include="C:\Xorion\Utils\xorstr.h" />
+    <ClInclude Include="C:\Xorion\Utils\Keys.h" />
+    <ClInclude Include="C:\Xorion\resource.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiImmobile.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AntiImmobile.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\JoeConstants.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\JoeConstants.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\JoeMovementController.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\JoeMovementController.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\JoePath.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\JoePath.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\JoePathFinder.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\JoePathFinder.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\JoeSegment.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\JoeSegment.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\goals\JoeGoal.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\goals\JoeGoal.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\goals\JoeGoalXYZ.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\goals\JoeGoalXYZ.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\goals\JoeGoalXZ.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\goals\JoeGoalXZ.h" />
+    <ClCompile Include="C:\Xorion\Xorion\path\goals\JoeGoalY.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\path\goals\JoeGoalY.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\FollowPathModule.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\FollowPathModule.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Twerk.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Twerk.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\BedAura.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\BedAura.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoAnchor.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoAnchor.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Unbanner.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Unbanner.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiCheatBlocker.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AntiCheatBlocker.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiCheatDelete.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AntiCheatDelete.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Impersonator.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Impersonator.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Command\Commands\ImpersonateCommand.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Command\Commands\ImpersonateCommand.h" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ClInclude Include="Xorion\Command\CommandMgr.h" />
-    <ClInclude Include="Xorion\Command\Commands\BindCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\BruhCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\CommandBlockExploitCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\ConfigCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\CoordsCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\DamageCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\DeviceIDCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\DupeCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\EjectCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\EnchantCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\FriendListCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\GameModeCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\GiveCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\HelpCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\HideCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\ICommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\ModulesCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\NameSpoofCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\NbtCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\PanicCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\PathCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\PlayerTeleportCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\RelativeTeleportCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\RenameCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\RepairCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\SayCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\SeedCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\ServerCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\SetLoreCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\SetOffhandCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\SetPrefixCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\SpammerCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\TeleportCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\TestCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\ToggleCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\TopCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\UnbindCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\WaypointCommand.h" />
-    <ClInclude Include="Xorion\Command\Commands\XpCommand.h" />
-    <ClInclude Include="Xorion\Config\ConfigManager.h" />
-    <ClInclude Include="Xorion\DrawUtils.h" />
-    <ClInclude Include="Xorion\FriendList\FriendsManager.h" />
-    <ClInclude Include="Xorion\GuiUtils.h" />
-    <ClInclude Include="Xorion\Loader.h" />
-    <ClInclude Include="Xorion\Menu\ClickGui.h" />
-    <ClInclude Include="Xorion\Menu\TabGui.h" />
-    <ClInclude Include="Xorion\Module\ModuleManager.h" />
-    <ClInclude Include="Xorion\Module\Modules\Aimbot.h" />
-    <ClInclude Include="Xorion\Module\Modules\AirJump.h" />
-    <ClInclude Include="Xorion\Module\Modules\AirSwim.h" />
-    <ClInclude Include="Xorion\Module\Modules\AntiBot.h" />
-    <ClInclude Include="Xorion\Module\Modules\AntiImmobile.h" />
-    <ClInclude Include="Xorion\Module\Modules\AntiInvis.h" />
-    <ClInclude Include="Xorion\Module\Modules\AntiVoid.h" />
-    <ClInclude Include="Xorion\Module\Modules\Arraylist.h" />
-    <ClInclude Include="Xorion\Module\Modules\AutoArmor.h" />
-    <ClInclude Include="Xorion\Module\Modules\AutoClicker.h" />
-    <ClInclude Include="Xorion\Module\Modules\AutoGapple.h" />
-    <ClInclude Include="Xorion\Module\Modules\AutoSneak.h" />
-    <ClInclude Include="Xorion\Module\Modules\AutoSplitter.h" />
-    <ClInclude Include="Xorion\Module\Modules\AutoSprint.h" />
-    <ClInclude Include="Xorion\Module\Modules\AutoTotem.h" />
-    <ClInclude Include="Xorion\Module\Modules\Bhop.h" />
-    <ClInclude Include="Xorion\Module\Modules\Blink.h" />
-    <ClInclude Include="Xorion\Module\Modules\BowAimbot.h" />
-    <ClInclude Include="Xorion\Module\Modules\ChestAura.h" />
-    <ClInclude Include="Xorion\Module\Modules\ChestStealer.h" />
-    <ClInclude Include="Xorion\Module\Modules\ClickGuiMod.h" />
-    <ClInclude Include="Xorion\Module\Modules\ClientTheme.h" />
-    <ClInclude Include="Xorion\Module\Modules\Compass.h" />
-    <ClInclude Include="Xorion\Module\Modules\Crasher.h" />
-    <ClInclude Include="Xorion\Module\Modules\Criticals.h" />
-    <ClInclude Include="Xorion\Module\Modules\CrystalAura.h" />
-    <ClInclude Include="Xorion\Module\Modules\Derp.h" />
-    <ClInclude Include="Xorion\Module\Modules\EditionFaker.h" />
-    <ClInclude Include="Xorion\Module\Modules\ESP.h" />
-    <!--    <ClInclude Include="Xorion\Module\Modules\FastEat.h" /> -->
-    <ClInclude Include="Xorion\Module\Modules\FastLadder.h" />
-    <ClInclude Include="Xorion\Module\Modules\FastStop.h" />
-    <ClInclude Include="Xorion\Module\Modules\Fly.h" />
-    <ClInclude Include="Xorion\Module\Modules\FollowPathModule.h" />
-    <ClInclude Include="Xorion\Module\Modules\FontChanger.h" />
-    <ClInclude Include="Xorion\Module\Modules\Freecam.h" />
-    <ClInclude Include="Xorion\Module\Modules\Freelook.h" />
-    <ClInclude Include="Xorion\Module\Modules\Breaker.h" />
-    <ClInclude Include="Xorion\Module\Modules\FullBright.h" />
-    <ClInclude Include="Xorion\Module\Modules\Glide.h" />
-    <ClInclude Include="Xorion\Module\Modules\Godmode.h" />
-    <ClInclude Include="Xorion\Module\Modules\HighJump.h" />
-    <ClInclude Include="Xorion\Module\Modules\Hitbox.h" />
-    <ClInclude Include="Xorion\Module\Modules\HudModule.h" />
-    <ClInclude Include="Xorion\Module\Modules\BlockReach.h" />
-    <!--    <ClInclude Include="Xorion\Module\Modules\InfiniteAura.h" /> -->
-    <ClInclude Include="Xorion\Module\Modules\InstaBreak.h" />
-    <ClInclude Include="Xorion\Module\Modules\NoBreak.h" />
-    <ClInclude Include="Xorion\Module\Modules\InventoryCleaner.h" />
-    <ClInclude Include="Xorion\Module\Modules\InventoryMove.h" />
-    <ClInclude Include="Xorion\Module\Modules\Jesus.h" />
-    <ClInclude Include="Xorion\Module\Modules\Killaura.h" />
-    <ClInclude Include="Xorion\Module\Modules\MidClick.h" />
-    <ClInclude Include="Xorion\Module\Modules\Module.h" />
-    <ClInclude Include="Xorion\Module\Modules\NameTags.h" />
-    <ClInclude Include="Xorion\Module\Modules\Nbt.h" />
-    <ClInclude Include="Xorion\Module\Modules\NightMode.h" />
-    <ClInclude Include="Xorion\Module\Modules\NoFall.h" />
-    <ClInclude Include="Xorion\Module\Modules\NoFriends.h" />
-    <ClInclude Include="Xorion\Module\Modules\NoHurtcam.h" />
-    <ClInclude Include="Xorion\Module\Modules\NoPacket.h" />
-    <ClInclude Include="Xorion\Module\Modules\NoSlowDown.h" />
-    <ClInclude Include="Xorion\Module\Modules\NoSwing.h" />
-    <ClInclude Include="Xorion\Module\Modules\NoWeb.h" />
-    <!--    <ClCompile Include="Xorion\Module\Modules\Notifications.h" /> -->
-    <ClInclude Include="Xorion\Module\Modules\Nuker.h" />
-    <ClInclude Include="Xorion\Module\Modules\OffhandAllow.h" />
-    <ClInclude Include="Xorion\Module\Modules\PacketLogger.h" />
-    <ClInclude Include="Xorion\Module\Modules\Phase.h" />
-    <ClInclude Include="Xorion\Module\Modules\Radar.h" />
-    <ClInclude Include="Xorion\Module\Modules\RainbowSky.h" />
-    <ClInclude Include="Xorion\Module\Modules\Reach.h" />
-    <ClInclude Include="Xorion\Module\Modules\ReachDisplay.h" />
-    <ClInclude Include="Xorion\Module\Modules\Reducer.h" />
-    <ClInclude Include="Xorion\Module\Modules\Scaffold.h" />
-    <ClInclude Include="Xorion\Module\Modules\Spammer.h" />
-    <ClInclude Include="Xorion\Module\Modules\Speed.h" />
-    <ClInclude Include="Xorion\Module\Modules\Spider.h" />
-    <ClInclude Include="Xorion\Module\Modules\StackableItem.h" />
-    <ClInclude Include="Xorion\Module\Modules\Step.h" />
-    <ClInclude Include="Xorion\Module\Modules\StorageESP.h" />
-    <ClInclude Include="Xorion\Module\Modules\Teams.h" />
-    <ClInclude Include="Xorion\Module\Modules\Teleport.h" />
-    <ClInclude Include="Xorion\Module\Modules\TestModule.h" />
-    <ClInclude Include="Xorion\Module\Modules\Timer.h" />
-    <ClInclude Include="Xorion\Module\Modules\TimeChanger.h" />
-    <ClInclude Include="Xorion\Module\Modules\Tower.h" />
-    <ClInclude Include="Xorion\Module\Modules\Tracer.h" />
-    <ClInclude Include="Xorion\Module\Modules\TriggerBot.h" />
-    <ClInclude Include="Xorion\Module\Modules\Twerk.h" />
-    <ClInclude Include="Xorion\Module\Modules\VanillaPlus.h" />
-    <ClInclude Include="Xorion\Module\Modules\ViewModel.h" />
-    <ClInclude Include="Xorion\Module\Modules\Velocity.h" />
-    <ClInclude Include="Xorion\Module\Modules\Waypoints.h" />
-    <ClInclude Include="Xorion\Module\Modules\Xray.h" />
-    <ClInclude Include="Xorion\Module\Modules\Zoom.h" />
-    <ClInclude Include="Xorion\path\goals\JoeGoal.h" />
-    <ClInclude Include="Xorion\path\goals\JoeGoalXYZ.h" />
-    <ClInclude Include="Xorion\path\goals\JoeGoalXZ.h" />
-    <ClInclude Include="Xorion\path\goals\JoeGoalY.h" />
-    <ClInclude Include="Xorion\path\JoeConstants.h" />
-    <ClInclude Include="Xorion\path\JoeMovementController.h" />
-    <ClInclude Include="Xorion\path\JoePath.h" />
-    <ClInclude Include="Xorion\path\JoePathFinder.h" />
-    <ClInclude Include="Xorion\path\JoeSegment.h" />
-    <ClInclude Include="include\atlrx.h" />
-    <ClInclude Include="include\RegExp.h" />
-    <ClInclude Include="include\StringProcess.h" />
-    <ClInclude Include="include\WinHttpClient.h" />
-    <ClInclude Include="Memory\GameData.h" />
-    <ClInclude Include="Memory\Hooks.h" />
-    <ClInclude Include="Memory\MinHook.h" />
-    <ClInclude Include="Memory\SlimMem.h" />
-    <ClInclude Include="SDK\ActorFlags.h" />
-    <ClInclude Include="SDK\BlockLegacy.h" />
-    <ClInclude Include="SDK\Camera.h" />
-    <ClInclude Include="SDK\ChestBlockActor.h" />
-    <ClInclude Include="SDK\ClientInstance.h" />
-    <ClInclude Include="SDK\ClientInstanceScreenModel.h" />
-    <ClInclude Include="SDK\ComplexInventoryTransaction.h" />
-    <ClInclude Include="SDK\Components.h" />
-    <ClInclude Include="SDK\Entity.h" />
-    <ClInclude Include="SDK\EntityContext.h" />
-    <ClInclude Include="SDK\EntityList.h" />
-    <ClInclude Include="SDK\EntityRefs.h" />
-    <ClInclude Include="SDK\GameMode.h" />
-    <ClInclude Include="SDK\GameSettingsInput.h" />
-    <ClInclude Include="SDK\GameType.h" />
-    <ClInclude Include="SDK\HIDController.h" />
-    <ClInclude Include="SDK\HitResult.h" />
-    <ClInclude Include="SDK\Inventory.h" />
-    <ClInclude Include="SDK\InventoryTransaction.h" />
-    <ClInclude Include="SDK\Item.h" />
-    <ClInclude Include="SDK\Level.h" />
-    <ClInclude Include="SDK\LoopbackPacketSender.h" />
-    <ClInclude Include="SDK\MinecraftUIRenderContext.h" />
-    <ClInclude Include="SDK\MoveInputHandler.h" />
-    <ClInclude Include="SDK\Packet.h" />
-    <ClInclude Include="SDK\PlayerMovementProxy.h" />
-    <ClInclude Include="SDK\RakNetConnector.h" />
-    <ClInclude Include="SDK\Ref.h" />
-    <ClInclude Include="SDK\ScreenContext.h" />
-    <ClInclude Include="SDK\UIScene.h" />
-    <ClInclude Include="SDK\Dimension.h" />
-    <ClInclude Include="SDK\MatrixStack.h" />
-    <ClInclude Include="SDK\MojangsonToken.h" />
-    <ClInclude Include="SDK\Tag.h" />
-    <ClInclude Include="SDK\Tessellator.h" />
-    <ClInclude Include="SDK\TextHolder.h" />
-    <ClInclude Include="SDK\Weather.h" />
-    <ClInclude Include="Utils\ClientColors.h" />
-    <ClInclude Include="Utils\ColorUtil.h" />
-    <ClInclude Include="Utils\DllHelper.h" />
-    <ClInclude Include="Utils\HMath.h" />
-    <ClInclude Include="Utils\Json.hpp" />
-    <ClInclude Include="Utils\keys.h" />
-    <ClInclude Include="Utils\Logger.h" />
-    <ClInclude Include="Utils\Target.h" />
-    <ClInclude Include="Utils\TextFormat.h" />
-    <ClInclude Include="Utils\Utils.h" />
-    <ClInclude Include="Utils\xorstr.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="minhook\MinHook.x64.lib" />
+    <ProjectReference Include="C:\Xorion\build\ZERO_CHECK.vcxproj">
+      <Project>{7FD12CEE-EF0C-31FB-A5E7-E81B849D2B95}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Xorion\build\Shaders.vcxproj">
+      <Project>{25FF483E-872F-300F-BB74-26CD96DD8F7D}</Project>
+      <Name>Shaders</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ItemGroup>
-  <!-- Pixel Shader -->
-  <FxCompile Include="Xorion\Shaders\UnlitTintPS.hlsl">
-    <ShaderType>Pixel</ShaderType>
-    <ShaderModel>5.0</ShaderModel>
-    <EntryPointName>main</EntryPointName>
-    <ObjectFileOutput>$(OutDir)UnlitTintPS.cso</ObjectFileOutput>
-  </FxCompile>
-
-  <!-- Vertex Shader -->
-  <FxCompile Include="Xorion\Shaders\UnlitTintVS.hlsl">
-    <ShaderType>Vertex</ShaderType>
-    <ShaderModel>5.0</ShaderModel>
-    <EntryPointName>main</EntryPointName>
-    <ObjectFileOutput>$(OutDir)UnlitTintVS.cso</ObjectFileOutput>
-  </FxCompile>
-</ItemGroup>
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
 </Project>
