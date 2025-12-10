@@ -1,21 +1,25 @@
 #pragma once
 
 // Minecraft 1.21.130 offsets
-// Replace placeholder values with real offsets from IDA/Ghidra/x64dbg
+// Sourced from the current 1.21.130 layout used by Entity/Player wrappers.
 
 struct LocalPlayerOffsets {
-    int sneakingFlag = 0x012C; // placeholder
-    int posX         = 0x00F0; // placeholder
-    int posY         = 0x00F4; // placeholder
-    int posZ         = 0x00F8; // placeholder
-    int health       = 0x0140; // placeholder
+    // Sneak is tracked via ActorFlags rather than a direct byte; keep -1 to signal flag-based access.
+    int sneakingFlag = -1;
+    // EntityLocation* lives at 0x2A0; positions are the first Vec3 inside it.
+    int posX         = 0x02A0;
+    int posY         = 0x02A4;
+    int posZ         = 0x02A8;
+    // Player::getHealth fallback used in Player.cpp
+    int health       = 0x04B0;
 };
 
 struct ItemStackOffsets {
-    int count = 0x0010; // placeholder
-    int name  = 0x0020; // placeholder
+    int count = 0x0014; // matches ITEM_RAW_OFF_COUNT
+    int name  = 0x0020; // matches ITEM_RAW_OFF_NAME
 };
 
 struct PlayerSuppliesOffsets {
-    int selectedSlot = 0x0008; // placeholder
+    // PlayerSupplies layout: [inventory ptr][selectedHotbarSlot][carriedSlotIndex]
+    int selectedSlot = 0x0008;
 };
