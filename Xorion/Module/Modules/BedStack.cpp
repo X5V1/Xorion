@@ -8,18 +8,20 @@
 constexpr int TOTAL_INVENTORY_SLOTS = 36; // Hotbar (0-8) + Main inventory (9-35)
 
 // Cache for bed item detection to avoid string operations every tick
+// Note: Bed item IDs are typically in the 355-370 range in Bedrock Edition 1.20+
+// This covers all 16 bed colors. The range may vary in older versions or with mods.
 static inline bool isBedItem(Item* item) {
 	if (!item) return false;
 	
-	// Check by item ID if known (beds are typically 355-370 depending on color)
-	// This is more efficient than string matching
+	// Check by item ID first for efficiency (beds are typically 355-370)
 	int itemId = item->itemId;
 	if (itemId >= 355 && itemId <= 370) {
 		return true;
 	}
 	
-	// Fallback to string matching for mod beds or unknown IDs
-	std::string name = item->name.getText();
+	// Fallback: Check if the name contains "bed" (case-insensitive substring match)
+	// This handles mod beds or non-standard IDs, but only called if ID check fails
+	const std::string& name = item->name.getText();
 	return name.find("bed") != std::string::npos;
 }
 

@@ -85,6 +85,8 @@ void Replenish::onTick(C_GameMode* gm) {
 
 				if (matches) {
 					// Move this stack to the empty hotbar slot
+					// Note: Direct assignment is safe here as ItemStack supports copy assignment
+					// This pattern is used throughout the codebase (see AutoArmor.cpp)
 					*selectedStack = *stack;
 					
 					// Clear the source slot
