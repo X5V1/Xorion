@@ -8,6 +8,7 @@ private:
 	int nukerRadius = 4;
 	bool veinMiner = false;
 	bool autodestroy = true;
+	int tickTimer = 0;
 
 public:
 	Nuker();
