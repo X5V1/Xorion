@@ -1,5 +1,7 @@
 #include "Loader.h"
 #include "../Memory/SlimMem.h"
+#include "../SDK/VersionTag.h"
+#include "../GameDataChecks.h"
 
 SlimUtils::SlimMem mem;
 const SlimUtils::SlimModule* gameModule;
@@ -34,6 +36,7 @@ DWORD WINAPI ejectThread(LPVOID lpParam) {
 DWORD WINAPI start(LPVOID lpParam) {
 	logF("Starting up...");
 	logF("MSC v%i at %s", _MSC_VER, __TIMESTAMP__);
+	logF("Target Minecraft version: %s", kMinecraftVersion.c_str());
 	init();
 
 	DWORD procId = GetCurrentProcessId();
@@ -45,6 +48,7 @@ DWORD WINAPI start(LPVOID lpParam) {
 
 	MH_Initialize();
 	g_Data.initGameData(gameModule, &mem, (HMODULE)lpParam);
+	VerifyGameData();
 	Target::init(Game.getPtrLocalPlayer());
 	Hooks::Init();
 

@@ -747,6 +747,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Xorion\include\RegExp.h" />
     <ClInclude Include="C:\Xorion\include\StringProcess.h" />
     <ClInclude Include="C:\Xorion\include\WinHttpClient.h" />
+    <ClInclude Include="C:\Xorion\GameDataChecks.h" />
     <ClCompile Include="C:\Xorion\Memory\GameData.cpp" />
     <ClInclude Include="C:\Xorion\Memory\GameData.h" />
     <ClCompile Include="C:\Xorion\Memory\Hooks.cpp" />
@@ -756,6 +757,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Xorion\Memory\SignatureGlobals.h" />
     <ClCompile Include="C:\Xorion\Memory\SlimMem.cpp" />
     <ClInclude Include="C:\Xorion\Memory\SlimMem.h" />
+    <ClCompile Include="C:\Xorion\GameDataChecks.cpp" />
     <ClInclude Include="C:\Xorion\SDK\AABB.h" />
     <ClInclude Include="C:\Xorion\SDK\ActorFlags.h" />
     <ClInclude Include="C:\Xorion\SDK\Attribute.h" />

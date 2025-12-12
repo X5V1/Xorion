@@ -523,6 +523,8 @@ add_library(Xorion SHARED
         Utils/Utils.h
         Utils/xorstr.h
 
+        GameDataChecks.cpp
+
         Utils/Keys.h
 
         resource.h
