@@ -23,7 +23,7 @@ bool ToggleCommand::execute(std::vector<std::string>* args) {
 	}
 
 	auto mod = modOpt.value();
-	// TODO: isFlashMode removed from IModule in 1.21.124
+	// TODO: isFlashMode removed from IModule in 1.21.130
 	/*if (mod->isFlashMode()) {
 		clientMessageF("%sModule cannot be toggled!", RED);
 	} else {*/

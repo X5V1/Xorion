@@ -11,7 +11,7 @@ public:
 
 	// Inherited via IModule
 	virtual const char* getModuleName() override;
-	// TODO: isFlashMode removed from IModule in 1.21.124
+	// TODO: isFlashMode removed from IModule in 1.21.130
 	//virtual bool isFlashMode() override;
 	virtual void onEnable() override;
 	virtual void onTick(C_GameMode* gm) override;

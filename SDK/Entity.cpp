@@ -26,7 +26,7 @@ void Entity::lerpTo(Vec3 const &pos, Vec2 const &rot, int steps) {
 }
 
 // Entity virtual method implementations - delegate to game vtable
-// Note: Vtable indices are estimates and may need adjustment for Minecraft 1.21.124
+// Note: Vtable indices are estimates and may need adjustment for Minecraft 1.21.130
 
 int Entity::getStatusFlag(ActorFlags flag) { 
 	using VFunc = int(__fastcall*)(void*, ActorFlags);

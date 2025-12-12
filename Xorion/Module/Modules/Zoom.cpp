@@ -9,7 +9,7 @@ Zoom::Zoom() : IModule('C', Category::VISUAL, "Zoom in or out!") {
 Zoom::~Zoom() {
 }
 
-// TODO: isFlashMode removed from IModule in 1.21.124
+// TODO: isFlashMode removed from IModule in 1.21.130
 /*
 bool Zoom::isFlashMode() {
 	return true;

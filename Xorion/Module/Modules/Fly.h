@@ -15,7 +15,7 @@ public:
 	Fly();
 	~Fly();
 
-	// TODO: SettingEnum removed in 1.21.124
+	// TODO: SettingEnum removed in 1.21.130
 	//SettingEnum mode = SettingEnum(this);
 
 	// Inherited via IModule
@@ -23,6 +23,6 @@ public:
 	virtual const char* getModuleName() override;
 	virtual void onTick(GameMode* gm) override;
 	virtual void onDisable() override;
-	// TODO: onMove removed from IModule in 1.21.124
+	// TODO: onMove removed from IModule in 1.21.130
 	//virtual void onMove(MoveInputHandler* input) override;
 };

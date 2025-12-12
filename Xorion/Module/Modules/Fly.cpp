@@ -6,7 +6,7 @@
 #include "../../../SDK/GameSettingsInput.h"
 
 Fly::Fly() : IModule('F', Category::MOVEMENT, "Fly to the sky") {
-	// TODO: Settings system redesigned in 1.21.124
+	// TODO: Settings system redesigned in 1.21.130
 	/*mode.addEntry(EnumEntry("Creative", 0))
 	.addEntry(EnumEntry("CubeGlide", 1))
 	.addEntry(EnumEntry("AirStuck", 2))
@@ -163,7 +163,7 @@ void Fly::onDisable() {
 	}
 }
 
-// TODO: onMove removed from IModule in 1.21.124
+// TODO: onMove removed from IModule in 1.21.130
 /*
 void Fly::onMove(MoveInputHandler *input) {
 	LocalPlayer *localPlayer = g_Data.getLocalPlayer();

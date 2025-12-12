@@ -124,14 +124,14 @@ void Init_AllGameModeMappings() {
 
 // Stub implementation for useItemOn - needs signature resolution
 void GameMode::useItemOn(ItemStack* stack, const Vec3i& blockPos, uint8_t face, const Vec3 & hitPos) {
-    // TODO: Resolve through signature scanning in 1.21.124
+    // TODO: Resolve through signature scanning in 1.21.130
     // For now, log and skip to prevent linker errors
-    logF("[GameMode] useItemOn called but not implemented for 1.21.124");
+    logF("[GameMode] useItemOn called but not implemented for 1.21.130");
 }
 
 // Stub implementation for buildBlock - needs signature resolution
 void GameMode::buildBlock(Vec3i* blockPos, uint8_t face, bool useBlockSide) {
-    // TODO: Resolve through signature scanning in 1.21.124
+    // TODO: Resolve through signature scanning in 1.21.130
     // For now, log and skip to prevent linker errors
-    logF("[GameMode] buildBlock called but not implemented for 1.21.124");
+    logF("[GameMode] buildBlock called but not implemented for 1.21.130");
 }

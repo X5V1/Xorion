@@ -13,7 +13,7 @@ const char* Bhop::getModuleName() {
 	return "Bhop";
 }
 
-// TODO: onMove removed from IModule in 1.21.124
+// TODO: onMove removed from IModule in 1.21.130
 /*
 void Bhop::onMove(MoveInputHandler* input) {
 	auto player = Game.getLocalPlayer();

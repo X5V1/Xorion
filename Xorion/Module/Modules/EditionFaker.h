@@ -4,7 +4,7 @@
 
 class EditionFaker : public IModule {
 public:
-	// TODO: SettingEnum removed in 1.21.124
+	// TODO: SettingEnum removed in 1.21.130
 	//SettingEnum edition = SettingEnum(this);
 	
 	EditionFaker();

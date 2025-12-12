@@ -16,7 +16,7 @@ public:
 	std::weak_ptr<JsScriptModule> getBackingScriptModule();
 
 	// Inherited via IModule
-	// TODO: onSaveConfig removed from IModule in 1.21.124
+	// TODO: onSaveConfig removed from IModule in 1.21.130
 	//virtual void onSaveConfig(void*) override{}; // delete
 	virtual const char* getModuleName() override;
 	virtual void onTick(C_GameMode* gm) override;

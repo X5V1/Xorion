@@ -1,7 +1,7 @@
 #include "EditionFaker.h"
 
 EditionFaker::EditionFaker() : IModule(0, Category::MISC, "Fakes your device.") {
-	// TODO: Settings system redesigned in 1.21.124
+	// TODO: Settings system redesigned in 1.21.130
 	/*edition.addEntry(EnumEntry("Unknown", 0))
 	.addEntry(EnumEntry("Android", 1))
 	.addEntry(EnumEntry("iOS", 2))

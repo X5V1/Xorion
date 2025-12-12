@@ -9,7 +9,7 @@
 namespace {
     inline bool isEndCrystal(Entity* e) {
         if (!e) return false;
-        // Replace with verified End Crystal type ID for 1.21.124
+        // Replace with verified End Crystal type ID for 1.21.130
         // TODO: isEndCrystal() method not available
         return e->getEntityTypeId() == 71;
     }
@@ -43,7 +43,7 @@ void SeeCrystals::rebuildCrystalCache() {
 
 // TODO: onLevelRender uses getD3DDevice and RenderUtils methods not available
 void SeeCrystals::onLevelRender() {
-    // Stub implementation - D3D device access not available in 1.21.124
+    // Stub implementation - D3D device access not available in 1.21.130
     return;
 }
 
