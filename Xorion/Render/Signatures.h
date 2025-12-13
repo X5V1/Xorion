@@ -67,7 +67,7 @@ namespace Signatures {
 
     // Additional clean GS/system access anchor
     inline constexpr const char* PATTERN_GSReadD =
-        // 00007FFA47A4B370
+        // 1.21.130 Dump-1.txt @ 0x7FF80752B200
         "48 89 5C 24 08 57 48 83 EC 20 65 48 8B 04 25 60 00 00 00";
 
     // Utility alt wrapper (prologue + setup; add a call tail when known)
