@@ -17,7 +17,7 @@ struct GameMode {
     // Commonly used calls; adjust to your actual signatures and implementations.
     void buildBlock(Vec3i* blockPos, uint8_t face, bool useBlockSide);
     void useItemOn(ItemStack* stack, const Vec3i& blockPos, uint8_t face, const Vec3& hitPos);
-    void attack(Entity* target) { /* stub */ }
+    void attack(Entity* target);
     void startDestroyBlock(const Vec3i& pos, uint8_t face) { /* stub */ }
     void stopDestroyBlock() { /* stub */ }
     void destroyBlock(const Vec3i& pos, uint8_t face) { /* stub */ }
