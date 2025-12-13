@@ -541,6 +541,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Fucker.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\FullBright.cpp" />
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\FullBright.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\FullAuto.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\FullAuto.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Glide.cpp" />
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Glide.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Godmode.cpp" />
@@ -601,6 +603,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoPacket.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoPaintingCrash.cpp" />
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoPaintingCrash.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoRender.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoRender.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoSlowDown.cpp" />
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\NoSlowDown.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\NoSwing.cpp" />
@@ -747,7 +751,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Xorion\include\RegExp.h" />
     <ClInclude Include="C:\Xorion\include\StringProcess.h" />
     <ClInclude Include="C:\Xorion\include\WinHttpClient.h" />
-    <ClInclude Include="C:\Xorion\GameDataChecks.h" />
     <ClCompile Include="C:\Xorion\Memory\GameData.cpp" />
     <ClInclude Include="C:\Xorion\Memory\GameData.h" />
     <ClCompile Include="C:\Xorion\Memory\Hooks.cpp" />
@@ -757,7 +760,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Xorion\Memory\SignatureGlobals.h" />
     <ClCompile Include="C:\Xorion\Memory\SlimMem.cpp" />
     <ClInclude Include="C:\Xorion\Memory\SlimMem.h" />
-    <ClCompile Include="C:\Xorion\GameDataChecks.cpp" />
     <ClInclude Include="C:\Xorion\SDK\AABB.h" />
     <ClInclude Include="C:\Xorion\SDK\ActorFlags.h" />
     <ClInclude Include="C:\Xorion\SDK\Attribute.h" />
@@ -857,6 +859,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Xorion\Utils\Utils.cpp" />
     <ClInclude Include="C:\Xorion\Utils\Utils.h" />
     <ClInclude Include="C:\Xorion\Utils\xorstr.h" />
+    <ClCompile Include="C:\Xorion\GameDataChecks.cpp" />
+    <ClInclude Include="C:\Xorion\GameDataChecks.h" />
     <ClInclude Include="C:\Xorion\Utils\Keys.h" />
     <ClInclude Include="C:\Xorion\resource.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AntiImmobile.cpp" />
@@ -885,6 +889,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Twerk.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\BedAura.cpp" />
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\BedAura.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\BedStack.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\BedStack.h" />
+    <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Replenish.cpp" />
+    <ClInclude Include="C:\Xorion\Xorion\Module\Modules\Replenish.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\AutoAnchor.cpp" />
     <ClInclude Include="C:\Xorion\Xorion\Module\Modules\AutoAnchor.h" />
     <ClCompile Include="C:\Xorion\Xorion\Module\Modules\Unbanner.cpp" />
