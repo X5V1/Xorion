@@ -43,8 +43,8 @@ void Jetpack::onTick(C_GameMode* gm) {
 		g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&packet1);
 		pos.y += 0.35f;
 		MovePlayerPacket packet2(g_Data.getLocalPlayer(), pos);
-		g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&packet2);			// TODO: Entity velocity not directly accessible
-			// gm->player->velocity.y = 0.465f;
+		g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&packet2);
+			// Velocity accessible via: gm->player->entityLocation->velocity.y = 0.465f;
 			vec3_t moveVec;
 			moveVec.x = cos(calcYaw) * cos(calcPitch) * speedMod;
 			moveVec.z = sin(calcYaw) * cos(calcPitch) * speedMod;

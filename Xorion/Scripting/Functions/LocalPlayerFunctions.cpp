@@ -34,8 +34,8 @@ JsValueRef CALLBACK LocalPlayerFunctions::setVelocity(JsValueRef callee, bool is
 		THROW(L"Invalid vector!");
 	}
 
-	// TODO: Entity::velocity removed
-	// ent->velocity = vecOpt.value();
+	// Velocity now accessible via ent->entityLocation->velocity
+	// ent->entityLocation->velocity = vecOpt.value();
 	return chakra.trueValue();
 }
 

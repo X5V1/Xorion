@@ -58,6 +58,6 @@ void CubeGlide::onTick(C_GameMode* gm) {
 }
 
 void CubeGlide::onDisable() {
-	// TODO: Entity velocity not directly accessible
-	// g_Data.getLocalPlayer()->velocity = vec3_t(0, 0, 0);
+	// Velocity now accessible via entityLocation->velocity
+	// g_Data.getLocalPlayer()->entityLocation->velocity = vec3_t(0, 0, 0);
 }
