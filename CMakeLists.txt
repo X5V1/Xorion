@@ -150,6 +150,10 @@ add_library(Xorion SHARED
         Xorion/Module/Modules/AutoSprint.h
         Xorion/Module/Modules/AutoTotem.cpp
         Xorion/Module/Modules/AutoTotem.h
+        Xorion/Module/Modules/BoatFly.cpp
+        Xorion/Module/Modules/BoatFly.h
+        Xorion/Module/Modules/BoatSpeed.cpp
+        Xorion/Module/Modules/BoatSpeed.h
         Xorion/Module/Modules/Bhop.cpp
         Xorion/Module/Modules/Bhop.h
         Xorion/Module/Modules/Blink.cpp
@@ -254,6 +258,8 @@ add_library(Xorion SHARED
         Xorion/Module/Modules/NoFall.h
         Xorion/Module/Modules/NoFriends.cpp
         Xorion/Module/Modules/NoFriends.h
+        Xorion/Module/Modules/NoLava.cpp
+        Xorion/Module/Modules/NoLava.h
         Xorion/Module/Modules/NoBreak.cpp
         Xorion/Module/Modules/NoBreak.h
         Xorion/Module/Modules/NoHurtcam.cpp

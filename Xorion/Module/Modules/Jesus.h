@@ -6,7 +6,7 @@ class Jesus :
 	public IModule
 {
 private:
-	bool wasInWater = false;
+	bool wasOnLiquid = false;
 public:
 	Jesus();
 	~Jesus();
@@ -15,4 +15,3 @@ public:
 	virtual const char* getModuleName() override;
 	virtual void onTick(GameMode* gm) override;
 };
-

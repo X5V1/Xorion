@@ -47,6 +47,8 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<Blink>());
         moduleList.emplace_back(std::make_shared<BlockReach>());
         moduleList.emplace_back(std::make_shared<Bhop>());
+        moduleList.emplace_back(std::make_shared<BoatFly>());
+        moduleList.emplace_back(std::make_shared<BoatSpeed>());
         moduleList.emplace_back(std::make_shared<BowAimbot>());
         moduleList.emplace_back(std::make_shared<Breadcrumbs>());
         moduleList.emplace_back(std::make_shared<Breaker>());
@@ -96,6 +98,7 @@ void ModuleManager::initModules() {
         moduleList.emplace_back(std::make_shared<NoBreak>());
         moduleList.emplace_back(std::make_shared<NoFriends>());
         moduleList.emplace_back(std::make_shared<NoHurtcam>());
+        moduleList.emplace_back(std::make_shared<NoLava>());
         moduleList.emplace_back(std::make_shared<NoPacket>());
         moduleList.emplace_back(std::make_shared<NoRender>());
         moduleList.emplace_back(std::make_shared<NoSlowDown>());
