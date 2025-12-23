@@ -2,6 +2,7 @@
 #include "SDK/GameMode.h"
 #include "Memory/SignatureGlobals.h"
 #include "../Utils/Logger.h"
+#include "SDK/VersionTag.h"
 #include <cstring> // for memcmp if doing quick runtime validation
 
 namespace SDK {
@@ -120,6 +121,14 @@ void Init_GameMode_Other() {
 void Init_AllGameModeMappings() {
     Init_GameMode_Attack();
     Init_GameMode_Other();
+}
+
+void GameMode::attack(Entity* target) {
+    if (SDK::GameMode_attack) {
+        SDK::GameMode_attack(this, target);
+    } else {
+        logF("[GameMode] attack called but not mapped for %s", kMinecraftVersion.c_str());
+    }
 }
 
 // Stub implementation for useItemOn - needs signature resolution
